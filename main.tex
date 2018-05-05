@@ -1,0 +1,343 @@
+% TUFTE-BOOK CLASS {{{
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tufte-Style Book (Documentation Template)
+% LaTeX Template
+% Version 1.0 (5/1/13)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% The Tufte-LaTeX Developers (tufte-latex.googlecode.com)
+%
+% Edited by:
+% Federico Marotta (federicomarotta@mail.com)
+%
+% License:
+% Apache License (Version 2.0)
+%
+% IMPORTANT NOTE:
+% In addition to running BibTeX to compile the reference list from the .bib
+% file, you will need to run MakeIndex to compile the index at the end of the
+% document.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% This document uses the tufte-book class (which in turn uses the 
+% tufte-common class)
+%
+% Summary of available options for the tufte-book class:
+% a4paper: use the A4 paper size
+% sfsitednotes: use a sans serif font for sidenotes and title blocks
+% twoside: print the page number on the outside edge
+% symmetric: typeset the sidenotes on the outside edge instead of on the right side
+% justified: justify text
+% notitlepage: have \maketitle generate a title block instead of a title page
+% notoc: suppress tufte's custom table of contents
+% nohyper: do not load the hyperref package
+% nobib: do not load natbib (which is incompatible with biblatex)
+\documentclass[a4paper,oneside,marginals=justified,nobib]{tufte-book} 
+
+% }}}
+
+% PACKAGES AND OTHER DOCUMENT CONFIGURATIONS {{{
+% --------------------------------------------------------------------------
+
+% Encoding and fonts
+\usepackage[utf8]{inputenc} % Use utf8 encoding in the input (.tex) file
+\usepackage[english]{babel} % Load characters and hyphenation
+\usepackage[T1]{fontenc} % Use utf8 encoding in the output (.pdf) file
+\usepackage{hyphenat} % Enable hyphenation for special fonts
+\usepackage{csquotes} % Quote like a boss
+
+% Special contents
+\usepackage{textgreek} % Greek characters
+\usepackage[scale=2]{ccicons} % Creative Commons icons
+\usepackage{units} % Used for printing standard units
+\usepackage{xspace} % Used for printing a trailing space better than using a tilde (~) using the \xspace command
+\usepackage{todonotes} % Add useful notes in the margins
+\usepackage{subfiles} % Adopt a modular structure
+
+% TOC
+\setcounter{secnumdepth}{1} % Number headings up to sections
+\setcounter{tocdepth}{1} % Show headings up to sections in the toc
+\usepackage[notlot,notlof]{tocbibind}
+
+% Images
+\usepackage{graphicx} % Needed to insert images into the document
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio} % Improves figure scaling
+\graphicspath{{images/}{../images/}} % Sets the default location of pictures
+% (the second path is relative to the subfiles)
+
+% Bibliography
+% See https://github.com/Tufte-LaTeX/tufte-latex/issues/60 for the 
+% problems concerning biblatex
+\usepackage[style=numeric,sorting=none,backend=biber]{biblatex}
+\addbibresource{main.bib}
+\renewcommand{\cite}[2][0pt]{ \sidenote[][#1]{\fullcite{#2}} }
+
+% Index
+%\usepackage{makeidx} % Used to generate the index
+%\makeindex % Generate the index which is printed at the end of the 
+%document (remember to uncomment \printindex if you use the index)
+
+% Document appearance
+\usepackage{microtype} % Improves character and word spacing
+\usepackage{booktabs} % Better horizontal rules in tables
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+\usepackage{multicol}
+\hypersetup{colorlinks} % Comment this if you don't want colored links
+\fvset{fontsize=\normalsize} % Change here the font size of all verbatim 
+
+% Print the chapter number and title on the same line 
+% https://latex.org/forum/viewtopic.php?t=25750
+\titleformat{\chapter}%
+[block]% shape
+{\relax\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\begin{fullwidth}}{}}% format applied to label+text
+{\itshape\huge\thechapter\hspace{10pt}}% label
+{0pt}% horizontal separation between label and title body
+{\huge\rmfamily\itshape}% before the title body
+[\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\end{fullwidth}}{}]% after the title body
+
+% CUSTOM COMMANDS {{{
+% --------------------------------------------------------------------------
+
+% Document-specific {{{
+
+\newcommand{\geno}[1]{\({#1}\)} % Print alleles in mathematics mode
+
+\newcommand{\labch}[1]{\label{ch:{#1}}}
+\newcommand{\refch}[1]{Chapter \ref{ch:{#1}}}
+
+\newcommand{\labsec}[1]{\label{sec:{#1}}}
+\newcommand{\refsec}[1]{Section \ref{sec:{#1}}}
+
+% }}}
+
+\newcommand{\hlred}[1]{\textcolor{Maroon}{#1}} % Print text in maroon
+
+\newcommand{\hangp}[1]{\makebox[0pt][r]{(}#1\makebox[0pt][l]{)}} % New command to create parentheses around text in tables which take up no horizontal space - this improves column spacing
+\newcommand{\hangstar}{\makebox[0pt][l]{*}} % New command to create asterisks in tables which take up no horizontal space - this improves column spacing
+
+\newcommand{\monthyear}{\ifcase\month\or January\or February\or March\or 
+April\or May\or June\or July\or August\or September\or October\or 
+November\or December\fi\space\number\year} % A command to print the current month and year
+
+\newcommand{\openepigraph}[2]{ % This block sets up a command for printing an epigraph with 2 arguments - the quote and the author
+\begin{fullwidth}
+\sffamily\large
+\begin{doublespace}
+\noindent\allcaps{#1}\\ % The quote
+\noindent\allcaps{#2} % The author
+\end{doublespace}
+\end{fullwidth}
+}
+
+\newcommand{\blankpage}{\newpage\hbox{}\thispagestyle{empty}\newpage} % Command to insert a blank page
+
+\newcommand{\hangleft}[1]{\makebox[0pt][r]{#1}} % Used for printing commands in the index, moves the slash left so the command name aligns with the rest of the text in the index 
+\newcommand{\hairsp}{\hspace{1pt}} % Command to print a very short space
+\newcommand{\ie}{\textit{i.\hairsp{}e.}\xspace} % Command to print i.e.
+\newcommand{\eg}{\textit{e.\hairsp{}g.}\xspace} % Command to print e.g.
+\newcommand{\na}{\quad--} % Used in tables for N/A cells
+\newcommand{\measure}[3]{#1/#2$\times$\unit[#3]{pc}} % Typesets the font size, leading, and measure in the form of: 10/12x26 pc.
+\newcommand{\tuftebs}{\symbol{'134}} % Command to print a backslash in tt type in OT1/T1
+
+% }}}
+
+% }}}
+
+% BOOK META-INFORMATION {{{
+%---------------------------------------------------------------------------
+
+% https://tex.stackexchange.com/questions/179839/tufte-book-title-page-customization
+
+\newsavebox{\logo}
+\savebox{\logo}{\includegraphics[height=3cm]{helix.pdf}}
+
+\title{Titolo della tesi} % Title of the book
+
+\author[FM]
+{
+	Relatore: Paolo Provero
+	\hfill
+	Studente: Federico Marotta
+}
+
+\publisher
+{
+	\usebox{\logo} \par \vspace{1cm}
+	\smallcaps{Università degli Studi di Torino} \par
+	\smallcaps{Scuola di Medicina} \par
+	\smallcaps{Dipartimento di Biotecnologie Molecolari e Scienze per la Salute} \par
+	\smallcaps{Corso di Laurea in Biotecnologie}
+} 
+
+\date{Sessione di Luglio 2018}
+
+% }}}
+
+% FRONT MATTER {{{
+%---------------------------------------------------------------------------
+
+\begin{document}
+
+\frontmatter
+
+% EPIGRAPH
+%---------------------------------------------------------------------------
+
+%\thispagestyle{empty}
+%\openepigraph{The public is more familiar with bad design than good 
+%design. It is, in effect, conditioned to prefer bad design, because 
+%that is what it lives with. The new becomes threatening, the old 
+%reassuring.}{Paul Rand, {\itshape Design, Form, and Chaos}}
+%\vfill
+%\openepigraph{A designer knows that he has achieved perfection not when 
+%there is nothing left to add, but when there is nothing left to take 
+%away.}{Antoine de Saint-Exup\'{e}ry}
+%\vfill
+%\openepigraph{\ldots the designer of a new system must not only be the 
+%implementor and the first large-scale user; the designer should also 
+%write the first user manual\ldots If I had not participated fully in 
+%all these activities, literally hundreds of improvements would never 
+%have been made, because I would never have thought of them or perceived 
+%why they were important.}{Donald E. Knuth}
+
+% TITLE PAGE
+%---------------------------------------------------------------------------
+
+% 1. the default way
+%\maketitle % Print the title page
+
+% 2. The custom title page
+\makeatletter
+\renewcommand{\maketitlepage}{%
+\begingroup%
+\begin{fullwidth}
+\begin{centering}
+\setlength{\parindent}{0pt}
+
+\vfill{\fontsize{13}{16}\selectfont\textit{\@publisher}\par}
+
+\vspace{3cm}
+
+{\fontsize{28}{46}\selectfont\@title\par}
+
+\vspace{8cm}
+
+{\fontsize{17}{17}\selectfont\textit{\@author}\par}
+
+\vfill
+
+{\fontsize{13}{13}\selectfont\textsf{\smallcaps{\@date}}\par}
+
+\thispagestyle{empty}
+\end{centering}
+\end{fullwidth}
+\endgroup
+}
+\makeatother
+\maketitle % Print the title page
+
+% COPYRIGHT PAGE
+%---------------------------------------------------------------------------
+
+%\newpage
+%\begin{fullwidth}
+%~\vfill
+%\thispagestyle{empty}
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+%Copyright \copyright\ \the\year\ \thanklessauthor
+%\par\smallcaps{Published by \thanklesspublisher}
+%\par\smallcaps{tufte-latex.googlecode.com}
+%\par Licensed under the Apache License, Version 2.0 (the ``License''); 
+%you may not use this file except in compliance with the License. You 
+%may obtain a copy of the License at 
+%\url{http://www.apache.org/licenses/LICENSE-2.0}. Unless required by 
+%applicable law or agreed to in writing, software distributed under the 
+%License is distributed on an \smallcaps{``AS IS'' BASIS, WITHOUT 
+%WARRANTIES OR CONDITIONS OF ANY KIND}, either express or implied. See 
+%the License for the specific language governing permissions and 
+%limitations under the License.\index{license}
+%\par\textit{First printing, \monthyear}
+%\end{fullwidth}
+
+% TABLES OF CONTENTS, FIGURES, TABLES
+%---------------------------------------------------------------------------
+
+\tableofcontents % Print the table of contents
+\listoffigures % Print a list of figures
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoftables % Print a list of tables
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftodos
+
+% DEDICATION PAGE
+%---------------------------------------------------------------------------
+
+\cleardoublepage
+~\vfill
+\begin{doublespace}
+\noindent\fontsize{15}{15}\selectfont\itshape
+\nohyphenation
+Dedicated to...
+
+\vspace{6cm}
+
+\noindent\fontsize{15}{15}\selectfont\itshape
+I would like to aknowledge...
+\end{doublespace}
+\vfill
+\vfill
+
+% ABSTRACT
+%---------------------------------------------------------------------------
+
+\cleardoublepage
+\chapter{Abstract} % "\chapter*" would leave out this chapter from the table of contents
+
+This sample book discusses the design of Edward Tufte's 
+books\cite{Salt1995May} and the use of the tufte-book and tufte-handout 
+document classes.
+
+% }}}
+
+% MAIN MATTER {{{
+%---------------------------------------------------------------------------
+
+\mainmatter
+
+\subfile{chapters/ld.tex}
+
+%\subfile{chapters/chapter2.tex}
+
+% }}}
+
+% BACK MATTER {{{
+%---------------------------------------------------------------------------
+
+\backmatter
+
+% BIBLIOGRAPHY
+%---------------------------------------------------------------------------
+
+%\nocite{*}
+\printbibliography[heading=bibintoc,title=Complete Bibliography]
+
+% APPENDIX
+%---------------------------------------------------------------------------
+
+%\appendix
+
+% INDEX
+%---------------------------------------------------------------------------
+
+%\printindex % Print the index at the very end of the document (remember 
+%to uncomment \makeindex if you use the index)
+
+\end{document}
+
+% }}}

@@ -54,6 +54,7 @@
 % Special contents
 \usepackage{textgreek} % Greek characters
 \usepackage{amsmath} % Improved mathematics
+\usepackage{amsfonts} % Math fonts
 \usepackage[scale=2]{ccicons} % Creative Commons icons
 \usepackage{units} % Used for printing standard units
 \usepackage{xspace} % Used for printing a trailing space better than using a tilde (~) using the \xspace command
@@ -108,11 +109,11 @@
 
 \newcommand{\geno}[1]{\({#1}\)} % Print alleles in mathematics mode
 
-\newcommand{\labch}[1]{\label{ch:{#1}}}
-\newcommand{\refch}[1]{Chapter \ref{ch:{#1}}}
+\newcommand{\labch}[1]{\label{ch:{#1} }}
+\newcommand{\refch}[1]{Chapter \ref{ch:{#1} }}
 
-\newcommand{\labsec}[1]{\label{sec:{#1}}}
-\newcommand{\refsec}[1]{Section \ref{sec:{#1}}}
+\newcommand{\labsec}[1]{\label{sec:{#1} }}
+\newcommand{\refsec}[1]{Section \ref{sec:{#1} }}
 
 % }}}
 
@@ -280,19 +281,18 @@ November\or December\fi\space\number\year} % A command to print the current mont
 %---------------------------------------------------------------------------
 
 \cleardoublepage
-~\vfill
+\null\vspace{\stretch{1}}
 \begin{doublespace}
 \noindent\fontsize{15}{15}\selectfont\itshape
 \nohyphenation
 Dedicated to...
 
-\vspace{6cm}
+\vspace{\stretch{1}}
 
 \noindent\fontsize{15}{15}\selectfont\itshape
 I would like to aknowledge...
 \end{doublespace}
-\vfill
-\vfill
+\vspace{\stretch{1}}\null
 
 % ABSTRACT
 %---------------------------------------------------------------------------
@@ -313,7 +313,7 @@ document classes.
 
 \subfile{chapters/ld.tex}
 
-%\subfile{chapters/chapter2.tex}
+\subfile{chapters/gwas.tex}
 
 % }}}
 

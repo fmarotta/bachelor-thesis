@@ -1,0 +1,13 @@
+# exclude everything in this directory and in chapters
+/*
+chapters/*
+
+# include directories
+!**/
+
+# include .tex and .bib files
+!**/*.tex
+!**/*.bib
+
+# include .gitignore
+!.gitignore

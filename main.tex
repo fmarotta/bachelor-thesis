@@ -53,6 +53,7 @@
 
 % Special contents
 \usepackage{textgreek} % Greek characters
+\usepackage{amsmath} % Improved mathematics
 \usepackage[scale=2]{ccicons} % Creative Commons icons
 \usepackage{units} % Used for printing standard units
 \usepackage{xspace} % Used for printing a trailing space better than using a tilde (~) using the \xspace command
@@ -75,7 +76,7 @@
 % problems concerning biblatex
 \usepackage[style=numeric,sorting=none,backend=biber]{biblatex}
 \addbibresource{main.bib}
-\renewcommand{\cite}[2][0pt]{ \sidenote[][#1]{\fullcite{#2}} }
+\renewcommand{\cite}[2][0pt]{\sidenote[][#1]{\fullcite{#2}} }
 
 % Index
 %\usepackage{makeidx} % Used to generate the index
@@ -300,7 +301,7 @@ I would like to aknowledge...
 \chapter{Abstract} % "\chapter*" would leave out this chapter from the table of contents
 
 This sample book discusses the design of Edward Tufte's 
-books\cite{Salt1995May} and the use of the tufte-book and tufte-handout 
+books\cite{lewontin1964} and the use of the tufte-book and tufte-handout 
 document classes.
 
 % }}}
@@ -324,8 +325,8 @@ document classes.
 % BIBLIOGRAPHY
 %---------------------------------------------------------------------------
 
-%\nocite{*}
 \printbibliography[heading=bibintoc,title=Complete Bibliography]
+\nocite{*}
 
 % APPENDIX
 %---------------------------------------------------------------------------

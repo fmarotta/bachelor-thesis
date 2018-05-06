@@ -4,6 +4,8 @@
 \chapter{Linkage Disequilibrium}
 \labch{ld}
 
+% Definition {{{
+
 \section{Definition}
 
 Linkage disequilibrium is the non-random association of two alleles. In
@@ -15,6 +17,15 @@ alleles in the same haplotype, i.e. in the alleles which are inherited
 together from a single parent. For haployd organisms, therefore,
 we will consider the genome of the individual as haplotype, but for
 diploid individuals, such as humans, we can consider the gametes.
+
+Essentially, LD is maintained because haplotypes are inherited together.
+
+As is often the case, a great deal of information can be extracted from 
+systems that are not at equilibrium.
+
+% }}}
+
+% Wiley article {{{
 
 \section{http://www.els.net/WileyCDA/ElsArticle/refId-a0005427.html}
 \labsec{ld_balance}
@@ -54,10 +65,6 @@ recombination event can occur between these two sister chromatides such
 as to cut the DNA right between locus A and locus B. In this case, a new 
 phenotype, deemed "recombinant", would be created.
 
-\todo{Relation of LD and allele frequency? If one locus has only one 
-allele (limit case of monomorphic locus), LD will always be perfect. On 
-the other hand, what happens when the frequency of an allele is low?}
-
 To sum up, disequilibrium between alleles is the product of many 
 balancing processes; recombination, on the other hand, balances those 
 processes so as to bring equilibrium. A corollary of these observations 
@@ -65,22 +72,21 @@ is that if two alleles are in disequilibrium, in all probability there
 is a reason behind, be it that one of the allele is newly appeared or 
 that there is selection to maintain the two alleles together.
 
-Not only does linkage disequilibrium suggest a relationship between 
-alleles, it is also the basis for association studies. These are 
-statistical analysis whose purpose is to find out alleles occurring more 
-often than expected by chance in individuals bearing a certain 
-phenotype, implying that such alleles are somewhat correlated with the 
-phenotype. Traditionally, the phenotypes investigated in association 
-studies are pathological ones, both because they are more interesting 
-and because they are easier to study, provided that they are not complex 
-diseases. \todo{This paragraph is weak.}
+Linkage can be calculated for more than two alleles, being on the same 
+locus or in different loci, but it is rarely done. I do not know whether 
+it is due to the complexity of the calculation or because it has a poor 
+biological relevance, but I would bet that it would be an interesting 
+area to explore.
 
-Linkage can be calculated for more than two alleles, but it is rarely 
-done. I do not know whether it is due to the complexity of the 
-calculation or because it has a poor biological relevance, but I would 
-bet that it would be an interesting area to explore.
+% }}}
+
+% PIFFLE {{{
 
 \section{http://www.handsongenetics.com/PIFFLE/LinkageDisequilibrium.pdf}
+
+% Measures of LD {{{
+
+\subsection{Measures of Linkage Disequilibrium}
 
 Let us consider a simplified model where all loci are independent, 
 taking two loci, A and B, both of which are biallelic, carrying alleles 
@@ -90,21 +96,70 @@ described by a pair of haplotypes. In all the gametes of such
 population, allele \geno{A} has a frequency of \geno{p_A}, and allele 
 \geno{B} of \geno{p_B}, so it follows from simple probabilistic 
 considerations that in a diploid organism the probability of finding 
-both alleles is \geno{p_AB = p_a p_b}. This result, however, holds true 
-only as long as the loci are independent.
+both alleles is \geno{p_{AB} = p_a p_b}. This result, however, holds 
+true only as long as the loci are independent.
 
-In a real population, \geno{p_AB} may well differ from the product of 
+In a real population, \geno{p_{AB}} may well differ from the product of 
 the allele frequencies, so it has been introduced the `linkage 
 coefficient', which is defined as
 
 \begin{equation}
 \label{eq:linkagecoeff}
-D = p_AB - p_A p_B\,,
+D = p_{AB} - p_A p_B\,,
 \end{equation}
 
 as a measure of this difference.
 
-Let us try to explain how \(D\) can be differen from \(0\) by 
+Much as the linkage coefficient is useful as a measure of linkage 
+disequilibrium, it has the disadvantage of being dependent upon allele 
+frequencies. Indeed, its range can only be between \(p_A p_B\) and \(p_A 
+	- p_B\), which is the reason why Lewontin\cite{lewontin1964} 
+introduced D', defined as
+
+\begin{equation}
+\label{eq:linkagecoefflewontin}
+D' = D / D_{max}\ ,
+\end{equation}
+
+where \(D_{max}\) is the theoretical maximum value that \(D\) can assume 
+given the allele frequencies of the population. As \(-1 <= D' <= 1\), 
+this is a completely normalised parameter; however, this parameter only 
+considers what is the difference between the actual frequency of the 
+\geno{AB} haplotype and the expected one, disregarding the unequality of 
+the allele frequencies at that locus.
+
+Another measure of linkage disequilibrium, which retains the information 
+of how much the allele frequencies differ at that locus, is the 
+correlation coefficient
+\marginnote[-1cm]{The linear correlation coefficient \(r\), often called 
+	Pearson's correlation coefficient, measures how strength is the 
+	linear relationship between two variables, as well as determining 
+	the direction of such relationship. The more two variables can be 
+	plotted on a straight line, the greater the \(|r|\). In this case, 
+	the two variables are the allele frequencies.
+}
+between the two alleles, \(r\), indroduced by Hill and 
+Robertson\cite{hill1968}; most often, the correlation coefficient is 
+used in its squared version:
+
+\begin{equation}
+\label{eq:squaredcorrelationcoeff}
+r^2 = \frac{D^2}{p_A (1 - p_A) p_B (1 - p_B)}\ .
+\end{equation}
+
+One of the strength of this parameter is that it has been shown to 
+depend almost entirely on \(N\) (population size), \(c\) and generation 
+number. Since it does not completely buffer the effect of different 
+allele frequencies, its range will be dependent upon \geno{p_A} and 
+\geno{p_B}.
+
+% }}}
+
+% Modeling LD {{{
+
+\subsection{Modeling D}
+
+Let us try to explain how \(D\) can be different from \(0\) by 
 considering genetic mutations, which are one of the processes through 
 which linkage disequilibrium can arise, as we said in 
 \refsec{ld_balance}. At the beginning, loci A and B are monomorphic, 
@@ -150,12 +205,83 @@ margin.
 \end{margintable}
 
 There is only one haplotype \geno{ab}, for that mutation has just 
-appeared, so that \geno{p_ab = 0.1}. However, \geno{p_a p_b = 0.3 \cdot 
-0.1 = 0.03}, which is much smaller than \geno{p_ab}, therefore, the 
-  linkage coefficient is \(D = 0.1 - 0.03 = 0.07\). Selection and other 
-  processes will act to increase or decrease such disequilibrium.
+appeared, so that \geno{p_ab = 0.1}; more generally, for \textit{de 
+	novo} mutations, the frequency of the genotype having that mutation 
+is equal to the allele frequency of the mutation. However, \geno{p_a p_b 
+	= 0.3 \cdot 0.1 = 0.03}, which is much smaller than \geno{p_ab}, 
+therefore, the linkage coefficient is \(D = 0.1 - 0.03 = 0.07\). 
+Selection and other processes will act to increase or decrease such 
+disequilibrium.
 
 Now let us consider the other process, recombination, which as we said 
-always decreases disequilibrium.
+always decreases disequilibrium. The first step of the argument is as 
+follows. Take haplotype \geno{AB}, where alleles \geno{A} and \geno{B} 
+are together: if recombination between A and B occurs with rate \(c\), 
+then afterwards there will only be \(1-c\) \geno{AB} haplotypes. On the 
+other hand, recombination is an exchange process, and here is where the 
+second step of the argument comes: this time, let us consider a complete 
+genotype, \ie two haplotypes. Every time there is an allele \geno{A} and 
+an allele \geno{B}, if there is recombination, a new \geno{AB} haplotype 
+will be formed. Therefore, in the next generation, we have
+
+\[p'_AB = (1 - c) p_{AB} + c p_A p_B\].
+
+Note that if an \geno{AB} haplotype is broken, but the other haplotype 
+undergoing recombination contained allele \geno{A} or \geno{B}, the two 
+events `cancel out' perfectly.
+
+In the absence of mutations and assuming a population infinite in size, 
+with no genetic fluxes and no selection, the allele frequencies do not 
+change, so that \(p'_A = p_A\) and \(p'_B = p_B\), leaving the following 
+result for \(D'\):
+
+\[D_1 = (1 - c) D_0\ ,\]
+
+which cllearly results in a geometric series, where the linkage 
+coefficient at generation \(n\) is given by
+
+\begin{equation}
+\label{eq:linkagecoeffrecomb}
+D_n = (1 - c)^n D_0\ .
+\end{equation}
+
+\(c\) being a small positive number, this equation implies that over 
+generations the linkage coefficient will decrease until it reaches zero 
+for \(n \to \infty\); the rate of decrease will be greater the higher 
+\(c\) is. Thus, our mathematical model confirms what we said at the 
+beginning.
+
+% }}}
+
+% Applications of LD {{{
+
+\subsection{Applications of LD}
+
+\todo{Shall we investigate further on this matter?}
+
+Linkage disequilibrium is such an important concept because it is the 
+bedrock of a number of applications. Interestingly enough, by knowing 
+the recombination rate at two loci and the \(r^2\) for the alleles at 
+those loci at a point in time, one can estimate the population size.
+
+Another use of disequilibrium is that of estimating the time at which 
+one population splitted in two; this is accomplished by comparing the LD 
+measures at the same two loci in the two populations. If LD between the 
+same alleles would be the same for the two populations, they would 
+actually be one population\ldots
+
+Finally, linkage disequilibrium is also the basis for association 
+studies. These are statistical analysis whose purpose is to find out 
+alleles occurring more often than expected by chance in individuals 
+bearing a certain phenotype, implying that such alleles are somewhat 
+correlated with the phenotype. Traditionally, the phenotypes 
+investigated in association studies are pathological ones, both because 
+they are more interesting and because they are easier to study, provided 
+that they are not complex diseases. In later sections we will be 
+focusing on this application.
+
+% }}}
+
+% }}}
 
 \end{document}

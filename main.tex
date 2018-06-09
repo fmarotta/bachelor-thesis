@@ -156,15 +156,17 @@ November\or December\fi\space\number\year} % A command to print the current mont
 % https://tex.stackexchange.com/questions/179839/tufte-book-title-page-customization
 
 \newsavebox{\logo}
-\savebox{\logo}{\includegraphics[height=3cm]{helix.pdf}}
+\savebox{\logo}{\includegraphics[height=3cm]{logo_unito.png}}
 
-\title{Titolo della tesi} % Title of the book
+% Title of the book
+\title{Transcriptome-Wide Association Studies: Bridging the Gap between 
+	Genome, Transcriptome and Disease} 
 
 \author[FM]
 {
-	Relatore: Paolo Provero
+	Supervisor: Prof. Paolo Provero
 	\hfill
-	Studente: Federico Marotta
+	Author: Federico Marotta
 }
 
 \publisher
@@ -176,7 +178,7 @@ November\or December\fi\space\number\year} % A command to print the current mont
 	\smallcaps{Corso di Laurea in Biotecnologie}
 } 
 
-\date{Sessione di Luglio 2018}
+\date{Tesi di Laurea, 18 Luglio 2018}
 
 % }}}
 
@@ -221,17 +223,17 @@ November\or December\fi\space\number\year} % A command to print the current mont
 \begin{centering}
 \setlength{\parindent}{0pt}
 
-\vfill{\fontsize{13}{16}\selectfont\textit{\@publisher}\par}
+\fontsize{13}{13}\selectfont\textit{\@publisher}\par
 
-\vspace{3cm}
+\null\vspace{\stretch{1}}
 
-{\fontsize{28}{46}\selectfont\@title\par}
+{\fontsize{22}{40}\selectfont\@title\par}
 
-\vspace{8cm}
+\vspace{\stretch{1}}
 
-{\fontsize{17}{17}\selectfont\textit{\@author}\par}
+{\fontsize{16}{16}\selectfont\textit{\@author}\par}
 
-\vfill
+\vspace{\stretch{1}}\null
 
 {\fontsize{13}{13}\selectfont\textsf{\smallcaps{\@date}}\par}
 
@@ -285,12 +287,22 @@ November\or December\fi\space\number\year} % A command to print the current mont
 \begin{doublespace}
 \noindent\fontsize{15}{15}\selectfont\itshape
 \nohyphenation
-Dedicated to...
+
+`The harmony of the world is made manifest in Form and Number, and the 
+heart and soul and all the poetry of Natural Philosophy are embodied in 
+the concept of mathematical beauty.'\\
+---D'Arcy Wentworth Thompson, \textnormal{On Growth and Form}
 
 \vspace{\stretch{1}}
 
 \noindent\fontsize{15}{15}\selectfont\itshape
-I would like to aknowledge...
+
+I would like to thank my supervisor, Prof. Paolo Provero, and all the 
+former and current members of the Computational Biology Unit whom I have 
+met: Elisa Mariella, Davide Marnetto, Elena Grassi, Ugo Ala, Alessandro 
+Lussana. Their help has been invaluable and they have never failed to 
+provide a stimulating environment for me to work in.
+
 \end{doublespace}
 \vspace{\stretch{1}}\null
 
@@ -300,9 +312,41 @@ I would like to aknowledge...
 \cleardoublepage
 \chapter{Abstract} % "\chapter*" would leave out this chapter from the table of contents
 
-This sample book discusses the design of Edward Tufte's 
-books\cite{lewontin1964} and the use of the tufte-book and tufte-handout 
-document classes.
+Understanding how genetic variation among individuals can influence the 
+manifestation of complex diseases, which stem from the interaction of 
+many genes with each other and with the environment, is a relevant 
+problem both in science and for clinical applications. Since the first 
+genome-wide association study (or GWAS) was conducted in 2005, tens of 
+thousands of SNP-trait associations have been reported, shedding light 
+on the at least partly genetic roots of complex diseases; most of such 
+associations, however, do not provide much predictive value and are 
+difficult to explain. Expression quantitative trait loci (eQTL) mapping, 
+which identifies loci that influence gene expression, is a possible step 
+towards a better understanding of the relationship between genetic 
+variation and phenotypic trait, using gene expression as a proxy for the 
+trait. Recently, a new approach has been devised which goes one step 
+further and aims to directly find associations between the expression of 
+each gene and a given trait by combining GWAS and eQTL data. In one of 
+their versions, these ’transcriptome-wide association studies’ (or TWAS) 
+are performed in two phases, the first being the prediction of the 
+genetic component of gene expression of the individuals in a GWAS cohort 
+using reference transcriptome data, and the second being the evaluation 
+of the association between predicted expression and trait in those 
+individuals. On the whole, TWAS are powerful statistical methods to find 
+associations between gene expression and complex traits; while they can 
+help in making sense of GWAS results, they also can find novel 
+associations, pointing at potential candidates for further analysis: as 
+such, their contribute to the characterisation of the relationship 
+between genome and phenotype is substantial. After an introduction, the 
+first part of this thesis will deal with how, conveniently, a TWAS can 
+be performed starting only from the summary association statistics and 
+the summary LD information of a GWAS. In the second part, we shall 
+discuss the advantages of integrating epigenetic markers in a TWA study 
+and see an application to schizophrenia. The focus of the third part 
+will be a slightly different approach where genetic variation is used to 
+estimate the genetic correlation between predicted gene expression and 
+trait, and predicted expression is used to estimate the correlation 
+between pairs of traits. 
 
 % }}}
 

@@ -1,0 +1,68 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Gamazon}
+\labch{gamazon2015}
+
+\section{method}
+
+first step: gene expression is decomposable in three components: genetically
+regulated expression (GReX), phenotype-influenced expression, and an
+environmental component. The phenotype can influence gene expression.
+
+An additive model trained on reference transcriptome datasets finds for each
+SNP the coefficents of which gene expression is altered by each SNP, i.e. it
+says that SNP rs483920482905, when present in an individual, alters the
+expression of gene XXXX by a factor 1.5. Clearly, the training dataset must
+contain both genome and transcriptome data. Afterwards, the GReX is predicted
+in indivuduals for which only the genome sequence is available. They thus
+generated predictDB.
+
+\begin{equation}
+	T = \sum_{k=1}^{M}{w_k X_k + \epsilon}
+\end{equation}
+
+T is the expression of a gene, $w_k$ is the weigth of SNP k in influencing the
+expression of that gene, and $X_k$ is the number of reference alleles of SNP k
+(I guess $X_k$ is the sum of the alleles in all the individuals in the
+dataset).
+
+consideration by fmarotta: there are other models available, for instance one
+could account for the penetrance, or use a dominant (recessive) model, and so
+on.
+
+Important (by fmarotta): in linear regression, each regressor is considered
+independent of the others, but is that so? I think often a phenotype can depend
+on the \textit{combination} of SNPs.
+
+(also by fmarotta): is it possible to use PCA to find which SNPs are most
+relevant in influencing a phenotype?
+
+In the second phase, the predicted GReX is correlated (with linear regression,
+logistic regression, Cox, or Spearman (the latter is non-parametric). They used
+logistic regression for the results discussed in this article.
+
+limits: there is an attenuation bias because of the error in the estimation of
+the GReX.
+
+\section{features}
+
+The rationale for everything is that often SNPs influence a phenotype by
+altering gene expression (i.e. they have regulatory roles), as stated in this
+article:
+http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888
+
+main advantages:
+
+\begin{itemize}
+\item directionality, possibility to get insights on mechanisms.
+\item small multiple-testing burden.
+\item possibility form functional units (e.g. basing on known pathways).
+\item possibility to reanalise gwas data (only the genome is needed).
+\end{itemize}
+
+\section{Predicting the transcriptome}
+
+TODO: understand LASSO!
+
+\end{document}

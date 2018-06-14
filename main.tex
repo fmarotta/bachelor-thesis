@@ -49,7 +49,7 @@
 \usepackage[english]{babel} % Load characters and hyphenation
 \usepackage[T1]{fontenc} % Use utf8 encoding in the output (.pdf) file
 \usepackage{hyphenat} % Enable hyphenation for special fonts
-\usepackage{csquotes} % Quote like a boss
+\usepackage[english=british]{csquotes} % Quote like a boss
 
 % Special contents
 \usepackage{textgreek} % Greek characters
@@ -156,15 +156,17 @@ November\or December\fi\space\number\year} % A command to print the current mont
 % https://tex.stackexchange.com/questions/179839/tufte-book-title-page-customization
 
 \newsavebox{\logo}
-\savebox{\logo}{\includegraphics[height=3cm]{helix.pdf}}
+\savebox{\logo}{\includegraphics[height=3cm]{logo_unito.png}}
 
-\title{Titolo della tesi} % Title of the book
+% Title of the book
+\title{Transcriptome-Wide Association Studies: Bridging the Gap between 
+	Genome, Transcriptome and Disease} 
 
 \author[FM]
 {
-	Relatore: Paolo Provero
+	Supervisor: Prof. Paolo Provero
 	\hfill
-	Studente: Federico Marotta
+	Candidate: Federico Marotta
 }
 
 \publisher
@@ -176,7 +178,7 @@ November\or December\fi\space\number\year} % A command to print the current mont
 	\smallcaps{Corso di Laurea in Biotecnologie}
 } 
 
-\date{Sessione di Luglio 2018}
+\date{Tesi di Laurea, 18 Luglio 2018}
 
 % }}}
 
@@ -221,17 +223,17 @@ November\or December\fi\space\number\year} % A command to print the current mont
 \begin{centering}
 \setlength{\parindent}{0pt}
 
-\vfill{\fontsize{13}{16}\selectfont\textit{\@publisher}\par}
+\fontsize{13}{13}\selectfont\textit{\@publisher}\par
 
-\vspace{3cm}
+\null\vspace{\stretch{1}}
 
-{\fontsize{28}{46}\selectfont\@title\par}
+{\fontsize{22}{40}\selectfont\@title\par}
 
-\vspace{8cm}
+\vspace{\stretch{1}}
 
-{\fontsize{17}{17}\selectfont\textit{\@author}\par}
+{\fontsize{16}{16}\selectfont\textit{\@author}\par}
 
-\vfill
+\vspace{\stretch{1}}\null
 
 {\fontsize{13}{13}\selectfont\textsf{\smallcaps{\@date}}\par}
 
@@ -246,13 +248,20 @@ November\or December\fi\space\number\year} % A command to print the current mont
 % COPYRIGHT PAGE
 %---------------------------------------------------------------------------
 
-%\newpage
+\newpage
 %\begin{fullwidth}
-%~\vfill
-%\thispagestyle{empty}
-%\setlength{\parindent}{0pt}
-%\setlength{\parskip}{\baselineskip}
-%Copyright \copyright\ \the\year\ \thanklessauthor
+~\vfill
+\thispagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\ccbysa\ This work is licensed under a 
+\href{http://creativecommons.org/licenses/by-sa/4.0/}
+{Creative Commons Attribution-ShareAlike 4.0 International License}.
+
+\par Typeset with \href{ttps://www.latex-project.org/}{\LaTeX} using the 
+\href{https://tufte-latex.github.io/tufte-latex/}{Tufte-LaTeX} class.
+
 %\par\smallcaps{Published by \thanklesspublisher}
 %\par\smallcaps{tufte-latex.googlecode.com}
 %\par Licensed under the Apache License, Version 2.0 (the ``License''); 
@@ -270,12 +279,16 @@ November\or December\fi\space\number\year} % A command to print the current mont
 % TABLES OF CONTENTS, FIGURES, TABLES
 %---------------------------------------------------------------------------
 
+% Decrease line spacing so that the toc fits in one page.
+% https://tex.stackexchange.com/questions/56546/how-to-change-spaces-between-items-in-table-of-contents
+\renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents % Print the table of contents
 \listoffigures % Print a list of figures
 \addcontentsline{toc}{chapter}{List of Figures}
 \listoftables % Print a list of tables
 \addcontentsline{toc}{chapter}{List of Tables}
 \listoftodos
+\renewcommand{\baselinestretch}{1.0}\normalsize
 
 % DEDICATION PAGE
 %---------------------------------------------------------------------------
@@ -285,12 +298,22 @@ November\or December\fi\space\number\year} % A command to print the current mont
 \begin{doublespace}
 \noindent\fontsize{15}{15}\selectfont\itshape
 \nohyphenation
-Dedicated to...
+
+\enquote{The harmony of the world is made manifest in Form and Number, 
+	and the heart and soul and all the poetry of Natural Philosophy are 
+	embodied in the concept of mathematical beauty.}\\
+---D'Arcy Wentworth Thompson, \textnormal{On Growth and Form}
 
 \vspace{\stretch{1}}
 
 \noindent\fontsize{15}{15}\selectfont\itshape
-I would like to aknowledge...
+
+I would like to thank my supervisor, Prof. Paolo Provero, and all the 
+former and current members of the Computational Biology Unit whom I have 
+met: Elisa Mariella, Davide Marnetto, Elena Grassi, Ugo Ala, Alessandro 
+Lussana. Their help has often been invaluable and they have never failed 
+to provide a stimulating environment for me to work in.
+
 \end{doublespace}
 \vspace{\stretch{1}}\null
 
@@ -300,9 +323,39 @@ I would like to aknowledge...
 \cleardoublepage
 \chapter{Abstract} % "\chapter*" would leave out this chapter from the table of contents
 
-This sample book discusses the design of Edward Tufte's 
-books\cite{lewontin1964} and the use of the tufte-book and tufte-handout 
-document classes.
+Understanding how genetic variation among individuals can influence the 
+manifestation of complex diseases, which stem from the interaction of 
+many genes with each other and with the environment, is a relevant 
+problem in medicine. Since the first genome-wide association study (or 
+GWAS) was conducted in 2005, tens of thousands of SNP-trait associations 
+have been reported, shedding light on the at least partly genetic roots 
+of many diseases; most of such associations, however, do not provide 
+much predictive value and are difficult to explain. Expression 
+quantitative trait loci (eQTL) mapping, which identifies loci that 
+influence gene expression, is a possible step towards a better 
+understanding of the relationship between genetic variation and 
+phenotypic trait, using gene expression as a proxy for the trait. 
+Recently, a new approach has been devised which goes one step further 
+and aims to directly find associations between the expression of each 
+gene and a given trait by combining GWAS and eQTL data. In one of their 
+versions, these \enquote{transcriptome-wide association studies} (or 
+TWAS) are performed in two phases, the first being the prediction of the 
+genetic component of gene expression of the individuals in a GWAS cohort 
+using reference transcriptome data, and the second being the evaluation 
+of the association between predicted expression and trait in those 
+individuals. On the whole, TWAS are powerful statistical methods to find 
+associations between gene expression and complex phenotypic traits; 
+while they can help in making sense of GWAS results, they also can find 
+novel associations, pointing at potential candidate genes for further 
+analysis: as such, their contribute to the characterisation of the 
+relationship between genome and phenotype is substantial. After an 
+introduction, the focus of the first part of this thesis will be a 
+method to leverage individual-level data in order to detect genes 
+associated with disease traits. The second part shall deal with how, 
+conveniently, a TWAS can be performed starting only from the summary 
+association statistics and the summary LD information of a GWAS. In the 
+third part, we will discuss the advantages of integrating epigenetic 
+markers in a TWA study and see an application to schizophrenia. 
 
 % }}}
 
@@ -311,9 +364,13 @@ document classes.
 
 \mainmatter
 
-\subfile{chapters/ld.tex}
+\subfile{chapters/introduction.tex}
 
-\subfile{chapters/gwas.tex}
+\subfile{chapters/gamazon2015.tex}
+
+\subfile{chapters/gusev2016.tex}
+
+\subfile{chapters/gusev2018.tex}
 
 % }}}
 

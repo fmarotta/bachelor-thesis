@@ -15,6 +15,9 @@ well. Also the genome, for instance UV rays cause mutations. Most of the
 time the environmental effects are random, but not always (\eg UV rays, 
 smoking...).
 
+somewhere: Height and most other quantitative traits are influenced by 
+many variants of small effects.
+
 gamazon2015:Gwas have found many associations, but a large sample size 
 is needed.
 
@@ -180,5 +183,78 @@ every trait...
 
 In experimental models, heritability is measured by artificial selection 
 (see above).
+
+https://www.nature.com/articles/ng0508-489
+
+Combination of alleles may have specific effects both if they occur at 
+the same locus (dominance) or at different loci (epistasis). 
+
+There is a nice picture showing the statistical power of association 
+studies as a function of effect size and population size.
+
+One could find genes near markers associated to a phenotype and look for 
+overrepresented pathways.
+
+\enquote{The main conclusion emerging from the current studies is that 
+GWAS are able to robustly identify common variants that are associated 
+with height but that the effect sizes of individual variants are small, 
+so that very large sample sizes are needed to detect associations 
+reliably. Single laboratories are unlikely to have sufficient sample 
+sizes to do powerful studies on their own, and the trend in human 
+complex trait mapping has been to create consortia of research groups 
+and even consortia of consortia.}
+
+At the same time, among the full sequences now available there are so 
+many variants that trying to associate them with anything is very 
+difficult. Statistics is not enough in this case.
+
+https://www.nature.com/articles/nrg2322
+
+Heritability deals with the old nature-nurture debate, in particular 
+with how offspring resemble parents.
+
+P = G + E (taking account of sex, age and other covariates while 
+defining varP)
+
+varP = varG + varE (assuming there is no genotype by environment 
+covariance. there would be covariance if intelligent parents would 
+provide an intelligence-stimulating environment for their offspring, or 
+if cattle would be fed according to production. Also, the interaction 
+between genotype and environment is neglected, i.e. when the effect of 
+the genotype depends on the environment. they are ignored because they 
+are difficult to evaluate.)
+
+H2 = var(G) / var(P)
+
+varG = varA + varD + varE (additive, dominant, epistatic effects. 
+covariates are assumed 0)
+
+h2 = varA / varP
+
+I have not understood this part:
+
+\enquote{in a non-inbred population, half of the additive genetic 
+variance is between families and half is within families. This implies 
+that for a trait such as adult height in human populations, with a 
+heritability of 0.8 and a standard deviation of approximately 7 cm in 
+the population, the standard deviation of height in adult offspring 
+around the mean value of the parents is 5.4 cm (=√[72 (1 – ½*0.8)]), 
+which is not much smaller than the standard deviation in the entire 
+population. Hence, tall parents have on average tall children, but with 
+a considerable variation around the parental mean.}
+
+Wait a minute: $h^2$ because the variance is a squared thing! $h$ would 
+correspond to the standard deviation.
+
+\enquote{Because individuals transmit only one copy of each gene to 
+their offspring, most relatives share only single or no copies that are 
+identical by descent (IBD) (the most important exceptions are identical 
+twins and full siblings (sibs)), and dominance and other non-additive 
+genetic effects that are based on sharing two copies do not contribute 
+to their phenotypic resemblance. This is why the selection response and 
+correlation of most relatives depend on h2 and not H2, and why h2 is the 
+usual parameter.} That means that most people are heterozygous.
+
+var(A) 
 
 \end{document}

@@ -4,26 +4,24 @@
 \chapter{Seminal work: TWAS from individual-level data}
 \labch{gamazon2015}
 
-\subsection{Abstract}
-
-\enquote{\footnotesize Genome-wide association studies (GWAS) have 
-	identified thousands of variants robustly associated with complex 
-	traits. However, the biological mechanisms underlying these 
-	associations are, in general, not well understood. We propose a 
-	gene-based association method called PrediXcan that directly tests 
-	the molecular mechanisms through which genetic variation affects 
-	phenotype. The approach estimates the component of gene expression 
-	determined by an individual's genetic profile and correlates 
-	'imputed' gene expression with the phenotype under investigation to 
-	identify genes involved in the etiology of the phenotype. 
-	Genetically regulated gene expression is estimated using 
-	whole-genome tissue-dependent prediction models trained with 
-	reference transcriptome data sets. PrediXcan enjoys the benefits of 
-	gene-based approaches such as reduced multiple-testing burden and a 
-	principled approach to the design of follow-up experiments. Our 
-	results demonstrate that PrediXcan can detect known and new genes 
-	associated with disease traits and provide insights into the 
-	mechanism of these associations.}
+\begin{tcolorbox}[title=Abstract]
+Genome-wide association studies (GWAS) have identified thousands of 
+variants robustly associated with complex traits. However, the 
+biological mechanisms underlying these associations are, in general, not 
+well understood. We propose a gene-based association method called 
+PrediXcan that directly tests the molecular mechanisms through which 
+genetic variation affects phenotype. The approach estimates the 
+component of gene expression determined by an individual's genetic 
+profile and correlates 'imputed' gene expression with the phenotype 
+under investigation to identify genes involved in the etiology of the 
+phenotype. Genetically regulated gene expression is estimated using 
+whole-genome tissue-dependent prediction models trained with reference 
+transcriptome data sets. PrediXcan enjoys the benefits of gene-based 
+approaches such as reduced multiple-testing burden and a principled 
+approach to the design of follow-up experiments. Our results demonstrate 
+that PrediXcan can detect known and new genes associated with disease 
+traits and provide insights into the mechanism of these associations.
+\end{tcolorbox}
 
 \section{Method}
 
@@ -32,12 +30,17 @@ regulated expression (GReX), phenotype-influenced expression, and an
 environmental component. The phenotype can influence gene expression.
 
 An additive model trained on reference transcriptome datasets finds for each
-SNP the coefficents of which gene expression is altered by each SNP, i.e. it
+SNP the coefficents of which gene expression is altered by that SNP, i.e. it
 says that SNP rs483920482905, when present in an individual, alters the
 expression of gene XXXX by a factor 1.5. Clearly, the training dataset must
 contain both genome and transcriptome data. Afterwards, the GReX is predicted
 in indivuduals for which only the genome sequence is available. They thus
 generated predictDB.
+
+\enquote{(For specific results on the disease phenotypes analyzed here, 
+we used logistic regression with disease status.)} by fmarotta: they 
+used a binary variable, but what about using the liability to the 
+disease, which is continuous? see visscher 2008.
 
 \begin{equation}
 	T = \sum_{k=1}^{M}{w_k X_k + \epsilon}
@@ -82,21 +85,144 @@ main advantages:
 \item possibility to reanalise gwas data (only the genome is needed).
 \end{itemize}
 
-\section{Prereq: 
-https://www.sciencedirect.com/science/article/pii/S0002929710005987?via%3Dihub}
+%\section{Prereq: 
+%https://www.sciencedirect.com/science/article/pii/S0002929710005987?via%3Dihub}
 
-\subsection{pre-prereq: https://www.nature.com/articles/nature08494}
+%\subsection{pre-prereq: https://www.nature.com/articles/nature08494}
 
 
 
 \section{Predicting the transcriptome}
 
-TODO: understand LASSO and elastic net!
+They tried lasso, elastic net and another thing which turned out to be 
+pretty bad and was abandoned. Lasso is a regression analysis whereby the 
+number of regressors is diminished: some covariates are disregarded 
+(their coefficient becomes 0), and in general only one covariate is 
+selected from a set of highly correlated covariates. This is achieved by 
+imposing the constraint that the sum of all the coefficients (in 
+absolute value) must be less than a fixed amount $t$ (see wikipedia). 
+Lasso explores a different path from ridge regression, where the sum of 
+the squares of the coefficients must be less than an amount. Elastic net 
+is an improvement of lasso, where an additional constraint is imposed: 
+the linear combination of lasso and ridge constraints. The relative 
+weight of the two constraints is moduled by the alpha coefficient: the 
+linear combination is alpha*L1 + (1-alpha)*L2.
+
+In general lasso (elastic net) is used 1) because the number of 
+predictors is HUGE, especially if compared to the number of samples; 2) 
+to avoid overfitting.
 
 They chose to use elastic net and used tenfold cross-validation (\ie 
 they looked at the R square of estimated GReX vs observed expression).
 
 They also computed the heritability of gene expression in DGN and claim 
-that 
+that heritability \marginnote{Heritability is defined as the proportion 
+of phenotypic variance that is due to genetic variance} is an upper 
+bound to how well the trait can be associated to the genotype. This 
+makes sense, because if the variance in a trait is entirely due to the 
+environment, the association study will not find anything.
+
+The average heritability calculated in DGN was 0.153, while the average 
+tenfold cross-validated prediction $R^2$ value for elastic net was 
+0.137, so: not bad. Does this make sense? I think so, because 
+  heritability can be interpreted as the slope of the line of the 
+predicted variable as a function of the predictor (\eg offspring height 
+as a function of parent height). In this case the "predictor" is the 
+phenotype of the training sample, and the "predicted" is the phenotype 
+in the testing sample. A high heritability says that parent height can 
+predict offspring height, and that this predictability is due to genetic 
+factors; here, the authors are trying to predict a phenotype (gene 
+expression, but it is hardly relevant) from a genotype, which in turn 
+was attributed scores according to the phenotype. The linear model 
+(actually elastic net) they made, mimics the actual process of 
+development: they go from one genotype to a phenotype, attributing to 
+each element of the genotype (\ie to each SNP) a coefficient that 
+measures how much that element is involved in the manifestation of that 
+phenotype. Then, let us imagine that the training people have offspring, 
+and that the offspring is the "testing people": many of the SNPs will be 
+transmitted from parents to offspring. offspring have a similar genotype 
+to their parents (abstracting things, offspring are merely people which 
+have a genome similar to their parents), but do they have also a similar 
+phenotype? If the trait is heritable, yes. In yet other words, if the 
+trait is heritable, people with a simila genotype (\ie relatives) will 
+have a similar phenotype (h2 is precisely the correlation between the 
+phenotypes in parents-offspring); in a sense, in this paper the testing 
+people (those in the gwas) are relatives of the training people (those 
+in the reference transcriptome study like GEUVADIS). All this is 
+expressed in figure 3.
+
+An important thing that perhaps I did not say before is that previously 
+they had imputed the SNPs of the DGN people. They used both 1000 Genomes 
+and HapMap Phase 2 to impute, and achieved similar results, therefore 
+they chose to restrict the imputation to hapmap to save computation 
+time.
+
+They then tested their models to see wether, given a genotype, they 
+could predict the expression. That is to say, they predicted expression 
+from a set of genotypes and then confronted it with the real expression. 
+They used GEUVADIS and GTEx as tests. In figure 4 they show that the 
+correlation between predicted and actual expression in this separate 
+cohort is very different from the expected correlation under the 
+hypothesis that the two vectors (predicted and actual expression) are 
+independent. In gray there is a 45-degree line: if the point lay on this 
+line, then on the two axes there are identical variables. on the y axis 
+there are the quantiles of observed R2 (a quantile is the percentage of 
+points below a given value), while on the x axis there are the quantiles 
+of expected R2. A point is produced when the two quantiles are equal. 
+For instance, if the 10th quantile in the observed R squareds have an R2 
+of 0.2, what is the R2 of the expected R2 at the 10th quantile? In other 
+words, the curve is parametric. This Q-Q plot is used to check whether 
+two populations are similar.
+
+They also note that the same situation arises for different tissues.
+
+In fig 5 they present some example genes.
+
+they also made a linear model for trans eQTL, with linear regression, 
+but it had a poorer predictive power, so they resolved to use local SNPs 
+only.
+
+\section{Application of PrediXcan to WTCCC}
+
+At last, they apply their method. they used DGN whole-blod elastic net 
+prediction models to predict the expression in the WTCCC cohort, then 
+correlated the predicted GReX with the disease status.
+
+An interesting consideration (by fmarotta) is that many of the genes 
+that were associated to the disease status were in the HLA or MHC 
+region; also, the most significant results were for autoimmune diseases 
+(this can be due to the fact that also in the WTCCC work the most 
+significant results were for autoimmune diseases. Nay, I think that the 
+fact that the two studies (WTCCC and gamazon) have found the same result 
+is due to a common underlying cause, which is the same for which most 
+GWAS hits are in the MHC region.) Think more about this.
+
+They made a manhattan plot and another quantile-quantile plot. Also a 
+gwas enrichment.
+
+Some genes were associated with multiple autoimmune disease. Question by 
+fmarotta: what determines which disease you have if the expression of 
+that gene is altered in you? environment? gene expression level? Anyway, 
+this is an example of the complexity of the situation: the relationship 
+between genotype and phenotype is not biunivocal at all. the authors say 
+that lower expression of dclre1b was associated with rheumatoid 
+arthritis and T1D, whereas higher expression with crohn's disease.
+
+An advantage of predicscan is that it provides directionality: we know 
+if higher or lower expression is associated with the disease. See the 
+example of ERBB3.
+
+Globally, many genes were previously reported or fell near reported 
+genes. Or: they were in the MHC.
+
+Using less stringent significance thresholds, they found the same high 
+enrichments of reported genes among the results of predicscan. This 
+suggests that there are many false-negatives at the higher thresholds. 
+The method is not so powerful afterall. They found also two completely 
+novel genes.
+
+Finally, they compared their method with two other gene-based tests: 
+vegas and skat. In the quantile-quantile plot, predixcan was the best in 
+the tail-end.
 
 \end{document}

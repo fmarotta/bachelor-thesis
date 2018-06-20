@@ -225,4 +225,62 @@ Finally, they compared their method with two other gene-based tests:
 vegas and skat. In the quantile-quantile plot, predixcan was the best in 
 the tail-end.
 
+\section{Discussion}
+
+Why gene expression? It is the most direct phenotype (indeed, sometimes 
+we speak about \enquote{extended phenotypes}; gene expression can also 
+be viewed as an intermediate phenotype), it is heritable, and virtually 
+all the other phenotypes depend on it. Moreover, it is easy to measure.
+
+fmarotta:Genes can do few things: either they bind proteins whith a 
+structural or regulatory function (and when it is structural, it can be 
+regulating: TAD are coregulated), or they are transcribed, starting a 
+series of biochemical reactions that ultimately lead to functional 
+molecules, be they RNA or proteins. The complexity stems from the 
+interactions of many genes together and with the environment
+
+Limits:
+\begin{itemize}
+	\item
+the prediction of gene expression can be biased, and some models, namely 
+a combination of K nearest neighbour (KNN), elastic net, and the use of 
+genomic annotation may perform better.
+	\item 
+(https://www.cell.com/ajhg/fulltext/S0002-9297(18)30108-3?code=cell-site) 
+Genetic variation does not alter only gene expression. There can be 
+\textit{trans}-acting effects, where a SNP alters how a gene (be it a TF 
+or a miRNA) modulates the expression of others, without altering the 
+expression of the modulator gene itself. Moreover, a SNP can have 
+effects on splicing, transcription start or end site or other RNA 
+editing processes, without altering the expression of the gene.
+
+One of the main advantages is that it is economic: one only needs 
+existing data, therefore many existing GWAS dataset can be reanalysed 
+\enquote{for free}.
+
+Another virtue is that predicscan provides directionality, hinting at 
+potential strategies to cure disease, \eg if a gene's upregulation is 
+linked to a disease, then a drug may be developed to downregulate it. 
+(by fmarotta: It probably woul have no effect whatsoever because of 
+compensatory effects.)
+
+Multiple testing: here they have used bonferroni, which is pretty 
+conservative. They only corrected gene-based tests of association, and 
+not SNP-based ones, because the gene-based association is the last step, 
+and because bonferroni is conservative. (by SNP-based, I do not know if 
+they mean SNP-geneexpression association or SNP-trait association 
+performed in a classical GWAS.)
+
+They do not claim causality, for SNPs may contribute both to expression 
+and to other things, and it may be that the other things are the cause 
+of the disease, not gene expression.
+
+They state that their method provides insights into gene regulation and 
+directionality.
+
+by fmarotta: Actually, they do not prove that a SNP associated to gene 
+expression regulates the gene: they  only say that variation between 
+individuals at that locus results in variation in gene expression. Or do 
+they?
+
 \end{document}

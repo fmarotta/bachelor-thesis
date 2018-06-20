@@ -104,18 +104,36 @@
 {\huge\rmfamily\itshape}% before the title body
 [\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\end{fullwidth}}{}]% after the title body
 
-% CUSTOM COMMANDS {{{
+% CUSTOM COMMANDS AND ENVIRONMENTS {{{
 % --------------------------------------------------------------------------
 
 % Document-specific {{{
 
-\newcommand{\geno}[1]{\({#1}\)} % Print alleles in mathematics mode
+% Print latin words in italics
+\newcommand{\invitro}{\textit{in vitro}\xspace}
+\newcommand{\invivo}{\textit{in vivo}\xspace}
+\newcommand{\cis}{\textit{cis}\xspace}
+\newcommand{\trans}{\textit{trans}\xspace}
 
+% Easily label and reference elements
 \newcommand{\labch}[1]{\label{ch:{#1} }}
 \newcommand{\refch}[1]{Chapter \ref{ch:{#1} }}
-
 \newcommand{\labsec}[1]{\label{sec:{#1} }}
 \newcommand{\refsec}[1]{Section \ref{sec:{#1} }}
+\newcommand{\labfig}[1]{\label{fig:{#1} }}
+\newcommand{\reffig}[1]{Figure \ref{fig:{#1} }}
+
+% Environment to put external abstracts in a box
+\newenvironment{external_abstract}[1]
+{
+	\begin{fullwidth}
+	\begin{tcolorbox}[#1]
+	\footnotesize
+}
+{
+	\end{tcolorbox}
+	\end{fullwidth}
+}
 
 % }}}
 
@@ -369,13 +387,13 @@ markers in a TWA study and see an application to schizophrenia.
 
 \mainmatter
 
-\subfile{chapters/introduction.tex}
+%\subfile{chapters/introduction.tex}
 
-\subfile{chapters/gamazon2015.tex}
+%\subfile{chapters/gamazon2015.tex}
 
 \subfile{chapters/gusev2016.tex}
 
-\subfile{chapters/gusev2018.tex}
+%\subfile{chapters/gusev2018.tex}
 
 % }}}
 

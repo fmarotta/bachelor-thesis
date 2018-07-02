@@ -66,6 +66,10 @@
 \setcounter{secnumdepth}{-1} % Do not number headings
 \setcounter{tocdepth}{1} % Show headings up to sections in the toc
 \usepackage[notlot,notlof]{tocbibind}
+%\makeatletter
+%\renewcommand*\l@chapter{\@dottedtocline{1}{0em}{2.3em}}
+%\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.3em}}
+%\makeatother
 
 % Images
 \usepackage{graphicx} % Needed to insert images into the document
@@ -76,8 +80,9 @@
 % Bibliography
 % See https://github.com/Tufte-LaTeX/tufte-latex/issues/60 for the 
 % problems concerning biblatex
-\usepackage[style=numeric,sorting=none,backend=biber]{biblatex}
+\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,sorting=none,backend=biber]{biblatex}
 \addbibresource{main.bib}
+\AtEveryBibitem{\clearfield{url}} % Do not show URL
 \renewcommand{\cite}[2][0pt]{\sidenote[][#1]{\fullcite{#2}} }
 
 % Index
@@ -410,7 +415,11 @@ markers in a TWA study and see an application to schizophrenia.
 % BIBLIOGRAPHY
 %---------------------------------------------------------------------------
 
-\printbibliography[heading=bibintoc,title=Complete Bibliography]
+\printbibheading[heading=bibintoc,title=References]
+\printbibliography[heading=subbibliography,keyword=TWAS,title=Main 
+Articles]
+\printbibliography[heading=subbibliography,notkeyword=TWAS,title=Further 
+Reading]
 \nocite{*}
 
 % APPENDIX

@@ -6,10 +6,9 @@ beamer/*
 # include directories
 !**/
 
-# include .tex, .bib and .pdf files
+# include .tex and .bib files
 !**/*.tex
 !**/*.bib
-!**/*.pdf
 
 # include .gitignore
 !.gitignore

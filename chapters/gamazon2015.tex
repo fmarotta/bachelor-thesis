@@ -33,35 +33,84 @@ functional point of view, and are only able to explain a little
 proportion of phenotypic variance. The wealth of biological data that is 
 now being released by large-scale consortia provides an unprecedented 
 opportunity to integrate information and obtain insight into the genetic 
-and biological processes underlying disease susceptibility; some of 
-these consortia, whose datasets have been exploited by Gamazon \etal, 
-are as follows.
-
+and biological processes underlying disease susceptibility\sidenote{Some 
+of these consortia, whose data sets have been used by Gamazon \etal, are 
+the following.
 \begin{description}
-	\item[GTEx Project.] Its aim is to collect data on genotype and gene 
-		expression levels of a number of tissues from postmortem 
-		samples.
 	\item[ENCODE.] The focus is on the systematic functional annotation 
-		of each segment of the human genome.
-	\item[GEUVADIS.] This projects
-	\item[DGN.]
-	\item[Braineac.]
+of each segment of the human genome.
+	\item[GEUVADIS.] This project endeavours to uncover functional 
+variation in humans through the study of how genetic variants affect 
+gene expression.
+	\item[DGN.] Variants regulating gene expression, splicing and 
+allelic expression are detected.
+	\item[Braineac.] The authors find eQTL in ten human brain regions.
+	\item[GTEx Project.] Its aim is to collect data on genotype and gene 
+expression levels of a number of tissues from postmortem samples.
 \end{description}
+}.
+
+This work is based on two key ideas: first, genetic variants most often 
+impact gene expression, as shown by the many eQTL studies; second, SNP 
+aggregation methods that combine many variants in a biologically 
+meaningful way have the potential to improve GWAS results. Therefore, 
+the authors propose to group together all the SNPs that regulate the 
+expression of a given gene. One advantage of this approach, which they 
+called PrediXcan, is that statistical tests performed on group of SNPs 
+are more powerful than those performed on each and every SNP due to less 
+multiple testing; besides, by choosing the gene as a grouping unit, 
+information about the directionality of the effect is intrinsically 
+provided, \ie it is possible to say whether the disease is associated to 
+an increase or a decrease in the gene's expression. Moreover, from a 
+functional point of view a gene is much more interpretable than a simple 
+genetic polymorphism.
 
 \section{Method}
 
-first step: gene expression is decomposable in three components: genetically
-regulated expression (GReX), phenotype-influenced expression, and an
-environmental component. The phenotype can influence gene expression.
+The main goal is to provide a framework to better interpret GWAS 
+results. However, in a typical GWA study the individuals are simply 
+genotyped with a SNP microarray, and expression data are completely 
+missing. Therefore, gene expression has to be predicted by exploiting 
+the knowledge of expression quantitative trait loci.
 
-An additive model trained on reference transcriptome datasets finds for each
-SNP the coefficents of which gene expression is altered by that SNP, \ie 
-it
-says that SNP rs483920482905, when present in an individual, alters the
-expression of gene XXXX by a factor 1.5. Clearly, the training dataset must
-contain both genome and transcriptome data. Afterwards, the GReX is predicted
-in indivuduals for which only the genome sequence is available. They thus
-generated predictDB.
+The first assumption here is that gene expression can be decomposed into 
+three components: genetically regulated expression (GReX), 
+phenotype-influenced expression, and an environment-determined component 
+(\reffig{gamazon2015/1}). Some phenotype, such as many diseases, can 
+indeed influence gene expression, but, as we shall see in a moment, by 
+training their predictive models on healthy individuals from reference 
+transcriptome experiments, they already exclude that component from what 
+they predict.
+
+\begin{figure}
+	\includegraphics{gamazon2015/1-expression_decomposition}
+	\caption{Gene expression can be decomposed into three components}
+	\labfig{gamazon2015/1}
+\end{figure}
+
+The prediction relies on data sets where both genotype and expression 
+are present, such as the aforementioned GEUVADIS and GTEx projects, and 
+the model is additive (\reffig{additive_model}), meaning that a given 
+variant in a homozygous individual is supposed to have twice the effect 
+of that same variant in an heterozygous individual. This is surely an 
+oversimplification, for it does not take into account three biologically 
+important effects ---epistasis, dominance and penetrance---, but an 
+additive model is much simpler to implement. The purpose of this 
+regression model, which is an elastic net (see \refsec{regression} 
+Regression) with $\alpha = 0.5$, is to find for each SNP the coefficient 
+of which gene expression is altered by a copy of that SNP. Once the 
+coefficients have been estimated, the genetically regulated component of 
+gene expression can be predicted starting only from the genotype of an 
+individual; the predicted GReX is denoted as $\hat{GReX}$.
+
+\begin{marginfigure}{-1cm}
+	\includegraphics{gamazon2015/ext-additive_genetic_model}
+	\labfig{additive_model}
+	\caption{An example of additive model for one SNP; Gamazon \etal 
+extended it for several SNPs. Image adapted from Conall M. O'Seaghdha 
+and Caroline S. Fox, \enquote{Genome-wide association studies of chronic 
+kidney disease: what have we learned?}}
+\end{marginfigure}
 
 \enquote{(For specific results on the disease phenotypes analyzed here, 
 we used logistic regression with disease status.)} by fmarotta: they 

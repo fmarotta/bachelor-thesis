@@ -66,6 +66,10 @@
 \setcounter{secnumdepth}{-1} % Do not number headings
 \setcounter{tocdepth}{1} % Show headings up to sections in the toc
 \usepackage[notlot,notlof]{tocbibind}
+%\makeatletter
+%\renewcommand*\l@chapter{\@dottedtocline{1}{0em}{2.3em}}
+%\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.3em}}
+%\makeatother
 
 % Images
 \usepackage{graphicx} % Needed to insert images into the document
@@ -76,8 +80,9 @@
 % Bibliography
 % See https://github.com/Tufte-LaTeX/tufte-latex/issues/60 for the 
 % problems concerning biblatex
-\usepackage[style=numeric,sorting=none,defernumbers=true,backend=biber]{biblatex}
+\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,sorting=none,backend=biber]{biblatex}
 \addbibresource{main.bib}
+\AtEveryBibitem{\clearfield{url}} % Do not show URL
 \renewcommand{\cite}[2][0pt]{\sidenote[][#1]{\fullcite{#2}} }
 
 % Index
@@ -114,6 +119,7 @@
 \newcommand{\invivo}{\textit{in vivo}\xspace}
 \newcommand{\cis}{\textit{cis}\xspace}
 \newcommand{\trans}{\textit{trans}\xspace}
+\newcommand{\etal}{\textit{et al.}\xspace}
 
 % Easily label and reference elements
 \newcommand{\labch}[1]{\label{ch:{#1} }}
@@ -388,6 +394,8 @@ markers in a TWA study and see an application to schizophrenia.
 \mainmatter
 
 \subfile{chapters/introduction.tex}
+
+\subfile{chapters/methods.tex}
 
 \subfile{chapters/gamazon2015.tex}
 

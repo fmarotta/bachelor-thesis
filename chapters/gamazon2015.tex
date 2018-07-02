@@ -4,7 +4,7 @@
 \chapter{Seminal work: TWAS from individual-level data}
 \labch{gamazon2015}
 
-\begin{tcolorbox}[title=Abstract]
+\begin{external_abstract}{title=Abstract}
 Genome-wide association studies (GWAS) have identified thousands of 
 variants robustly associated with complex traits. However, the 
 biological mechanisms underlying these associations are, in general, not 
@@ -21,7 +21,7 @@ approaches such as reduced multiple-testing burden and a principled
 approach to the design of follow-up experiments. Our results demonstrate 
 that PrediXcan can detect known and new genes associated with disease 
 traits and provide insights into the mechanism of these associations.
-\end{tcolorbox}
+\end{external_abstract}
 
 \section{Method}
 
@@ -30,7 +30,8 @@ regulated expression (GReX), phenotype-influenced expression, and an
 environmental component. The phenotype can influence gene expression.
 
 An additive model trained on reference transcriptome datasets finds for each
-SNP the coefficents of which gene expression is altered by that SNP, i.e. it
+SNP the coefficents of which gene expression is altered by that SNP, \ie 
+it
 says that SNP rs483920482905, when present in an individual, alters the
 expression of gene XXXX by a factor 1.5. Clearly, the training dataset must
 contain both genome and transcriptome data. Afterwards, the GReX is predicted
@@ -72,7 +73,8 @@ the GReX.
 \section{features}
 
 The rationale for everything is that often SNPs influence a phenotype by
-altering gene expression (i.e. they have regulatory roles), as stated in this
+altering gene expression (\ie they have regulatory roles), as stated in 
+this
 article:
 http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888
 
@@ -144,7 +146,7 @@ transmitted from parents to offspring. offspring have a similar genotype
 to their parents (abstracting things, offspring are merely people which 
 have a genome similar to their parents), but do they have also a similar 
 phenotype? If the trait is heritable, yes. In yet other words, if the 
-trait is heritable, people with a simila genotype (\ie relatives) will 
+trait is heritable, people with a similar genotype (\ie relatives) will 
 have a similar phenotype (h2 is precisely the correlation between the 
 phenotypes in parents-offspring); in a sense, in this paper the testing 
 people (those in the gwas) are relatives of the training people (those 
@@ -253,6 +255,7 @@ or a miRNA) modulates the expression of others, without altering the
 expression of the modulator gene itself. Moreover, a SNP can have 
 effects on splicing, transcription start or end site or other RNA 
 editing processes, without altering the expression of the gene.
+\end{itemize}
 
 One of the main advantages is that it is economic: one only needs 
 existing data, therefore many existing GWAS dataset can be reanalysed 

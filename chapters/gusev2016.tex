@@ -38,7 +38,10 @@ decreasing for over a decade (\reffig{sequencingcost}), it can become
 quite an expensive technology if applied to cohorts of tens of thousand 
 samples, such as those of a typical modern GWAS; secondly, every tissue 
 shows a different pattern of expressed genes, and to choose the right 
-tissue to analyse for each phenotype is not always a trivial matter.
+tissue to analyse for each phenotype is not always a trivial 
+matter.\todo{is the tissue from which the expression data for the 
+training comes relevant? Gamazon seems to say no, but another work 
+(https://www.ncbi.nlm.nih.gov/pubmed/29632380) says another thing}
 
 \begin{marginfigure}[-4cm]
 	\includegraphics{sequencingcost}
@@ -66,7 +69,8 @@ expression and accordingly assigns a weight to the SNP \todo{taking into
 account LD: gamazon used elastic net to prune correlated predictors}; 
 next, the SNPs weights are used to impute the \cis genetic component of 
 expression; finally, the imputed gene expression is tested for an 
-association \todo{through correlation} with a complex trait.
+association \todo{through correlation} with a complex trait.\todo{LD is 
+taken into account: how? where?}
 
 \begin{figure}
 	\includegraphics{gusev2016/1-TWAS_schematic}
@@ -81,7 +85,8 @@ principle be applied to any GWA study; moreover, the authors emphasise
 the robustness of their approach, for its focus is on the genetic 
 component of expression only, therefore it is guaranteed that the 
 association between expression and trait is ultimately due to genetic 
-factors.\todo{it doesn't mean it is robust}
+factors.\todo{it doesn't mean it is robust} Nevertheless, pleiotropic 
+effects cannot be effectively modeled (see gusev2018).
 
 Indeed, there are several ways in which genomic variation can be related 
 to gene expression and phenotypic variation.\todo{approfondire}

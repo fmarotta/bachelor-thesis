@@ -65,7 +65,7 @@ an increase or a decrease in the gene's expression. Moreover, from a
 functional point of view a gene is much more interpretable than a simple 
 genetic polymorphism.
 
-\section{Method}
+\section{The imputation of gene expression}
 
 The main goal is to provide a framework to better interpret GWAS 
 results. However, in a typical GWA study the individuals are simply 
@@ -95,15 +95,20 @@ variant in a homozygous individual is supposed to have twice the effect
 of that same variant in an heterozygous individual. This is surely an 
 oversimplification, for it does not take into account three biologically 
 important effects ---epistasis, dominance and penetrance---, but an 
-additive model is much simpler to implement. The purpose of this 
-regression model, which is an elastic net (see \refsec{regression} 
-Regression) with $\alpha = 0.5$, is to find for each SNP the coefficient 
-of which gene expression is altered by a copy of that SNP. Once the 
-coefficients have been estimated, the genetically regulated component of 
-gene expression can be predicted starting only from the genotype of an 
-individual; the predicted GReX is denoted as $\hat{GReX}$.
+additive model is much simpler to implement. Moreover, the use of 
+multiple linear regression, though a simplistic approach, is a first 
+attempt to quantitatively model the interactions among genetic variants: 
+indeed, it may well be that a given phenotype is influenced by a 
+\textit{combination} of SNPs rather than a single SNP\todo{safety check. 
+also: in a linear model the regressors are independent! how are the 
+interaction considered?}. The purpose of this regression model is to 
+find for each SNP the coefficient of which gene expression is altered by 
+a copy of that SNP. Once the coefficients have been estimated, the 
+genetically regulated component of gene expression can be predicted 
+starting only from the genotype of an individual; the predicted GReX is 
+denoted as $\hat{GReX}$.
 
-\begin{marginfigure}{-1cm}
+\begin{marginfigure}
 	\includegraphics{gamazon2015/ext-additive_genetic_model}
 	\labfig{additive_model}
 	\caption{An example of additive model for one SNP; Gamazon \etal 
@@ -112,91 +117,157 @@ and Caroline S. Fox, \enquote{Genome-wide association studies of chronic
 kidney disease: what have we learned?}}
 \end{marginfigure}
 
-\enquote{(For specific results on the disease phenotypes analyzed here, 
-we used logistic regression with disease status.)} by fmarotta: they 
-used a binary variable, but what about using the liability to the 
-disease, which is continuous? see visscher 2008.
+They thus generated predictDB, which stores the coefficients of which 
+each SNP influence the GReX. By using healthy individuals from reference 
+transcriptome and genome data sets, they disregard the 
+disease-determined component of gene expression, and by using a 
+regression model, they disregard the random environmental component. It 
+is now possible to \enquote{impute} the transcriptome of an individual 
+from its genotype, just like it has been possible to impute unknown 
+variants in an individual from its known genotyped variants.
+
+\begin{figure}
+	\includegraphics[height=10cm]{gamazon2015/2-grex_estimation}
+	\labfig{gamazon2015/2}
+	\caption{The framework to estimate the coefficient by which each SNP 
+		alters the expression of a gene.}
+\end{figure}
+
+The regression model employed can be summarised with the following 
+equation (referring to \reffig{gamazon2015/2}):
 
 \begin{equation}
-	T = \sum_{k=1}^{M}{w_k X_k + \epsilon}
+	T = \sum_{k=1}^{M}w_k X_k + \epsilon
 \end{equation}
 
-T is the expression of a gene, $w_k$ is the weigth of SNP k in influencing the
-expression of that gene, and $X_k$ is the number of reference alleles of SNP k
-(I guess $X_k$ is the sum of the alleles in all the individuals in the
-dataset).
+where T is the expression of a gene, $w_k$ is the weigth (or the effect 
+size) of SNP $k$ in influencing the expression of that gene, $X_k$ is 
+the number of reference alleles of SNP $k$ in all the dataset, and 
+$\epsilon$ is a random error. Only SNPs falling 1Mb within the gene's 
+start or end were considered. To fit this model, the authors tried 
+various types of regression methods ---lasso, elastic net and polygenic 
+scrores---, but finally settled to elastic net\sidenote{In general, 
+elastic net is used for two reasons: first, when the number of 
+predictors is large, especially if compared to the number of samples; 
+and second, to avoid overfitting.} (with the parameter $\alpha = 0.5$), 
+whose main advantage is the \enquote{automatic} selection of the most 
+important regressors. 10-fold cross-validation\sidenote{In $k$-fold 
+cross-validation, the dataset is split in $k$ portions, and for each 
+part, the model is trained on the remaining $k-1$ parts, then the $R^2$ 
+of the predicted and real values is calculated on the selected part. The 
+average of the $R^2$ is finally reported.} was used to asses the 
+predictive performance.
 
-consideration by fmarotta: there are other models available, for instance one
-could account for the penetrance, or use a dominant (recessive) model, and so
-on.
+Having seen the general method, we now turn to the actual protocol 
+followed by the authors.
 
-Important (by fmarotta): in linear regression, each regressor is considered
-independent of the others, but is that so? I think often a phenotype can depend
-on the \textit{combination} of SNPs.
+From DGN, they obtained whole-blood RNA-seq and genome-wide genotype 
+data for 922 European individuals, normalised and filtered to retain 
+only SNPs with MAF > 0.05, in Hardy-Weinberg equilibrium and univoquely 
+mapped onto a strand. The SNPs that were not genotyped were imputed; 
+genome imputation\cite{Marchini2010} is a routinely-used method to 
+estimate the genotype of an individual at loci that were not analysed, 
+basing on known linkage disequilibrium information in a reference 
+population. This data set was used to train the predictive models.
 
-(also by fmarotta): is it possible to use PCA to find which SNPs are most
-relevant in influencing a phenotype?
+From GEUVADIS, normalised RNA-seq data from lymphoblastoid cell lines 
+established from 421 individuals was downloaded; genotype data was also 
+available for the same individuals, since they were part of the 1000 
+genomes project as well. This data set was used for the validation of 
+the models (\reffig{gamazon2015/4}).
 
-In the second phase, the predicted GReX is correlated (with linear regression,
-logistic regression, Cox, or Spearman (the latter is non-parametric). They used
-logistic regression for the results discussed in this article.
+RNA-seq data from GTeX, normalised and adjusted for the most common 
+covariates such as sex, was used to test the predictive performance of 
+the model in different tissues. Surprisingly, the model was able to 
+predict gene expression quite accurately in tissues other than the 
+blood, even though it was trained on blood expression data.
 
-limits: there is an attenuation bias because of the error in the estimation of
-the GReX.
+\begin{figure}
+	\includegraphics{gamazon2015/4-prediction_performance}
+	\labfig{gamazon2015/4}
+	\caption{The performance in the GEUVADIS data set of the elastic net 
+model trained on the DGN data set, showed by a quantile-quantile plot 
+(left) and a distribution of $R^2$ (right).}
+\end{figure}
 
-\section{features}
+\section{The heritability of gene expression}
 
-The rationale for everything is that often SNPs influence a phenotype by
-altering gene expression (\ie they have regulatory roles), as stated in 
-this
-article:
-http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888
+Heritability is an important idea in genetics and is especially relevant 
+in the scope of association studies, therefore we dedicate some space to 
+its analysis.
 
-main advantages:
+Many traits vary among the individuals of a population: height and hair 
+colour are obvious ones, but for instance also disease status (or 
+liability) can be considered a phenotypic trait. The heritability of a 
+trait is the proportion of trait variance which can be explained by the 
+genetic variance among the individuals of the population. In order not 
+to underestimate heritability, only genetic variance at loci associated 
+to the phenotype must be taken into account\todo{safety check}. 
+Heritability does not deal with the influence of genes in the 
+development of the trait, but rather is concerned with the role of 
+genetic \textit{variation} in determining \textit{phenotypic variation}. 
+There are two definitions of heritability:
 
-\begin{itemize}
-\item directionality, possibility to get insights on mechanisms.
-\item small multiple-testing burden.
-\item possibility form functional units (e.g. basing on known pathways).
-\item possibility to reanalise gwas data (only the genome is needed).
-\end{itemize}
+\begin{description}
+	\item[Narrow sense heritability,] or $h^2$, is the heritability due 
+to additive genetic factors (see \reffig{additive_model} and related 
+discussion).
+	\item[Broad sense heritability,] or $H^2$, is the heritability due 
+to all genetic factors, taking into account dominance and gene-gene 
+interactions.
+\end{description}
 
-%\section{Prereq: 
-%https://www.sciencedirect.com/science/article/pii/S0002929710005987?via%3Dihub}
+\marginnote{If we assume that $P = G + E$, where $P$ is the phenotype, 
+$G$ the genetics, $E$ the environment, then phenotypic variance can be 
+expressed as follows:
+\begin{equation*}
+	Var(P) = Var(G) + Var(E) + 2 Cov(G,E)
+\end{equation*}
+and, assuming the independence of genetics and environment,
+\begin{equation*}
+	H^2 = Var(G) / Var(P)
+	h^2 = Var(A) / Var(P)
+\end{equation*}
+}
 
-%\subsection{pre-prereq: https://www.nature.com/articles/nature08494}
+Usually, the first definition is used, but it is a reasonable 
+approximation, for in the majority of case, alternate alleles are 
+homozygous only in a minority of individuals due to their low frequency, 
+hence the effects of dominance or epistasis manifest only 
+rarely\cite{Visscher2008march}\todo{safety check}.
 
+There are many ways to estimate narrow-sense heritability. One is in 
+selective breeding, where $R = h^2 S$: we start from a population with 
+mean $\lambda$, select a subpopulation with mean $\mu$, then take the 
+offspring of the subpopulation, which will have mean $\mu_1$. R is the 
+difference between the mean of the offspring and the mean of the 
+original population (\ie, $\mu_1 - \lambda$), that is a measure of the 
+success of selection; S is the difference between the mean of the 
+selected subpopulation and the mean of the original population (\ie $\mu 
+- \lambda$), that is a measure of the selective pressure applied.
 
+Another way to interpret heritability in the narrow sense is as follows. 
+Make a plot of parents heights vs. offspring heights. If there is 
+perfect heritability, the height of a son is equal to the average 
+heights of the two parents, so the plot will be a straight line y=x. In 
+general, $h^2$ is the slope of the regression line. In principle, if 
+genes determine variations in phenotypes, then offspring should be more 
+similar to their parents than to unrelated individuals. This can be 
+expressed as a correlation between parents and offspring (or between 
+siblings). In other words, if we have X = "phenotype of parent X" and 
+Y(X) = "phenotype of offspring of parent X", then the plot of Y(X) 
+should be a straight line with positive slope. This, however, is valid 
+ONLY IF THE ENVIRONMENT IS NOT SHARED BETWEEN RELATIVES MORE THAN IT IS 
+SHARED BETWEEN UNRELATED PEOPLE.
 
-\section{Predicting the transcriptome}
-
-They tried lasso, elastic net and another thing which turned out to be 
-pretty bad and was abandoned. Lasso is a regression analysis whereby the 
-number of regressors is diminished: some covariates are disregarded 
-(their coefficient becomes 0), and in general only one covariate is 
-selected from a set of highly correlated covariates. This is achieved by 
-imposing the constraint that the sum of all the coefficients (in 
-absolute value) must be less than a fixed amount $t$ (see wikipedia). 
-Lasso explores a different path from ridge regression, where the sum of 
-the squares of the coefficients must be less than an amount. Elastic net 
-is an improvement of lasso, where an additional constraint is imposed: 
-the linear combination of lasso and ridge constraints. The relative 
-weight of the two constraints is moduled by the alpha coefficient: the 
-linear combination is alpha*L1 + (1-alpha)*L2.
-
-In general lasso (elastic net) is used 1) because the number of 
-predictors is HUGE, especially if compared to the number of samples; 2) 
-to avoid overfitting.
-
-They chose to use elastic net and used tenfold cross-validation (\ie 
-they looked at the R square of estimated GReX vs observed expression).
+\todo{add marginfigures of breeder and height plot. rewrite last two 
+paragraphs.}
 
 They also computed the heritability of gene expression in DGN and claim 
-that heritability \marginnote{Heritability is defined as the proportion 
-of phenotypic variance that is due to genetic variance} is an upper 
-bound to how well the trait can be associated to the genotype. This 
-makes sense, because if the variance in a trait is entirely due to the 
-environment, the association study will not find anything.
+that heritability is an upper bound to how well the trait can be 
+associated to the genotype. This makes sense, because if the variance in 
+a trait is entirely due to the environment, the association study will 
+not find anything.
 
 The average heritability calculated in DGN was 0.153, while the average 
 tenfold cross-validated prediction $R^2$ value for elastic net was 
@@ -257,6 +328,21 @@ In fig 5 they present some example genes.
 they also made a linear model for trans eQTL, with linear regression, 
 but it had a poorer predictive power, so they resolved to use local SNPs 
 only.
+
+\section{The correlation between expression and phenotype}
+% This section is valid!
+
+In the second phase, the predicted $\hat{GReX}$ is correlated with the 
+phenotypic status employing linear regression, logistic regression, Cox 
+regression, or Spearman correlation (the latter is non-parametric). They 
+chose to use logistic regression for the results discussed in this 
+article. Another possibility could have been that to model not the 
+disease status, which is a binary variable, but rather the liability to 
+the disease, following what Vissher\cite{Visscher2008} reported, showing 
+that this approach is able to explain a larger proportion of genetic 
+variance.
+
+\section{Some examples}
 
 \section{Application of PrediXcan to WTCCC}
 
@@ -359,5 +445,24 @@ by fmarotta: Actually, they do not prove that a SNP associated to gene
 expression regulates the gene: they  only say that variation between 
 individuals at that locus results in variation in gene expression. Or do 
 they?
+
+\section{PrediXcan: pros and cons}
+
+Main advantages:
+
+\begin{itemize}
+\item directionality, possibility to get insights on mechanisms.
+\item small multiple-testing burden.
+\item possibility form functional units (e.g. basing on known pathways).
+\item possibility to reanalise gwas data (only the genome is needed).
+\end{itemize}
+
+%\section{Prereq: 
+%https://www.sciencedirect.com/science/article/pii/S0002929710005987?via%3Dihub}
+
+%\subsection{pre-prereq: https://www.nature.com/articles/nature08494}
+
+limits: there is an attenuation bias because of the error in the 
+estimation of the GReX.
 
 \end{document}

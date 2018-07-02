@@ -10,6 +10,7 @@ In this section I shall describe some well established methods which
 were applied in some of the papers described in the thesis.
 
 \section{Regression}
+\labsec{regression}
 
 Regression usually consists of three-steps:
 
@@ -88,10 +89,10 @@ This function is the sum of the RSS and a penalty term, the minimisation
 of which can improve the fitting of the model, provided that the tuning 
 parameter $\lambda$ is properly chosen.
 
-\newthought{Lasso regression\cite{James2013}} is another regularisation 
-method which allows to effectively select a subset of relevant 
-predictors by setting the coefficients of the others to zero. In this 
-case, the minimisation function is
+\newthought{Lasso regression\cite{Tibshirani1996}} is another 
+regularisation method which allows to effectively select a subset of 
+relevant predictors by setting the coefficients of the others to zero. 
+In this case, the minimisation function is
 
 \begin{equation}
 	\sum_{i=1}^{n}\left(y_i-\beta_0-\sum_{j=1}^{p}\beta_jx_{ij}\right)^2+
@@ -142,8 +143,8 @@ denoted by an hat, and manipulate the logistic function until we have
 \end{equation}
 
 where the left-hand member is the logarithm of the odds, or logit. At 
-this point the coefficients can be found with the maximum likelihood 
-method, and the predictions be made. As with linear regression, this 
-model can be easily extended to include more than one predictor.
+this point the coefficients can be found with the maximum likelihood, 
+and the predictions be made. As with linear regression, this model can 
+be easily extended to include more than one predictor.
 
 \end{document}

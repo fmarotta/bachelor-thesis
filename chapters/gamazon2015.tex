@@ -1,7 +1,8 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-\chapter{Seminal work: TWAS from individual-level data}
+\chapter{A gene-based association method for mapping traits using 
+reference transcriptome data}
 \labch{gamazon2015}
 
 \begin{external_abstract}{title=Abstract}
@@ -140,23 +141,23 @@ equation (referring to \reffig{gamazon2015/2}):
 	T = \sum_{k=1}^{M}w_k X_k + \epsilon
 \end{equation}
 
-where T is the expression of a gene, $w_k$ is the weigth (or the effect 
-size) of SNP $k$ in influencing the expression of that gene, $X_k$ is 
-the number of reference alleles of SNP $k$ in all the dataset, and 
-$\epsilon$ is a random error. Only SNPs falling 1Mb within the gene's 
-start or end were considered. To fit this model, the authors tried 
-various types of regression methods ---lasso, elastic net and polygenic 
-scrores---, but finally settled to elastic net\sidenote{In general, 
-elastic net is used for two reasons: first, when the number of 
-predictors is large, especially if compared to the number of samples; 
-and second, to avoid overfitting.} (with the parameter $\alpha = 0.5$), 
-whose main advantage is the \enquote{automatic} selection of the most 
-important regressors. 10-fold cross-validation\sidenote{In $k$-fold 
-cross-validation, the dataset is split in $k$ portions, and for each 
-part, the model is trained on the remaining $k-1$ parts, then the $R^2$ 
-of the predicted and real values is calculated on the selected part. The 
-average of the $R^2$ is finally reported.} was used to asses the 
-predictive performance.
+where T is the expression of a given gene in a given tissue, $w_k$ is 
+the weigth (or the effect size) of SNP $k$ in influencing the expression 
+of that gene, $X_k$ is the number of reference alleles of SNP $k$ in all 
+the dataset, and $\epsilon$ is a random error. Only SNPs falling 1Mb 
+within the gene's start or end were considered. To fit this model, the 
+authors tried various types of regression methods ---lasso, elastic net 
+and polygenic scrores---, but in the end settled to elastic 
+net\sidenote{In general, elastic net is used for two reasons: first, 
+when the number of predictors is large, especially if compared to the 
+number of samples; and second, to avoid overfitting.} (with the 
+parameter $\alpha = 0.5$), whose main advantage is the 
+\enquote{automatic} selection of the most important regressors. 10-fold 
+cross-validation\sidenote{In $k$-fold cross-validation, the dataset is 
+split in $k$ portions, and for each part, the model is trained on the 
+remaining $k-1$ parts, then the $R^2$ of the predicted and real values 
+is calculated on the selected part. The average of the $R^2$ is finally 
+reported.} was used to asses the predictive performance.
 
 Having seen the general method, we now turn to the actual protocol 
 followed by the authors.
@@ -175,6 +176,14 @@ established from 421 individuals was downloaded; genotype data was also
 available for the same individuals, since they were part of the 1000 
 genomes project as well. This data set was used for the validation of 
 the models (\reffig{gamazon2015/4}).
+
+In the quantile-quantile plot each point represents an expression value; 
+on the $x$-axis it is reported the $R^2$ that would be expected if the 
+null hypothesis were true (\ie, if there were no correlation between 
+predicted and observed expression values), while on the $y$-axis there 
+is the observed $R^2$. A 45\textdegree line is displayed in gray: the 
+farther the points are from that line, the more different the two 
+distributions of $R^2$ are.\todo{safety check}
 
 RNA-seq data from GTeX, normalised and adjusted for the most common 
 covariates such as sex, was used to test the predictive performance of 
@@ -237,100 +246,62 @@ hence the effects of dominance or epistasis manifest only
 rarely\cite{Visscher2008march}\todo{safety check}.
 
 There are many ways to estimate narrow-sense heritability. One is in 
-selective breeding, where $R = h^2 S$: we start from a population with 
-mean $\lambda$, select a subpopulation with mean $\mu$, then take the 
-offspring of the subpopulation, which will have mean $\mu_1$. R is the 
-difference between the mean of the offspring and the mean of the 
-original population (\ie, $\mu_1 - \lambda$), that is a measure of the 
-success of selection; S is the difference between the mean of the 
-selected subpopulation and the mean of the original population (\ie $\mu 
-- \lambda$), that is a measure of the selective pressure applied.
+selective breeding, where the heritability is the proportionality 
+coefficient between the intensity of the applied selective pressure, 
+$S$, and the response to selection, $R$ (\reffig{breeders}). In other 
+words, $R = h^2 S$, wihch is the famous breeder's equation. The larger 
+the heritability, the greater the response to selection.
 
-Another way to interpret heritability in the narrow sense is as follows. 
-Make a plot of parents heights vs. offspring heights. If there is 
-perfect heritability, the height of a son is equal to the average 
-heights of the two parents, so the plot will be a straight line y=x. In 
-general, $h^2$ is the slope of the regression line. In principle, if 
-genes determine variations in phenotypes, then offspring should be more 
-similar to their parents than to unrelated individuals. This can be 
-expressed as a correlation between parents and offspring (or between 
-siblings). In other words, if we have X = "phenotype of parent X" and 
-Y(X) = "phenotype of offspring of parent X", then the plot of Y(X) 
-should be a straight line with positive slope. This, however, is valid 
-ONLY IF THE ENVIRONMENT IS NOT SHARED BETWEEN RELATIVES MORE THAN IT IS 
-SHARED BETWEEN UNRELATED PEOPLE.
+\begin{marginfigure}
+	\includegraphics{gamazon2015/ext-breeders}
+	\labfig{breeders}
+	\caption{The breeder's work. Source: 
+\url{https://wiki.groenkennisnet.nl/}}
+\end{marginfigure}
 
-\todo{add marginfigures of breeder and height plot. rewrite last two 
-paragraphs.}
+Another way to interpret heritability in the narrow sense is the 
+plotting of the averaged trait in the two parents versus the trait in 
+their offspring. In principle, if genes determine variations in 
+phenotypes, then offspring should be more similar to their parents than 
+to unrelated individuals. This can be expressed as a correlation between 
+parents and offspring (\reffig{parents_offspring}). In other words, if 
+we have $X = "phenotype of parent X"$ and $Y(X) = "phenotype of 
+offspring of parent X"$, then the plot of $Y(X)$ should be a straight 
+line with positive slope, and in the extreme case where there is perfect 
+heritability, the plot should be of the form $Y(X) = X$. In general, 
+$h^2$ is the slope of the regression line. This, however, is valid only 
+if the environment is not shared between relatives more than it is 
+shared between unrelated people.
 
-They also computed the heritability of gene expression in DGN and claim 
-that heritability is an upper bound to how well the trait can be 
-associated to the genotype. This makes sense, because if the variance in 
-a trait is entirely due to the environment, the association study will 
-not find anything.
+\begin{marginfigure}
+	\includegraphics{gamazon2015/ext-parents_offspring}
+	\caption{Parents-offspring regression. Source: Visscher \etal 2008, 
+\enquote{Heritability in the genomics era — concepts and 
+misconceptions}}
+	\labfig{parents_offspring}
+\end{marginfigure}
 
-The average heritability calculated in DGN was 0.153, while the average 
-tenfold cross-validated prediction $R^2$ value for elastic net was 
-0.137, so: not bad. Does this make sense? I think so, because 
-  heritability can be interpreted as the slope of the line of the 
-predicted variable as a function of the predictor (\eg offspring height 
-as a function of parent height). In this case the "predictor" is the 
-phenotype of the training sample, and the "predicted" is the phenotype 
-in the testing sample. A high heritability says that parent height can 
-predict offspring height, and that this predictability is due to genetic 
-factors; here, the authors are trying to predict a phenotype (gene 
-expression, but it is hardly relevant) from a genotype, which in turn 
-was attributed scores according to the phenotype. The linear model 
-(actually elastic net) they made, mimics the actual process of 
-development: they go from one genotype to a phenotype, attributing to 
-each element of the genotype (\ie to each SNP) a coefficient that 
-measures how much that element is involved in the manifestation of that 
-phenotype. Then, let us imagine that the training people have offspring, 
-and that the offspring is the "testing people": many of the SNPs will be 
-transmitted from parents to offspring. offspring have a similar genotype 
-to their parents (abstracting things, offspring are merely people which 
-have a genome similar to their parents), but do they have also a similar 
-phenotype? If the trait is heritable, yes. In yet other words, if the 
-trait is heritable, people with a similar genotype (\ie relatives) will 
-have a similar phenotype (h2 is precisely the correlation between the 
-phenotypes in parents-offspring); in a sense, in this paper the testing 
-people (those in the gwas) are relatives of the training people (those 
-in the reference transcriptome study like GEUVADIS). All this is 
-expressed in figure 3.
+Returning to the paper by Gamazon \etal, they rightly claim that 
+heritability is an upper bound to how well the trait can be associated 
+to the genotype. A high heritability means that the parents' trait can 
+predict the offspring trait, or, equivalently, since this predictability 
+is due to genetic factors, that people with a similar genotype will have 
+a similar phenotype (indeed, $h^2$ is precisely the correlation between 
+the phenotypes in parents and offspring).
 
-An important thing that perhaps I did not say before is that previously 
-they had imputed the SNPs of the DGN people. They used both 1000 Genomes 
-and HapMap Phase 2 to impute, and achieved similar results, therefore 
-they chose to restrict the imputation to hapmap to save computation 
-time.
+The heritability of gene expression in DGN cells was computed, resulting 
+in an average value of 0.153, whereas the average 10-fold 
+cross-validation $R^2$ with elastic net was 0.137. 
+\reffig{gamazon2015/3} reports the results of the cross-validation.
 
-They then tested their models to see wether, given a genotype, they 
-could predict the expression. That is to say, they predicted expression 
-from a set of genotypes and then confronted it with the real expression. 
-They used GEUVADIS and GTEx as tests. In figure 4 they show that the 
-correlation between predicted and actual expression in this separate 
-cohort is very different from the expected correlation under the 
-hypothesis that the two vectors (predicted and actual expression) are 
-independent. In gray there is a 45-degree line: if the point lay on this 
-line, then on the two axes there are identical variables. on the y axis 
-there are the quantiles of observed R2 (a quantile is the percentage of 
-points below a given value), while on the x axis there are the quantiles 
-of expected R2. A point is produced when the two quantiles are equal. 
-For instance, if the 10th quantile in the observed R squareds have an R2 
-of 0.2, what is the R2 of the expected R2 at the 10th quantile? In other 
-words, the curve is parametric. This Q-Q plot is used to check whether 
-two populations are similar.
-
-They also note that the same situation arises for different tissues.
-
-In fig 5 they present some example genes.
-
-they also made a linear model for trans eQTL, with linear regression, 
-but it had a poorer predictive power, so they resolved to use local SNPs 
-only.
+\begin{figure}
+	\includegraphics{gamazon2015/3-prediction_r2}
+	\caption{$R^2$ (red) of $\widehat{GReX}$ versus observed expression; 
+heritability (black) of gene expression.}
+	\labfig{gamazon2015/3}
+\end{figure}
 
 \section{The correlation between expression and phenotype}
-% This section is valid!
 
 In the second phase, the predicted $\hat{GReX}$ is correlated with the 
 phenotypic status employing linear regression, logistic regression, Cox 
@@ -342,127 +313,86 @@ the disease, following what Vissher\cite{Visscher2008} reported, showing
 that this approach is able to explain a larger proportion of genetic 
 variance.
 
-\section{Some examples}
-
 \section{Application of PrediXcan to WTCCC}
 
-At last, they apply their method. they used DGN whole-blod elastic net 
-prediction models to predict the expression in the WTCCC cohort, then 
-correlated the predicted GReX with the disease status.
+At last, their method was applied to seven autoimmune diseases which had 
+previously been the object of as many GWAS by the Wellcome Trust Case 
+Control Consortium\cite{WTCC2007}. They used DGN whole-blod elastic net 
+prediction models to predict the expression in each WTCCC cohort, then 
+correlated the predicted GReX with the disease status. After applying 
+Bonferroni correction, 41 significant associations (P < 0.05) with 5 
+diseases were reported. Most of the significant associations were for 
+autoimmune disease and were located in the extended MHC 
+region\sidenote{This region, located on chromosome 6, harbours 421 loci, 
+including 252 expressed genes, 139 pseudogenes and 30 transcripts. Many 
+of these loci are associated to diseases.} Moreover, some genes were 
+associated to multiple diseases\sidenote{In these cases, what determines 
+which disease shows up if the expression of that gene is altered in an 
+individual? Perhaps the environment, or gene expression level. This is 
+an example of the complexity of the situation: the relationship between 
+genotype and phenotype is not biunivocal at all.} The majority of these 
+associations were supported by previous evidence, and often they were 
+enriched in known GWAS; but two completely novel disease-associated 
+genes were also found: low expression of KCNN4 was associated with 
+hypertension, and high expression of PTPRE with bipolar disorder.
 
-An interesting consideration (by fmarotta) is that many of the genes 
-that were associated to the disease status were in the HLA or MHC 
-region; also, the most significant results were for autoimmune diseases 
-(this can be due to the fact that also in the WTCCC work the most 
-significant results were for autoimmune diseases. Nay, I think that the 
-fact that the two studies (WTCCC and gamazon) have found the same result 
-is due to a common underlying cause, which is the same for which most 
-GWAS hits are in the MHC region.) Think more about this.
+One of the most interesting features of this new approach is that not 
+only can it provide association results, but also a directionality. As 
+an example, PTPN22 expression was positively associated with rheumatoid 
+arthritis and type 1 diabetes, and negatively associated with Crohn's 
+disease. The results of the associations with type 1 diabetes are 
+reported in \reffig{gamazon2015/7}.
 
-They made a manhattan plot and another quantile-quantile plot. Also a 
-gwas enrichment.
-
-Some genes were associated with multiple autoimmune disease. Question by 
-fmarotta: what determines which disease you have if the expression of 
-that gene is altered in you? environment? gene expression level? Anyway, 
-this is an example of the complexity of the situation: the relationship 
-between genotype and phenotype is not biunivocal at all. the authors say 
-that lower expression of dclre1b was associated with rheumatoid 
-arthritis and T1D, whereas higher expression with crohn's disease.
-
-An advantage of predicscan is that it provides directionality: we know 
-if higher or lower expression is associated with the disease. See the 
-example of ERBB3.
-
-Globally, many genes were previously reported or fell near reported 
-genes. Or: they were in the MHC.
-
-Using less stringent significance thresholds, they found the same high 
-enrichments of reported genes among the results of predicscan. This 
-suggests that there are many false-negatives at the higher thresholds. 
-The method is not so powerful afterall. They found also two completely 
-novel genes.
-
-Finally, they compared their method with two other gene-based tests: 
-vegas and skat. In the quantile-quantile plot, predixcan was the best in 
-the tail-end.
+\begin{figure}
+	\includegraphics{gamazon2015/7-t1d_associations}
+	\caption{(a) Manhattan plot of disease-gene associations P-values. 
+(b) Q-Q plot of the same P-values and top three genes.}
+\labfig{gamazon2015/7}
+\end{figure}
 
 \section{Discussion}
 
-Why gene expression? It is the most direct phenotype (indeed, sometimes 
-we speak about \enquote{extended phenotypes}; gene expression can also 
-be viewed as an intermediate phenotype), it is heritable, and virtually 
-all the other phenotypes depend on it. Moreover, it is easy to measure.
+In this paper, the authors developed a framework to group together 
+genetic variants, predict how such variants influence gene expression, 
+and finally correlate gene expression to a disease. This approach has 
+many advantages. First of all, it provides the directionality of the 
+effect of a gene on the disease, hinting at potential strategies to cure 
+the disease: for instance, if a gene's over-expression is linked to a 
+disease, then a drug may be developed to downregulate it. Furthermore, 
+directionality can also give insight into the underlying causal 
+mechanism of the disease.
 
-fmarotta:Genes can do few things: either they bind proteins whith a 
-structural or regulatory function (and when it is structural, it can be 
-regulating: TAD are coregulated), or they are transcribed, starting a 
-series of biochemical reactions that ultimately lead to functional 
-molecules, be they RNA or proteins. The complexity stems from the 
-interactions of many genes together and with the environment
+An added benefit of grouping many variants together is that there will 
+be less multiple testing correction to perform, leading to more variants 
+that exceed the significancy threshold. A further step could be to group 
+together many genes into the same pathway.
 
-Limits:
-\begin{itemize}
-	\item
-the prediction of gene expression can be biased, and some models, namely 
-a combination of K nearest neighbour (KNN), elastic net, and the use of 
-genomic annotation may perform better.
-	\item 
-(https://www.cell.com/ajhg/fulltext/S0002-9297(18)30108-3?code=cell-site) 
-Genetic variation does not alter only gene expression. There can be 
-\textit{trans}-acting effects, where a SNP alters how a gene (be it a TF 
-or a miRNA) modulates the expression of others, without altering the 
-expression of the modulator gene itself. Moreover, a SNP can have 
-effects on splicing, transcription start or end site or other RNA 
-editing processes, without altering the expression of the gene.
-\end{itemize}
+Finally, an important part is that an analysis with PrediXcan is 
+economic, in the sense that one only needs reference transcriptome and 
+GWAS data, which are already available; therefore, many existing GWAS 
+dataset can be reanalysed \enquote{for free}.
 
-One of the main advantages is that it is economic: one only needs 
-existing data, therefore many existing GWAS dataset can be reanalysed 
-\enquote{for free}.
+However, there are also some limits. For instance, the prediction of 
+gene expression can be biased; in this paper elastic net was employed, 
+but some models, namely a combination of K nearest neighbour (KNN), 
+elastic net, and the use of genomic annotation may perform better. 
+Besides, elastic net does not take into account biologically relevant 
+concepts such as epistasis, dominance and penetrance.
 
-Another virtue is that predicscan provides directionality, hinting at 
-potential strategies to cure disease, \eg if a gene's upregulation is 
-linked to a disease, then a drug may be developed to downregulate it. 
-(by fmarotta: It probably woul have no effect whatsoever because of 
-compensatory effects.)
+%(https://www.cell.com/ajhg/fulltext/S0002-9297(18)30108-3?code=cell-site) 
+Another possible critic to this work is that genetic variation does not 
+alter only gene expression. There can be \textit{trans}-acting effects, 
+where a SNP alters how a gene (be it a TF or a miRNA) modulates the 
+expression of others, without altering the expression of the modulator 
+gene itself. Moreover, a SNP can have effects on splicing, transcription 
+start or end site or other RNA editing processes, without altering the 
+expression of the gene.
 
-Multiple testing: here they have used bonferroni, which is pretty 
-conservative. They only corrected gene-based tests of association, and 
-not SNP-based ones, because the gene-based association is the last step, 
-and because bonferroni is conservative. (by SNP-based, I do not know if 
-they mean SNP-geneexpression association or SNP-trait association 
-performed in a classical GWAS.)
-
-They do not claim causality, for SNPs may contribute both to expression 
-and to other things, and it may be that the other things are the cause 
-of the disease, not gene expression.
-
-They state that their method provides insights into gene regulation and 
-directionality.
-
-by fmarotta: Actually, they do not prove that a SNP associated to gene 
-expression regulates the gene: they  only say that variation between 
-individuals at that locus results in variation in gene expression. Or do 
-they?
-
-\section{PrediXcan: pros and cons}
-
-Main advantages:
-
-\begin{itemize}
-\item directionality, possibility to get insights on mechanisms.
-\item small multiple-testing burden.
-\item possibility form functional units (e.g. basing on known pathways).
-\item possibility to reanalise gwas data (only the genome is needed).
-\end{itemize}
-
-%\section{Prereq: 
-%https://www.sciencedirect.com/science/article/pii/S0002929710005987?via%3Dihub}
-
-%\subsection{pre-prereq: https://www.nature.com/articles/nature08494}
-
-limits: there is an attenuation bias because of the error in the 
-estimation of the GReX.
+Even with this method, then, causal SNP or mechanisms cannot be 
+inferred. Indeed, disease-associated SNPs may contribute both to gene 
+expression and to other factors that impact the disease independently 
+from gene expression. PrediXcan  only says that variation between 
+individuals at that locus results in variation in gene 
+expression.\todo{safety check}
 
 \end{document}

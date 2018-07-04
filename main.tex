@@ -65,7 +65,7 @@
 % TOC
 \setcounter{secnumdepth}{-1} % Do not number headings
 \setcounter{tocdepth}{1} % Show headings up to sections in the toc
-\usepackage[notlot,notlof]{tocbibind}
+%\usepackage[notlot,notlof]{tocbibind}
 %\makeatletter
 %\renewcommand*\l@chapter{\@dottedtocline{1}{0em}{2.3em}}
 %\renewcommand*\l@section{\@dottedtocline{1}{0em}{2.3em}}
@@ -134,13 +134,14 @@
 % Environment to put external abstracts in a box
 \newenvironment{external_abstract}[1]
 {
-	\begin{fullwidth}
-	\begin{tcolorbox}[#1]
+	%\begin{fullwidth}
+	\begin{tcolorbox}[colback=white,colframe=gray!15,coltitle=black!90,arc=0pt,outer 
+arc=0pt,#1]
 	\footnotesize
 }
 {
 	\end{tcolorbox}
-	\end{fullwidth}
+	%\end{fullwidth}
 }
 
 % }}}
@@ -314,9 +315,9 @@ This work is licensed under a
 \renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents % Print the table of contents
 \listoffigures % Print a list of figures
-\addcontentsline{toc}{chapter}{List of Figures}
+%\addcontentsline{toc}{chapter}{List of Figures}
 \listoftables % Print a list of tables
-\addcontentsline{toc}{chapter}{List of Tables}
+%\addcontentsline{toc}{chapter}{List of Tables}
 \listoftodos
 \renewcommand{\baselinestretch}{1.0}\normalsize
 
@@ -352,7 +353,7 @@ in.
 %---------------------------------------------------------------------------
 
 \cleardoublepage
-\chapter{Abstract} % "\chapter*" would leave out this chapter from the table of contents
+\chapter*{Abstract} % "\chapter*" leaves out this chapter from the toc
 
 Understanding how genetic variation among individuals can influence the 
 manifestation of complex diseases, which stem from the interaction of 

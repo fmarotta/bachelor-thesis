@@ -42,7 +42,7 @@ matter.\todo{is the tissue from which the expression data for the
 training comes relevant? Gamazon seems to say no, but another work 
 (https://www.ncbi.nlm.nih.gov/pubmed/29632380) says another thing}
 
-\begin{marginfigure}[-4cm]
+\begin{marginfigure}[-13cm]
 	\includegraphics{gusev2016/ext-sequencingcost}
 	\caption[Sequencing cost over time]{The decrease in the cost of 
 	genome sequencing; the same technology is used to sequence RNA. 
@@ -95,9 +95,9 @@ be related to gene expression and phenotypic variation
 associations between gene and disease if the . Moreover, pleiotropic 
 effects cannot be effectively modeled.
 
-\begin{marginfigure}[-2cm]
+\begin{marginfigure}
 	\includegraphics{gusev2016/2-causality_models}
-	\caption{}
+	\caption{The possible models of causality.}
 	\labfig{gusev2016/2}
 \end{marginfigure}
 
@@ -113,8 +113,8 @@ powerful than SNP-based approaches. Finally, they applied their method
 to GWAS data for over 900,000 phenotype measurements, identifying many 
 new disease-associated genes.
 
-The following \reftab{comparison} illustrates the differences between 
-the Gamazon and the Gusev methods.
+\reftab{comparison} illustrates the differences between the Gamazon and 
+the Gusev methods.
 
 \begin{table}
 	\begin{tabular}{ l c c }
@@ -237,6 +237,8 @@ causal variants to the trait (\reffig{gusev2016/5}).
 \todo{supplementary figure 17. 
 https://academic.oup.com/hmg/article/11/20/2417/2901592.}
 
+\section{Comparison with COLOC and LDSC?}
+
 \section{Application to a small-cohort GWAS}
 
 In the previous sections, we have discussed how the authors showed that 
@@ -269,7 +271,10 @@ if available, directly from the population of the GWAS. Thus, by knowing
 the z-score of a genotyped SNP and the LD between a non-genotyped SNP 
 and the genotyped one, it is possible to estimate the z-score of the 
 non-genotyped SNP. The method was adapted in this paper so as to predict 
-the gene expression instead of the association with a phenotype.
+the gene expression instead of the association with a 
+phenotype.\todo{non e' proprio cosi'. cercare di capire meglio e 
+riscrivere. Lo z-score della SNP secondo la summary statistic del GWAS 
+viene pesato in base al coefficiente di cui altera l'espressione.}
 
 \section{Application to 900,000 phenotypes}
 
@@ -301,21 +306,7 @@ the novel genes were specific of hypothalamus and neurosecretory
 systems, which is consistent with recent discoveries on 
 obesity.\todo{cite obesity papers}
 
-\section{Conclusions}
-
-Transcriptome-wide association studies were born to address some of the 
-limits of classical association studies by combining many SNPs in a 
-biologically meaningful way, \ie through their effect on the expression 
-of a gene. However, one first problem is the paucity of large-cohort 
-studies where genomic, transcriptomic and phenotypic data are present 
-simultaneously (on the other hand, GWAS, where only genotype and 
-phenotype are characterised, are very common). This problem was solved 
-by imputing gene expression with a regression model able to predict the 
-levels of expression starting from the genotypic information. Bun 
-another problem arises: in published GWA studies the full genotype of 
-each individual is not available; in order to solve this problem, the 
-imputation of gene expression is performed at the level of the whole 
-GWAS cohort.
+\section{Discussion}
 
 There are four main advantages with this integrative approach for 
 transcriptome-wide association studies:

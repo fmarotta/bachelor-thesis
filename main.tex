@@ -37,7 +37,7 @@
 % notoc: suppress tufte's custom table of contents
 % nohyper: do not load the hyperref package
 % nobib: do not load natbib (which is incompatible with biblatex)
-\documentclass[a4paper,oneside,marginals=justified,nobib]{tufte-book} 
+\documentclass[a4paper,twoside,notoc,marginals=justified,nobib]{tufte-book} 
 
 % }}}
 
@@ -94,7 +94,9 @@
 \usepackage{microtype} % Improves character and word spacing
 \usepackage{booktabs} % Better horizontal rules in tables
 \usepackage{fancyvrb} % Allows customization of verbatim environments
-\usepackage{multicol}
+\usepackage{multicol} % Customisation for tables
+\usepackage{caption} % Hyperlinks point to the top, not to the caption
+\usepackage{varioref} % Reference also the page if necessary
 \hypersetup{colorlinks} % Comment this if you don't want colored links
 \fvset{fontsize=\normalsize} % Change here the font size of all verbatim 
 \setlength{\headheight}{24pt} % Set the height of headers
@@ -124,14 +126,15 @@
 \newcommand{\etc}{\textit{etc.}\xspace}
 
 % Easily label and reference elements
+% Note that \label must appear after \caption
 \newcommand{\labch}[1]{\label{ch:{#1} }}
-\newcommand{\refch}[1]{Chapter \ref{ch:{#1} }}
+\newcommand{\refch}[1]{Chapter \nameref{ch:{#1} }}
 \newcommand{\labsec}[1]{\label{sec:{#1} }}
-\newcommand{\refsec}[1]{Section \ref{sec:{#1} }}
+\newcommand{\refsec}[1]{Section \nameref{sec:{#1} }}
 \newcommand{\labfig}[1]{\label{fig:{#1} }}
-\newcommand{\reffig}[1]{Figure \ref{fig:{#1} }}
+\newcommand{\reffig}[1]{Figure \vref{fig:{#1} }}
 \newcommand{\labtab}[1]{\label{tab:{#1} }}
-\newcommand{\reftab}[1]{Table \ref{tab:{#1} }}
+\newcommand{\reftab}[1]{Table \vref{tab:{#1} }}
 
 % Environment to put external abstracts in a box
 \newenvironment{external_abstract}[1]
@@ -316,11 +319,11 @@ This work is licensed under a
 % https://tex.stackexchange.com/questions/56546/how-to-change-spaces-between-items-in-table-of-contents
 \renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents % Print the table of contents
-\listoffigures % Print a list of figures
+%\listoffigures % Print a list of figures
 %\addcontentsline{toc}{chapter}{List of Figures}
-\listoftables % Print a list of tables
+%\listoftables % Print a list of tables
 %\addcontentsline{toc}{chapter}{List of Tables}
-\listoftodos
+%\listoftodos
 \renewcommand{\baselinestretch}{1.0}\normalsize
 
 % DEDICATION PAGE
@@ -332,10 +335,10 @@ This work is licensed under a
 \noindent\fontsize{15}{15}\selectfont\itshape
 \nohyphenation
 
-\enquote{The harmony of the world is made manifest in Form and Number, 
-	and the heart and soul and all the poetry of Natural Philosophy are 
-	embodied in the concept of mathematical beauty.}\\
----D'Arcy Wentworth Thompson, \textnormal{On Growth and Form}
+%\enquote{The harmony of the world is made manifest in Form and Number, 
+%and the heart and soul and all the poetry of Natural Philosophy are 
+%embodied in the concept of mathematical beauty.}\\
+%---D'Arcy Wentworth Thompson, \textnormal{On Growth and Form}
 
 \vspace{\stretch{1}}
 

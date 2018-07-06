@@ -4,265 +4,109 @@
 \chapter{Introduction}
 \labch{intro}
 
-https://www.ebi.ac.uk/gwas/home
+Here I should describe the state of the art on the subject.
 
-https://www.broadinstitute.org/news/after-decade-genome-wide-association-st
+\section{The old nature-nurture debate}
 
-Genotype => Expression => Phenotype <= Environment
+%Environment can influence gene expression and epigenome as well. Also 
+%the genome, for instance UV rays cause mutations. Most of the time the 
+%environmental effects are random, but not always (\eg UV rays, 
+%smoking...).
 
-Actually, environment can influence gene expression and epigenome as 
-well. Also the genome, for instance UV rays cause mutations. Most of the 
-time the environmental effects are random, but not always (\eg UV rays, 
-smoking...).
+\section{Genome-wide association studies and eQTL (classics)}
 
-https://www.nature.com/articles/ng0508-489
+\subsection{Pros (successes)}
 
-Combination of alleles may have specific effects both if they occur at 
-the same locus (dominance) or at different loci (epistasis). 
+\subsection{Cons (limits)}
 
-There is a nice picture showing the statistical power of association 
-studies as a function of effect size and population size.
+\section{Fine mapping, COLOC?, LDSC? (modern state of the art)}
 
-One could find genes near markers associated to a phenotype and look for 
-overrepresented pathways.
+%----
 
-\enquote{The main conclusion emerging from the current studies is that 
-GWAS are able to robustly identify common variants that are associated 
-with height but that the effect sizes of individual variants are small, 
-so that very large sample sizes are needed to detect associations 
-reliably. Single laboratories are unlikely to have sufficient sample 
-sizes to do powerful studies on their own, and the trend in human 
-complex trait mapping has been to create consortia of research groups 
-and even consortia of consortia.}
+%https://www.ebi.ac.uk/gwas/home
 
-At the same time, among the full sequences now available there are so 
-many variants that trying to associate them with anything is very 
-difficult. Statistics is not enough in this case.
+%https://www.broadinstitute.org/news/after-decade-genome-wide-association-st
 
-end of source.
+%"finding the missing heritability"
 
-somewhere: Height and most other quantitative traits are influenced by 
-many variants of small effects.
+%----
 
-gamazon2015:Gwas have found many associations, but a large sample size 
-is needed.
+%Genes can do few things: either they bind proteins whith a structural 
+%or regulatory function (and when it is structural, it can be 
+%regulating: TAD are coregulated), or they are transcribed, starting a 
+%series of biochemical reactions that ultimately lead to functional 
+%molecules, be they RNA or proteins. The complexity stems from the 
+%interactions of many genes together and with the environment
 
-other limit of gwas: they study single variants, but sometimes the 
-disease manifest only when there is a certain \textit{combination} of 
-variants.
+%----
 
-gamazon2015: Gwas on their own are not enough (cite 
-https://www.nature.com/articles/nature08494). in particular, there is a 
-missing link between the variant and the disease: how (not why, 
-\textit{how}) does the variant make one individual more susceptible to a 
-disease? It is not true that the nearest gene is always involved.
+%https://www.nature.com/articles/ng0508-489
 
-fine mapping? (it may be necessary also for TWAS.)
+%Combination of alleles may have specific effects both if they occur at 
+%the same locus (dominance) or at different loci (epistasis). 
 
-gamazon2015: Many SNPs are found in regulatory regions, as evinced by 
-the fact that they overlap with DNaseI sites (is this true? read Gusev, 
-A. et al. Regulatory variants explain much more heritability than coding 
-variants across 11 common diseases. bioRxiv 004309 (21 April 2014).), 
-and that they often are found in eQTL (see Nicolae, D.L. et al. 
-Trait-associated SNPs are more likely to be eQTLs: annotation to enhance 
-discovery from GWAS. PLoS Genet. 6, e1000888 (2010).)
+%There is a nice picture showing the statistical power of association 
+%studies as a function of effect size and population size.
 
-gamazon2015: eQTL mapping has shown that intermediate phenotypes, 
-especially gene expression, are important. New projects are generating 
-huge amounts of epxression data: ENCODE, GTEx, GEUVADIS, to name a few.
+%One could find genes near markers associated to a phenotype and look 
+%for overrepresented pathways.
 
-gamazon2015: they provide a way to aggregate SNPs in a biologically 
-meaningful way, since they combine those variants that influence the 
-expression of a gene. In general, either the phenotype is influenced by 
-a small number of variants (one in the extreme case of mendelian 
-diseases) with a large effect, or by a large number of variants of small 
-effect. PrediXscan should districate this entanglement.
+%\enquote{The main conclusion emerging from the current studies is that 
+%GWAS are able to robustly identify common variants that are associated 
+%with height but that the effect sizes of individual variants are small, 
+%so that very large sample sizes are needed to detect associations 
+%reliably. Single laboratories are unlikely to have sufficient sample 
+%sizes to do powerful studies on their own, and the trend in human 
+%complex trait mapping has been to create consortia of research groups 
+%and even consortia of consortia.}
 
-marker1
-marker2
-			\} => gene expression => phenotype
-marker3
-marker4
+%At the same time, among the full sequences now available there are so 
+%many variants that trying to associate them with anything is very 
+%difficult. Statistics is not enough in this case.
 
-http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888 
-says that gwas are also eqtl. it is the basis of everything.
+%----
 
-gamazon2015: multiple testing problems reduced.
+%Height and most other quantitative traits are influenced by many 
+%variants of small effects.
 
-\section{Heritability}
+%gamazon2015:Gwas have found many associations, but a large sample size 
+%is needed.
 
-% source: 
-% http://www.cureffi.org/2013/02/04/how-to-calculate-heritability/
-% (equivalent to visscher 2006)
+%other limit of gwas: they study single variants, but sometimes the 
+%disease manifest only when there is a certain \textit{combination} of 
+%variants.
 
-Many traits vary among the individuals in a population: height and hair 
-colour are obvious ones, but also the number of fingers can be different 
-in some pathological cases (see the amish communities in the USA). The 
-heritability of a trait is the proportion of the trait variance which 
-can be explained by the genetic variance among the individuals of a 
-population.
+%gamazon2015: Gwas on their own are not enough (cite 
+%https://www.nature.com/articles/nature08494). in particular, there is a 
+%missing link between the variant and the disease: how (not why, 
+%\textit{how}) does the variant make one individual more susceptible to 
+%a disease? It is not true that the nearest gene is always involved.
 
-Genetic variance where? only at the loci associated to the trait? It 
-should be so, otherwise we underestimate heritability.
+%fine mapping? (it may be necessary also for TWAS.)
 
-There are two definitions of heritability:
+%gamazon2015: Many SNPs are found in regulatory regions, as evinced by 
+%the fact that they overlap with DNaseI sites (is this true? read Gusev, 
+%A. et al. Regulatory variants explain much more heritability than 
+%coding variants across 11 common diseases. bioRxiv 004309 (21 April 
+%2014).), and that they often are found in eQTL (see Nicolae, D.L. et 
+%     al. 
+%Trait-associated SNPs are more likely to be eQTLs: annotation to 
+%enhance discovery from GWAS. PLoS Genet. 6, e1000888 (2010).)
 
-\begin{itemize}
-	\item \enquote{narrow sense heritability}, $h^2$ is the heritability 
-		due to additive genetic factors.
-	\item \enquote{broad sense heritability}, $H^2$ is the heritability 
-		due to all genetic factors, taking into account dominance and 
-		gene-gene interactions.
-\end{itemize}
+%gamazon2015: eQTL mapping has shown that intermediate phenotypes, 
+%especially gene expression, are important. New projects are generating 
+%huge amounts of epxression data: ENCODE, GTEx, GEUVADIS, to name a few.
 
-According to the additive model, one individual's having $m$ alleles (0, 
-1 or 2) influences the phenotype of a factor $m a$, where $a$ is the 
-  effect of the allele. For instance, if you have 1 copy of allele $a$ 
-then your height increases of 1 cm, and if you have 2 copies it 
-increases of 2 cm. In the additive model, each allele and genotype is 
-independent of the others.
+%gamazon2015: they provide a way to aggregate SNPs in a biologically 
+%meaningful way, since they combine those variants that influence the 
+%expression of a gene. In general, either the phenotype is influenced by 
+%a small number of variants (one in the extreme case of mendelian 
+%diseases) with a large effect, or by a large number of variants of 
+%small effect. PrediXscan should districate this entanglement.
 
-There are many ways to estimate narrow-sense heritability. One is in 
-selective breeding, where $R = h^2 S$: we start from a population with 
-mean $\lambda$, select a subpopulation with mean $\mu$, then take the 
-offspring of the subpopulation, which will have mean $\mu_1$. R is the 
-difference between the mean of the offspring and the mean of the 
-original population (\ie, $\mu_1 - \lambda$), that is a measure of the 
-success of selection; S is the difference between the mean of the 
-selected subpopulation and the mean of the original population (\ie $\mu 
-- \lambda$), that is a measure of the selective pressure applied, if you 
-want.
+%http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000888 
+%says that gwas are also eqtl. it is the basis of everything.
 
-Another way to interpret heritability in the narrow sense is the 
-following. Make a plot of parents heights vs. offspring heights. If 
-there is perfect heritability, the height of a son is equal to the 
-average heights of the two parents, so the plot will be a straight line 
-y=x. In general, $h^2$ is the slope of the regression line.
-
-One way to get rid of environmental effects is to compare monozygotic 
-twins with dizygotic ones. MZ twins share the same environment and the 
-same genotype, whereas DZ twins share the same environment but have 
-different genotypes (albeit pretty similar).
-
-Wikipedia
-
-We assume that $P = G + E$, where P = phenotype, G = genetics, E = 
-environment. Phenotypic variance can be expressed as follows: 
-
-\begin{equation}
-	Var(P) = Var(G) + Var(E) + 2 Cov(G,E)
-\end{equation}
-
-\begin{equation}
-	H^2 = Var(G) / Var(P)
-	h^2 = Var(A) / Var(P)
-\end{equation}
-
-Visscher 2006
-
-Previous studies calculated genetic variance according to kinship (\ie 
-siblings share 1/2 of the genome, cousins 1/8, and so on). Visscher, 
-instead, relies on the actual genotype of the samples, as assessed with 
-markers. They had some 3000 pairs of siblings with genotype information. 
-First, they calculated IBD sharing for each pair, then they calculated 
-the heritability of height.
-
-https://www.ncbi.nlm.nih.gov/books/NBK22001/
-
-A trait is heritable if the variation of the trait in the individuals of 
-a population can be imputed to genes. Note that every gene plays a role 
-in the development of a trait, but is the variation due to genes? For 
-instance (by fmarotta), in a population of genetic clones there can be 
-variability in a trait. In this case it is convenient to think about 
-plants, for they are often propagated by vegetative methods, so each 
-plant is genetically identical to the others; however, some plants may 
-be better irrigated or manured, and hence grow taller. In this case, 
-genes play a role in the "development" of height, but the variation in 
-the trait is entirely due to environmental factors. The example made by 
-the book I am following is this: `there is no environment in which cows 
-will speak. But, although the particular language that is spoken by 
-humans varies from nation to nation, that variation is totally 
-nongenetic'.
-
-In principle, if genes determine variations in phenotypes, then 
-offspring should be more similar to their parents than to unrelated 
-individuals. This can be expressed as a correlation between parents and 
-offspring (or between siblings). In other words, if we have X = 
-"phenotype of parent X" and Y(X) = "phenotype of offspring of parent X", 
-then the plot of Y(X) should be a straight line with positive slope. 
-This, however, is valid ONLY IF THE ENVIRONMENT IS NOT SHARED BETWEEN 
-RELATIVES MORE THAN IT IS SHARED BETWEEN UNRELATED PEOPLE.
-
-In order to estimate the heritability of a trait, we have to check 
-whether individuals with different genetic markers have different 
-phenotypes. If the phenotypes are different and the markers are 
-different, then probably the markers are linked to genes that influence 
-the phenotype (note that the markers are rarely involved directly in 
-influencing the phenotype); on the other hand, if phenotypes differ but 
-the markers are the same, then the trait is not heritable (otherwise it 
-would have been inherited together with the markers).
-
-There is also another sense in which heritability is not a measure of 
-the role played by the genes during development: heritability is 
-measured by taking into account all genetic variation, not variation in 
-genes associated to the phenotype. This boggles me: we might see two 
-individuals with different phenotypes and discover that they are 
-genetically different, but maybe they differ at loci that have nothing 
-to do with the phenotype! Perhaps, by using large cohorts, this 
-phenomenon is less likely to appear, because different individuals will 
-differ at different loci. It is also true that every locus influence 
-every trait...
-
-In experimental models, heritability is measured by artificial selection 
-(see above).
-
-https://www.nature.com/articles/nrg2322
-
-Heritability deals with the old nature-nurture debate, in particular 
-with how offspring resemble parents.
-
-P = G + E (taking account of sex, age and other covariates while 
-defining varP)
-
-varP = varG + varE (assuming there is no genotype by environment 
-covariance. there would be covariance if intelligent parents would 
-provide an intelligence-stimulating environment for their offspring, or 
-if cattle would be fed according to production. Also, the interaction 
-between genotype and environment is neglected, i.e. when the effect of 
-the genotype depends on the environment. they are ignored because they 
-are difficult to evaluate.)
-
-H2 = var(G) / var(P)
-
-varG = varA + varD + varE (additive, dominant, epistatic effects. 
-covariates are assumed 0)
-
-h2 = varA / varP
-
-I have not understood this part:
-
-\enquote{in a non-inbred population, half of the additive genetic 
-variance is between families and half is within families. This implies 
-that for a trait such as adult height in human populations, with a 
-heritability of 0.8 and a standard deviation of approximately 7 cm in 
-the population, the standard deviation of height in adult offspring 
-around the mean value of the parents is 5.4 cm ($=sqrt[7^2 (1 – 
-½*0.8)]$), which is not much smaller than the standard deviation in the 
-entire population. Hence, tall parents have on average tall children, 
-but with a considerable variation around the parental mean.}
-
-Wait a minute: $h^2$ because the variance is a squared thing! $h$ would 
-correspond to the standard deviation.
-
-\enquote{Because individuals transmit only one copy of each gene to 
-their offspring, most relatives share only single or no copies that are 
-identical by descent (IBD) (the most important exceptions are identical 
-twins and full siblings (sibs)), and dominance and other non-additive 
-genetic effects that are based on sharing two copies do not contribute 
-to their phenotypic resemblance. This is why the selection response and 
-correlation of most relatives depend on h2 and not H2, and why h2 is the 
-usual parameter.} That means that most people are heterozygous.
-
-Breeder's equation: R = h2 S.
+%gamazon2015: multiple testing problems reduced.
 
 \end{document}

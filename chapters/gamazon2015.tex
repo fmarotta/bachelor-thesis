@@ -5,7 +5,7 @@
 reference transcriptome data}
 \labch{gamazon2015}
 
-\begin{external_abstract}{title=Abstract}
+\begin{external_abstract}{title=\textit{Abstract}}
 Genome-wide association studies (GWAS) have identified thousands of 
 variants robustly associated with complex traits. However, the 
 biological mechanisms underlying these associations are, in general, not 
@@ -13,15 +13,16 @@ well understood. We propose a gene-based association method called
 PrediXcan that directly tests the molecular mechanisms through which 
 genetic variation affects phenotype. The approach estimates the 
 component of gene expression determined by an individual's genetic 
-profile and correlates 'imputed' gene expression with the phenotype 
-under investigation to identify genes involved in the etiology of the 
-phenotype. Genetically regulated gene expression is estimated using 
-whole-genome tissue-dependent prediction models trained with reference 
-transcriptome data sets. PrediXcan enjoys the benefits of gene-based 
-approaches such as reduced multiple-testing burden and a principled 
-approach to the design of follow-up experiments. Our results demonstrate 
-that PrediXcan can detect known and new genes associated with disease 
-traits and provide insights into the mechanism of these associations.
+profile and correlates \enquote{imputed} gene expression with the 
+phenotype under investigation to identify genes involved in the etiology 
+of the phenotype. Genetically regulated gene expression is estimated 
+using whole-genome tissue-dependent prediction models trained with 
+reference transcriptome data sets. PrediXcan enjoys the benefits of 
+gene-based approaches such as reduced multiple-testing burden and a 
+principled approach to the design of follow-up experiments. Our results 
+demonstrate that PrediXcan can detect known and new genes associated 
+with disease traits and provide insights into the mechanism of these 
+associations.
 \end{external_abstract}
 
 \section{Introduction}
@@ -34,9 +35,9 @@ functional point of view, and are only able to explain a little
 proportion of phenotypic variance. The wealth of biological data that is 
 now being released by large-scale consortia provides an unprecedented 
 opportunity to integrate information and obtain insight into the genetic 
-and biological processes underlying disease susceptibility\sidenote{Some 
-of these consortia, whose data sets have been used by Gamazon \etal, are 
-the following.
+and biological processes underlying disease 
+susceptibility\sidenote[][-3cm]{Some of these consortia, whose data sets 
+have been used by Gamazon \etal, are the following.
 \begin{description}
 	\item[ENCODE.] The focus is on the systematic functional annotation 
 of each segment of the human genome.
@@ -66,7 +67,7 @@ an increase or a decrease in the gene's expression. Moreover, from a
 functional point of view a gene is much more interpretable than a simple 
 genetic polymorphism.
 
-\section{The imputation of gene expression}
+\section{Imputation of gene expression}
 
 The main goal is to provide a framework to better interpret GWAS 
 results. However, in a typical GWA study the individuals are simply 
@@ -111,11 +112,11 @@ denoted as $\hat{GReX}$.
 
 \begin{marginfigure}
 	\includegraphics{gamazon2015/ext-additive_genetic_model}
-	\labfig{additive_model}
 	\caption{An example of additive model for one SNP; Gamazon \etal 
 extended it for several SNPs. Image adapted from Conall M. O'Seaghdha 
 and Caroline S. Fox, \enquote{Genome-wide association studies of chronic 
 kidney disease: what have we learned?}}
+	\labfig{additive_model}
 \end{marginfigure}
 
 They thus generated predictDB, which stores the coefficients of which 
@@ -129,9 +130,9 @@ variants in an individual from its known genotyped variants.
 
 \begin{figure}
 	\includegraphics[height=10cm]{gamazon2015/2-grex_estimation}
-	\labfig{gamazon2015/2}
 	\caption{The framework to estimate the coefficient by which each SNP 
-		alters the expression of a gene.}
+alters the expression of a gene.}
+	\labfig{gamazon2015/2}
 \end{figure}
 
 The regression model employed can be summarised with the following 
@@ -193,13 +194,14 @@ blood, even though it was trained on blood expression data.
 
 \begin{figure}
 	\includegraphics{gamazon2015/4-prediction_performance}
-	\labfig{gamazon2015/4}
 	\caption{The performance in the GEUVADIS data set of the elastic net 
 model trained on the DGN data set, showed by a quantile-quantile plot 
 (left) and a distribution of $R^2$ (right).}
+	\labfig{gamazon2015/4}
 \end{figure}
 
-\section{The heritability of gene expression}
+\section{Heritability of gene expression}
+\labsec{heritability}
 
 Heritability is an important idea in genetics and is especially relevant 
 in the scope of association studies, therefore we dedicate some space to 
@@ -254,9 +256,9 @@ the heritability, the greater the response to selection.
 
 \begin{marginfigure}
 	\includegraphics{gamazon2015/ext-breeders}
-	\labfig{breeders}
 	\caption{The breeder's work. Source: 
 \url{https://wiki.groenkennisnet.nl/}}
+	\labfig{breeders}
 \end{marginfigure}
 
 Another way to interpret heritability in the narrow sense is the 
@@ -301,7 +303,7 @@ heritability (black) of gene expression.}
 	\labfig{gamazon2015/3}
 \end{figure}
 
-\section{The correlation between expression and phenotype}
+\section{Correlation between expression and phenotype}
 
 In the second phase, the predicted $\hat{GReX}$ is correlated with the 
 phenotypic status employing linear regression, logistic regression, Cox 
@@ -347,7 +349,7 @@ reported in \reffig{gamazon2015/7}.
 	\includegraphics{gamazon2015/7-t1d_associations}
 	\caption{(a) Manhattan plot of disease-gene associations P-values. 
 (b) Q-Q plot of the same P-values and top three genes.}
-\labfig{gamazon2015/7}
+	\labfig{gamazon2015/7}
 \end{figure}
 
 \section{Discussion}

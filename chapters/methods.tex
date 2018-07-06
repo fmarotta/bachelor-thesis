@@ -4,21 +4,24 @@
 \chapter{Methods}
 \labch{methods}
 
-\section{GWAS}
-
-In this section I shall describe some well established methods which 
-were applied in some of the papers described in the thesis.
+In this section I shall describe some general methods which are widely 
+used in quantitative genetics and bioinformatics, and were also employed 
+in the papers described in the thesis.
 
 \section{Regression}
 \labsec{regression}
 
-Regression usually consists of three-steps:
+Regression is used to find relationship between data. It usually 
+consists of three-steps:
 
 \begin{enumerate}
-	\item Assumption making, where one chooses the parameters of the 
-		model and stuff.
-	\item Fitting of the model on a training dataset.
-	\item Prediction on a testing dataset.
+	\item Assumption-making, where one chooses the type of relationship 
+(\eg linear, logistic, polynomial...).
+	\item Fitting of the model, where the parameters of the model are 
+evaluated on a training data set.
+	\item Prediction of the response, where known data from a testing 
+data set are fed to the model, which returns an estimation of the 
+outcome.
 \end{enumerate}
 
 \newthought{Linear regression\cite{James2013}} is used to model a linear 
@@ -32,7 +35,7 @@ words, $Y$ can be expressed as
 
 where the $\beta$'s are called the model coefficients; the approximation 
 sign is due to random errors, which causes the $Y$ to differ from the 
-right-hand side by a term $\epsilon$ --a random error. The purpose of 
+right-hand side by a term $\epsilon$ ---a random error. The purpose of 
 simple linear regression is first to fit the model, \ie to find the 
 values of the coefficients that better describe the relationship between 
 $X$ and $Y$ in a training dataset, and then to apply the model to make 
@@ -70,9 +73,8 @@ and the system yields
 \end{flalign*}
 }
 
-Once we have the coefficients, given an $x$, we could estimate an 
-$\hat{y}$; geometrically, $\hat{\beta}_0$ is the $y$-intercept of the 
-regression line and $\hat{\beta}_1$ is its slope.
+Once we have the coefficients, given the $x$'s, we could estimate an 
+$\hat{y}$.
 
 \newthought{Ridge regression\cite{James2013}} is a regularisation method 
 which allows to reduce the dependance of the fitting on the training set 
@@ -89,18 +91,18 @@ This function is the sum of the RSS and a penalty term, the minimisation
 of which can improve the fitting of the model, provided that the tuning 
 parameter $\lambda$ is properly chosen.
 
-\newthought{Lasso regression\cite{Tibshirani1996}} is another 
-regularisation method which allows to effectively select a subset of 
-relevant predictors by setting the coefficients of the others to zero. 
-In this case, the minimisation function is
+\newthought{The lasso\cite{Tibshirani1996}} is another regularisation 
+method which allows to effectively select a subset of relevant 
+predictors by setting the coefficients of the others to zero. In this 
+case, the minimisation function is
 
 \begin{equation}
 	\sum_{i=1}^{n}\left(y_i-\beta_0-\sum_{j=1}^{p}\beta_jx_{ij}\right)^2+
 		\lambda\sum_{j=1}^{p}\left|\beta_j\right|\,.
 \end{equation}
 
-\newthought{Elastic net regression\cite{Zou2005}} combines the best 
-features of ridge and lasso regression by introducing two penalty terms:
+\newthought{Elastic net\cite{Zou2005}} combines the best features of 
+ridge regression and lasso by introducing two penalty terms:
 
 \begin{equation}
 	\sum_{i=1}^{n}\left(y_i-\beta_0-\sum_{j=1}^{p}\beta_jx_{ij}\right)^2+
@@ -129,9 +131,9 @@ we rely on the logistic function
 
 \begin{marginfigure}[0cm]
 	\includegraphics{methods/logistic}
-	\labfig{logistic}
 	\caption{An example of logistic model. Adapted from James etal 2013, 
-		"An introduction to statistical learning".}
+"An introduction to statistical learning".}
+	\labfig{logistic}
 \end{marginfigure}
 
 In order to fit this model we switch to the \enquote{estimated} values, 
@@ -146,5 +148,30 @@ where the left-hand member is the logarithm of the odds, or logit. At
 this point the coefficients can be found with the maximum likelihood, 
 and the predictions be made. As with linear regression, this model can 
 be easily extended to include more than one predictor.
+
+\newthought{Linear mixed models} are useful when the data has an 
+hierarchical structure, \ie there can be identified many groups and 
+there is variability both inside and among groups. Such models cobine 
+fixed and random effects as predictors of the outcome.
+
+\newthought{Sparse regression models} 
+
+\newthought{Bayesian sparse linear mixed model\cite{Zhou2013}}
+
+\todo{Expand on the last three sections... it doesn't make sense to put 
+the ones on the other types of regression, and not these. Also, provide 
+references to where these methods are used in the papers.}
+
+\section{GWAS}
+\labsec{gwas}
+
+\section{eQTL mapping}
+\labsec{eqtl}
+
+\section{Fine mapping}
+
+\section{COLOC?}
+
+\section{LDSC?}
 
 \end{document}

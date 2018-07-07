@@ -1,0 +1,14 @@
+# exclude everything in content directories
+/*
+chapters/*
+beamer/*
+
+# include directories
+!**/
+
+# include .tex and .bib files
+!**/*.tex
+!**/*.bib
+
+# include .gitignore
+!.gitignore

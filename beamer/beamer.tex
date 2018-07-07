@@ -1,0 +1,204 @@
+\documentclass[aspectratio=169,12pt]{beamer}
+%\documentclass[handout]{beamer}
+
+% ### Preamble
+
+% Encoding
+\usepackage[utf8]{inputenc} % Use utf8 encoding in the input (.tex) file
+\usepackage[english]{babel} % Load characters and hyphenation
+\usepackage[T1]{fontenc} % Use utf8 encoding in the output (.pdf) file
+
+% Size
+% With an aspect ratio of 16:9, I prefer having wide margins
+\setbeamersize{text margin left=1.5cm}
+\setbeamersize{text margin right=1.5cm}
+
+% Presentation structure
+\usepackage{appendixnumberbeamer} % Allows for an appendix
+
+% Special content
+\usepackage{textgreek} % Greek characters
+\usepackage{csquotes} % Quote like a boss
+\usepackage[scale=2]{ccicons} % Creative Commons icons
+\usepackage[sortcites,style=authoryear-icomp]{biblatex} % Bibliography
+\addbibresource{main.bib}
+
+% Images
+\usepackage{graphicx}
+\usepackage{subcaption}
+\graphicspath{ {../images/} }
+\setlength\abovecaptionskip{-5pt}
+\setbeamerfont{caption}{size=\tiny} % Font size for captions
+
+% Themes, colours and fonts
+% Choose the theme according to the purpose of the presentation; do not 
+% become too attached to a particular theme. For long presentations, a 
+% sidebar which highlights the current topic can be helpful.
+% Themes
+\usetheme{metropolis} % A modern theme
+%\usetheme{Madrid} % A classic
+%\usetheme{Hannover} % Side bar
+% Colour themes
+%\usecolortheme{seagull} % Gray-based
+%\usecolortheme{crane} % Straw yellow
+% Fonts
+\usepackage{FiraSans} % Font needed by metropolis
+\usepackage{FiraMono} % Font needed by metropolis
+
+% Table of contents
+\setbeamertemplate{section in toc}[sections numbered] % ToC style
+%\AtBeginSection[] % Recurring ToC
+%{
+%	\begin{frame}
+%		\frametitle{Table of Contents}
+%    	\tableofcontents[currentsection]
+%	\end{frame}
+%}
+
+% Footer
+% Remember: if everyone in the audience knows you, putting your name at 
+% the bottom of each slide is just vanity.
+%\setbeamertemplate{frame footer}{\tiny Footer} 
+
+% Notes and printing layout settings
+
+%
+
+\usepackage{pgfpages} % Manage page layout 
+%\pgfpagesuselayout{4 on 1}[a4paper,border shrink=0mm,landscape]
+%\setbeameroption{show notes} % Print note after corresponding frame
+%\setbeameroption{show only notes} % Print only notes
+%\setbeameroption{show notes on second screen} % (Self explainatory)
+%\setbeamertemplate{note page}[plain] % Use minimal notes
+
+% ### Top matter
+
+\title{Transcriptome-Wide Association Studies}
+\subtitle{\footnotesize Bridging the gap between genome, transcriptome 
+	and disease}
+\author[FM]
+{
+	\scriptsize
+	Supervisor: \href{mailto:paolo.provero@unito.it}{Prof. Paolo 
+		Provero}
+	\\
+	Candidate: \href{mailto:federico.marotta@edu.unito.it}{Federico 
+		Marotta}
+}
+\institute[UniTo, DBMSS]
+{
+	\scriptsize
+	\bigskip
+
+	Università degli Studi di Torino\\
+	Dipartimento di Biotecnologie Molecolari e Scienze per la Salute
+
+	\bigskip
+	\vfill
+
+	{\tiny {\ccbysa\/}
+	\href{https://creativecommons.org/licenses/by-sa/4.0/}
+	{CC BY-SA}}
+}
+\date{\tiny Tesi di Laurea, 18 Luglio 2018}
+
+% ### Document
+
+\begin{document}
+
+\maketitle
+
+% Table of contents
+% It can seem silly in a ten-minute presentation.
+% NOTE: This frame is mutually exclusive with a recurring ToC.
+\begin{frame}
+	\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\section{Section}
+
+\begin{frame}
+    \frametitle{Frametitle}
+	gran parte della ricerca si concentra sulle malattie complesse, che 
+	derivano dall'interazione tra tanti geni e l'ambiente.
+
+	\note[item]{note1}
+    \note[item]{note2}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GWAS have been useful...}
+	Identification of SNPs associated to diabetes, IBD...
+\end{frame}
+
+\begin{frame}
+	\frametitle{...But they are a mess}
+	My scheme of the pyramid
+\end{frame}
+
+\begin{frame}
+	\frametitle{Recipe for a TWAS}
+	Gli ingredienti sono: un GWAS, la regressione lineare...
+\end{frame}
+
+\begin{frame}
+	\frametitle{Nature or Nurture, that is the question...}
+	In definitiva, si tratta del solito dilemma su chi sia responsabile: 
+	il genoma o l'ambiente.
+\end{frame}
+
+\begin{frame}[allowframebreaks] % Allow citations to occupy many frames
+	\frametitle{}
+	\nocite{*}
+	\printbibliography[title=Further Reading]
+\end{frame}
+
+\appendix
+
+\begin{frame}
+	\frametitle{Appendix}
+	Numbering and progress are stopped here.
+\end{frame}
+
+\end{document}
+
+% ### Reference
+
+% Dual screen with notes:
+
+% To display notes on second screen, do the following. First you have to 
+% set up the projector: open the display settings and choose "join 
+% displays". (mirror just copies the pc monitor on the projector; single 
+% display neglects one of the displays.) Set the built-in display as the 
+% primary one. You can also set the resolution for each display, e.g. 
+% for the PC you can set 16:9 and for the projector 4:3 or whatever is 
+% available. This will create two displays, and you can switch from one 
+% another moving the mouse cursor to the appropriate site.
+% At this point you have to run the presentation, using a tool capable 
+% to exploit dual screens. There are several options:
+% pympress. On the command line, write pympress, then open the right 
+% file. It does not always work, and the presentation in 16:9 does not 
+% fit the projector display.
+% dspdfviewer. On the command line, write dspdfviewer main.pdf. It will 
+% work out of the box.
+% pdfpc. On the command line, pdfpc main.pdf --notes=right. It can also 
+% work out of the box, without the options. If you use the option 
+% --notes, specify the same value you had specified to pgfpages inside 
+% the .tex file. It also handles overlays (I still have to investigate 
+% this feature). However, in dspdfviewer I can see both the current 
+% slide and the notes; besides, the space for the notes is bigger.
+
+% Graphics: figure environment
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.8\textwidth, keepaspectratio]{imgname}
+%\end{figure}
+
+% Interactive global structure: framezoom
+
+%\framezoom<1><2>[border](5.5cm,0.5cm)(1cm,1cm)
+%\begin{figure}
+% 	\includegraphics[width=2cm,height=2cm]{imgname}
+%\end{figure}

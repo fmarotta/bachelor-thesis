@@ -1,0 +1,339 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\chapter{Integrative approaches for large-scale transcriptome-wide 
+association studies}
+\labch{gusev2016}
+
+\begin{external_abstract}{title=\textit{Abstract}}
+Many genetic variants influence complex traits by modulating gene 
+expression, thus altering the abundance of one or multiple proteins. 
+Here we introduce a powerful strategy that integrates gene expression 
+measurements with summary association statistics from large-scale 
+genome-wide association studies (GWAS) to identify genes whose 
+cis-regulated expression is associated with complex traits. We leverage 
+expression imputation from genetic data to perform a transcriptome-wide 
+association study (TWAS) to identify significant expression-trait 
+associations. We applied our approaches to expression data from blood 
+and adipose tissue measured in \char`\~3,000 individuals overall. We 
+imputed gene expression into GWAS data from over 900,000 phenotype 
+measurements to identify 69 new genes significantly associated with 
+obesity-related traits (BMI, lipids and height). Many of these genes are 
+associated with relevant phenotypes in the Hybrid Mouse Diversity Panel. 
+Our results showcase the power of integrating genotype, gene expression 
+and phenotype to gain insights into the genetic basis of complex traits.
+\end{external_abstract}
+
+\section{Introduction}
+
+The \textit{rationale} that lies behind the association of gene 
+expression to phenotype is that many genetic variants influence traits 
+by altering the regulation of the expression of some genes. Despite the 
+strength of this argument, publications of studies in which both 
+transcriptomic and phenotypic data are investigated simultaneously lag 
+behind those of simple GWAS studies, for at least two reasons: first, 
+although the cost of sequencing nucleic acids has been sharply 
+decreasing for over a decade (\reffig{sequencingcost}), it can become 
+quite an expensive technology if applied to cohorts of tens of thousand 
+samples, such as those of a typical modern GWAS; secondly, every tissue 
+shows a different pattern of expressed genes, and to choose the right 
+tissue to analyse for each phenotype is not always a trivial 
+matter.\todo{is the tissue from which the expression data for the 
+training comes relevant? Gamazon seems to say no, but another work 
+(https://www.ncbi.nlm.nih.gov/pubmed/29632380) says another thing}
+
+\begin{marginfigure}[-13cm]
+	\includegraphics{gusev2016/ext-sequencingcost}
+	\caption[Sequencing cost over time]{The decrease in the cost of 
+	genome sequencing; the same technology is used to sequence RNA. 
+	\url{https://www.genome.gov/sequencingcosts/}}
+	\labfig{sequencingcost}
+\end{marginfigure}
+
+In order to harness the plethora of data available from existing 
+large-cohort GWAS studies, which, due to their great sample size, have 
+the statistical power to find association even for rare and small-effect 
+variants, many new methods are being developed. One of such methods is 
+PrediXcan, with which we dealt in the previous section, but it is by no 
+means the only one. In particular, in 2016 a new approach has been 
+proposed which does not need individual-level data, but only summary 
+association statistics\sidenote[][0cm]{By summary association statistics 
+we mean the effect size of all the SNPs and, optionally, the summary 
+linkage disequilibrium information for the samples (\ie the pairwise LD 
+among typed SNPs).} from a GWAS, which is an important advantage since, 
+normally, only the summary-level data of a study is publicly available 
+due to privacy concerns.
+
+In essence, this approach is not different from PrediXcan: first, a 
+linear regression model finds the correlation between each SNP and gene 
+expression from a reference transcriptome data set, and accordingly 
+assigns a weight to each SNP \todo{taking into account LD: gamazon used 
+elastic net to prune correlated predictors}; next, the SNPs weights are 
+used to impute the \cis genetic component of expression for the whole 
+GWAS cohort, but separately for cases and controls\todo{is that so?}; 
+finally, the imputed gene expression is tested for an association 
+\todo{through correlation} with a complex trait.\todo{LD is taken into 
+account: how? where?}
+
+\begin{figure}
+	\includegraphics{gusev2016/1-TWAS_schematic}
+	\caption{Schematic of a TWAS.}
+	\labfig{gusev2016/1}
+\end{figure}
+
+Nevertheless, there are some relevant points in this new method, 
+relative to PrediXcan: its being based on summary association statistics 
+greatly increases the effective sample size, for the method can in 
+principle be applied to any GWA study; moreover, the authors emphasise 
+the specificity of their approach, for its focus is on the genetic 
+component of expression only, therefore it is guaranteed that the 
+association between expression and trait is ultimately due to genetic 
+factors. However, the method cannot reliably identify causal genetic 
+variants: indeed, there are several ways in which genomic variation can 
+be related to gene expression and phenotypic variation 
+(\reffig{gusev2016/2}). The TWAS approach is not able to detect 
+associations between gene and disease if the . Moreover, pleiotropic 
+effects cannot be effectively modeled.
+
+\begin{marginfigure}
+	\includegraphics{gusev2016/2-causality_models}
+	\caption{The possible models of causality.}
+	\labfig{gusev2016/2}
+\end{marginfigure}
+
+The models were trained on about 3,000 individuals whose expression data 
+from blood and adipose tissues, as well as genotype data, were 
+available. With the help of a simulated dataset, they compared their 
+approch with others previously proposed, showing that theirs is a 
+significant improvement. Moreover, they reanalysed an existing dataset 
+of a small-cohort lipid GWAS, finding that most of the novel 
+associations they obtained had been previously reported in a 
+larger-cohort GWAS, and implying that their method is statistically more 
+powerful than SNP-based approaches. Finally, they applied their method 
+to GWAS data for over 900,000 phenotype measurements, identifying many 
+new disease-associated genes.
+
+\reftab{comparison} illustrates the differences between the Gamazon and 
+the Gusev methods.
+
+\begin{table}
+	\begin{tabular}{ l c c }
+		\toprule
+		& PrediXcan & Integrative \\
+		\midrule
+		Training data sets & DGR & METSIM, YFS, NTR \\
+		Prediction of expression & elastic net & BSLMM \\
+		Input data & individual level & summary level \\
+		Gene-disease association & logistic regression & correlation \\
+		\bottomrule
+	\end{tabular}
+	\caption{Comparison between PrediXcan and the integrative approach.}
+	\labtab{comparison}
+\end{table}
+
+\section{Training of the expression model}
+
+The accuracy of the prediction of a gene's expression cannot be greater 
+than the heritability of the expression of that gene itself (see the 
+discussion in \refsec{heritability}). For example, if a quantitative 
+trait is normally-distributed in a population, but every individual has 
+the same alleles at the same trait-associated loci, the genetic variance 
+in that population will be 0, and the heritability for such a trait 
+would consequently be 0 as well; In such circumstances, it is not 
+possible to predict height using the \cis-genetic component of gene 
+expression, for there is no such component: the differences in the 
+individuals' traits depend only upon the environment, and it is 
+notoriously difficult to quantitatively measure the effect of 
+environment, especially outside of the laboratory. On the other hand, if 
+the trait has an $h^2$ of 1, its manifestation can be predicted from the 
+genotype with arbitrary accuracy, save for random variation due to 
+chance\sidenote{Indeed, environment and chance have different effects: 
+the former generates a systematic bias in the trait, but is difficult to 
+quantitfy, while the latter alters the trait because of the stochastic 
+nature of life, and its average effect is zero in a large enough 
+population.}.
+
+In order to predict a quantitative trait from the genotype of the 
+individuals, samples for which both gene expression and genotype data 
+are present are necessary. The authors collected about 3,000 samples 
+from three data sets: METSIM, YFS and NTR. Both the quantitative 
+measures of the phenotypes and the gene expression levels were 
+normalised and standardised before the analysis.
+
+\marginnote{
+\begin{description}
+	\item[YFS] is a long-term study of cardiovascular diseases in young 
+finns.
+	\item[METSIM] studied the metabolic syndrome in men, collecting 
+adipose tissue data in follow-ups of the young finns study.
+	\item[NTR] measured gene expression in peripheral blood in more than 
+2000 twins, computing the heritability of genes and finding 
+	 eQTL.
+\end{description}
+}
+
+From the data obtained from the about 3,000 individuals, the 
+heritability of the expression of each gene was computed 
+(\reffig{gusev2016/S1}) using the tool GCTA\cite{Yang2011}. For each 
+gene, two heritability measures were estimated, \cis- and \trans- 
+heritability, labelled $h_{g,cis}^2$ and $h_{g,trans}^2$; 
+\cis-heritability refers to the proportion of variance in gene 
+expression that is imputable to variance in loci up to 1Mb from the 
+gene, whereas \trans-heritability is the proportion of variance in gene 
+expression explained by the rest of the loci. Since on average any two 
+non-related individuals differ at 0.1\% of loci \cite{1000Genomes}, in 
+order to estimate \trans variance a very large sample size is needed, 
+far larger than the 3,000 individuals used in this study, and this is 
+the reason why estimates of \trans-heritability are close to 0. All 
+subsequent analysis were based on the 6,924 \cis-heritable genes 
+(\reffig{gusev2016/3}). Restricting the analysis to \cis-SNPs greatly 
+increases the statistical power of the study, for the number of 
+predictors of gene expression becomes quite small; as previously 
+explained, the multiple testing burden is also decreased.
+
+\begin{figure}
+	\includegraphics[height=10cm]{gusev2016/S1-heritability_distribution}
+	\caption{Heritability distribution.}
+	\labfig{gusev2016/S1}
+\end{figure}
+
+\begin{marginfigure}[-4cm]
+	\includegraphics{gusev2016/3-heritable_genes}
+	\caption{The 6,924 heritable genes, distributed according to their 
+origin}
+	\labfig{gusev2016/3}
+\end{marginfigure}
+
+Having computed heritability, a statistical model could be trained to 
+predict gene expression from genotype data. Two different models, all 
+based on the \cis-SNPs, were employed: the first was a best linear 
+unbiased model (BLUP) and the second a Bayesian model (BSLMM). The 
+performance of each model was evaluated by cross-validation. Moreover, 
+these two models were compared to the predictions of gene expression 
+made from the best \cis-eQTL. The Bayesian model was the best one 
+(\reffig{gusev2016/4}), therefore it was used for subsequent analysis.
+
+\begin{figure}
+	\includegraphics{gusev2016/4-prediction_accuracy_comparison}
+	\caption{BSLMM performs better}
+	\labfig{gusev2016/4}
+\end{figure}
+
+For comparison purposes, the authors built an array of simulated data 
+sets, each modeling a possible scenario (1 causal variant, 5\% causal or 
+10\% causal), and performed a TWAS, a GWAS and an eGWAS on them. On the 
+whole, TWAS performance was comparable to the others' when the number of 
+causal variants was small, but it was the best at associating multiple 
+causal variants to the trait (\reffig{gusev2016/5}).
+
+\begin{figure}
+	\includegraphics{gusev2016/5-association_power}
+	\caption{The TWAS approach compared to GWAS and eGWAS.}
+	\labfig{gusev2016/5}
+\end{figure}
+
+\section{Allelic heterogeneity}
+
+\todo{supplementary figure 17. 
+https://academic.oup.com/hmg/article/11/20/2417/2901592.}
+
+\section{Comparison with COLOC and LDSC?}
+
+\section{Application to a small-cohort GWAS}
+
+In the previous sections, we have discussed how the authors showed that 
+predicting gene expression from the summary-level statistics of a GWAS 
+is feasible; now they show that associating gene expression to the trait 
+is also useful.
+
+The BSLMM was trained on the three data sets (METSIM, YFS and NTR) as 
+described previously; then, gene expression was predicted in a GWAS 
+cohort of a published study on blood lipids, and finally the predicted 
+expression was correlated with the phenotype. 25 correlations were found 
+between phenotype and genes that were more than 500 kb far from any 
+significant SNP in that study, and 19 of these genes contained at least 
+a significant SNP in a larger blood lipid GWAS. This result is an 
+additional confirmation that the proposed method is valid.
+
+The method they used to impute gene expression from the summary 
+statistics of the GWAS is a generalisation of a method previously 
+proposed by the same authors to impute SNP-phenotype associations in a 
+GWAS, knowing only the association score of genotyped 
+SNPs\cite{Pasaniuc2014} and optionally the summary LD statistics. In 
+essence, the original method is based on the assumption that the 
+z-scores\sidenote{The z-score is the standardised association score and 
+measures of how many standard deviations the score differs from the 
+mean.} of the SNPs in a locus are normally-distributed, with mean 0 if 
+there is no association, and with a standard deviation depending on the 
+correlation among the SNPs, that is, on the LD structure of the locus. 
+The LD structure can be taken from the reference genome\cite{1000G} or, 
+if available, directly from the population of the GWAS. Thus, by knowing 
+the z-score of a genotyped SNP and the LD between a non-genotyped SNP 
+and the genotyped one, it is possible to estimate the z-score of the 
+non-genotyped SNP. The method was adapted in this paper so as to predict 
+the gene expression instead of the association with a 
+phenotype.\todo{non e' proprio cosi'. cercare di capire meglio e 
+riscrivere. Lo z-score della SNP secondo la summary statistic del GWAS 
+viene pesato in base al coefficiente di cui altera l'espressione.}
+
+\section{Application to 900,000 phenotypes}
+
+One of the most innovative features of this approach is its broad 
+applicability. Indeed, its potential was unleashed on three GWAS which 
+account for over 900,000 phenotype measurements of obesity-related 
+traits\sidenote[][0cm]{Lipid measures (high-density lipoproteins [HDL] 
+cholesterol, low-density lipoprotein [LDL] cholesterol, total 
+cholesterol [TC], and triglycerides [TG]); height; and BMI}. They first 
+imputed gene expression for the 6,924 genes whose expression is 
+heritable, then associated such imputed expression to the trait, 
+correcting for the multiple testing, and finding 665 significant 
+gene-trait associations, 69 of which genes did not overlap any SNP which 
+was reported by the original GWA studies.
+
+\todo{permutation test}
+
+\todo{contribution to heritability of the associations. I think they say 
+that if a gene is associated, it contributes to the heritability.}
+
+Those 69 novel associations are the most interesting ones, therefore 
+they were the focus of a functional analysis: on the one hand, their 
+presence was sought in the Hybrid Mouse Diversity Panel (HMDP), which 
+collects obesity-related phenotypes; on the other hand, tissue-specific 
+enrichments of these genes was evaluated. Many of the 69 genes were 
+indeed present and they were associated with an obesity-related trait. 
+Moreover, the enrichment analysis, performed with DEPICT, showed that 
+the novel genes were specific of hypothalamus and neurosecretory 
+systems, which is consistent with recent discoveries on 
+obesity.\todo{cite obesity papers}
+
+\section{Discussion}
+
+There are four main advantages with this integrative approach for 
+transcriptome-wide association studies:
+
+\begin{itemize}
+	\item A gene is more interpretable, as a functional unit.
+	\item There is less multiple-testing burden.
+	\item Combining the SNPs may capture heterogeneous signal.
+	\item No random environment effects.
+	\item Works better if there are more than one causal SNPs (allelic 
+heterogeneity).
+	\item Does not require individual-level data.
+\end{itemize}
+
+However, the authors recognise some limitations, too. As shown in 
+\reffig{gusev2016/2}, there are many scenarios where genetic variation 
+and phenotype correlate, but a TWAS can only find instances where the 
+variants influence gene expression, and furthermore can be confounded 
+when it is the phenotype that influence gene expression, or when the 
+variant influence phenotype and expression independently.
+
+The need of a reference training data set mean that the predictions 
+cannot be better than the quality of the training data, so this is an 
+additional limitation; however, with the ever-increasing amount of data 
+being produced daily, this will likely be less of a problem in the 
+future. Finally, the summary-based approach is less likely to identify 
+rare variants. And, as always, only linear effects are 
+accounted.\todo{improve}
+
+\end{document}

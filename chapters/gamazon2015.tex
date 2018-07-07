@@ -5,6 +5,8 @@
 reference transcriptome data}
 \labch{gamazon2015}
 
+\subsection{Gamazon, Eric R. \etal, Nature Genetics 2015}
+
 \begin{external_abstract}{title=\textit{Abstract}}
 Genome-wide association studies (GWAS) have identified thousands of 
 variants robustly associated with complex traits. However, the 
@@ -216,8 +218,8 @@ to underestimate heritability, only genetic variance at loci associated
 to the phenotype must be taken into account\todo{safety check}. 
 Heritability does not deal with the influence of genes in the 
 development of the trait, but rather is concerned with the role of 
-genetic \textit{variation} in determining \textit{phenotypic variation}. 
-There are two definitions of heritability:
+genetic \textit{variation} in determining phenotypic variation. There 
+are two definitions of heritability:
 
 \begin{description}
 	\item[Narrow sense heritability,] or $h^2$, is the heritability due 
@@ -228,24 +230,25 @@ to all genetic factors, taking into account dominance and gene-gene
 interactions.
 \end{description}
 
-\marginnote{If we assume that $P = G + E$, where $P$ is the phenotype, 
-$G$ the genetics, $E$ the environment, then phenotypic variance can be 
-expressed as follows:
+\marginnote[-1.5cm]{If we assume that $P = G + E$, where $P$ is the 
+	phenotype, $G$ the genetics, $E$ the environment, then phenotypic 
+	variance can be expressed as follows:
 \begin{equation*}
 	Var(P) = Var(G) + Var(E) + 2 Cov(G,E)
 \end{equation*}
 and, assuming the independence of genetics and environment,
-\begin{equation*}
-	H^2 = Var(G) / Var(P)
-	h^2 = Var(A) / Var(P)
-\end{equation*}
+\begin{flalign*}
+	&H^2 = Var(G) / Var(P)
+	&\\
+	&h^2 = Var(A) / Var(P)
+\end{flalign*}
 }
 
 Usually, the first definition is used, but it is a reasonable 
 approximation, for in the majority of case, alternate alleles are 
 homozygous only in a minority of individuals due to their low frequency, 
 hence the effects of dominance or epistasis manifest only 
-rarely\cite{Visscher2008march}\todo{safety check}.
+rarely\cite{Visscher2008}\todo{safety check}.
 
 There are many ways to estimate narrow-sense heritability. One is in 
 selective breeding, where the heritability is the proportionality 

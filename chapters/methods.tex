@@ -114,6 +114,9 @@ with $\alpha$ between 0 and 1. Its main advantage is that it works well
 when $p>n$, for it can potentially group correlated predictors and 
 select only one representative variable for each group.
 
+Elastic net is used in the paper by Gamazon \etal (\refch{gamazon2015}) 
+to predict the genetically regulated component of gene expression.
+
 \newthought{Logistic regression\cite{James2013}}, which applies when the 
 predicted outcome is a binary variable indicating whether the response 
 falls into one of two categories, models the probability that the 
@@ -131,8 +134,8 @@ we rely on the logistic function
 
 \begin{marginfigure}[0cm]
 	\includegraphics{methods/logistic}
-	\caption{An example of logistic model. Adapted from James etal 2013, 
-"An introduction to statistical learning".}
+	\caption{An example of logistic model. Adapted from James \etal 
+		2013, "An introduction to statistical learning".}
 	\labfig{logistic}
 \end{marginfigure}
 
@@ -149,29 +152,103 @@ this point the coefficients can be found with the maximum likelihood,
 and the predictions be made. As with linear regression, this model can 
 be easily extended to include more than one predictor.
 
+Logistic regression is used in Gamazon \etal to find the probability of 
+disease given the expression level of a gene.
+
 \newthought{Linear mixed models} are useful when the data has an 
 hierarchical structure, \ie there can be identified many groups and 
 there is variability both inside and among groups. Such models cobine 
-fixed and random effects as predictors of the outcome.
+fixed and random effects as predictors of the outcome. The relationship 
+between the predictors and the outcome is as follows.
 
-\newthought{Sparse regression models} 
+\begin{equation}
+	Y = \beta_0 + \sum_{j=1}^{p} \beta_j X_j +
+		u_0 + \sum_{j=1}^{q} u_j Z_j + \epsilon
+\end{equation}
 
-\newthought{Bayesian sparse linear mixed model\cite{Zhou2013}}
+The $X$'s are the predictor variables, with the $\beta$'s as their 
+coefficients; the $uZ$'s are the random effects, because the $u$'s are 
+assumed to be normally distributed; and $\epsilon$ is the residual 
+random error.
 
-\todo{Expand on the last three sections... it doesn't make sense to put 
-the ones on the other types of regression, and not these. Also, provide 
-references to where these methods are used in the papers.}
+\newthought{A bayesian sparse linear mixed model\cite{Zhou2013}} is a 
+linear mixed model because the outcome depends on both fixed and random 
+effects, is sparse because it selects only a subset of all the 
+predictors (like lasso or elastic net), and is Bayesian because the 
+predictors are selected using a Bayesian approach.
 
-\section{GWAS}
-\labsec{gwas}
+One of these models is used in both papers by Gusev \etal 
+(\refch{gusev2016}, \refch{gusev2018}) to predict the expression levels 
+of genes in a reference transcriptome data set.
 
 \section{eQTL mapping}
 \labsec{eqtl}
 
-\section{Fine mapping}
+There are many ways to perfom an eQTL analysis\cite{Gilad2008}, but the 
+underlying idea is that of considering gene expression as a quantitative 
+trait and finding associations between a genetic variant and this 
+phenotype. The association, which can exist both for \cis and for \trans 
+variants, can be found either through correlating genotype and 
+expression, or by using a linear regression model for each gene-marker 
+pair between the number of alleles that individuals have at the marker 
+and expression of the gene.
 
-\section{COLOC?}
+\begin{figure}
+	\includegraphics[height=9cm]{methods/eqtl}
+	\caption{Typical eQTL results.}
+	\labfig{eqtl}
+\end{figure}
 
-\section{LDSC?}
+\section{GWAS}
+\labsec{gwas}
+
+To perform a genome-wide association study\cite{Clarke2011}, two types 
+of data about the individuals are needed: genetic markers and 
+phenotypes. For each individual, its two alleles at each of the locus 
+under study are reported; such loci are called markers, because they 
+mark a specific position on a chromosome. Phenotypic data is needed to 
+split the population in cases and controls, and possibly to detect and 
+correct false associations: indeed, differences in the allele 
+frequencies of cases and controls could be due to differences in sex, 
+population stratification or other conditions that differ from cases to 
+controls\cite{Price2006}.
+
+After making quality controls and corrections for causes of variance not 
+due to the phenotype of interest (\ie, covariates, which are a possible 
+source of confounding), the frequency of each allele at each marker in 
+cases and controls is computed. At this point, there are a few choices 
+about how to perform the test of association. The simplest model is 
+based on allele counts. First of all, a contingency table like that in 
+\reftab{gwas_contingency} is built.
+
+\begin{table}
+	\begin{tabular}{ l c c l}
+		\toprule
+		Allele & a & A & Total \\
+		\midrule
+		Cases & $m_{11}$ & $m_{12}$ & $m_{1\cdot}$ \\
+		Controls & $m_{21}$ & $m_{22}$ & $m_{2\cdot}$ \\
+		Total & $m_{\cdot1}$ & $m_{\cdot2}$ & $2n$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Contingency table for an allelic model of association.}
+	\labtab{gwas_contingency}
+\end{table}
+
+The odds ratio for allele A is estimated by
+
+\begin{equation}
+	OR_A = \frac{\frac{m_{12}}{m_{11}}}{\frac{m_{22}}{m_{21}}} =
+		\frac{m_{12}m_{21}}{m_{22}m_{11}}
+\end{equation}
+
+And the association test is actually a $\chi^2$ test of independence of 
+rows and columns, the significance threshold of which should be 
+corrected for the multiple testing performed at each marker.
+
+%\begin{equation}
+	%\chi^2 = \sum_{i=1}^{2} \sum_{j=1}^{2}
+		%\frac{(m_{ij} - E[m_{ij}])^2}{E[m_{ij}]}
+%\end{equation}
 
 \end{document}

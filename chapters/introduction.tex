@@ -30,6 +30,12 @@ phenotype, but rather variation at that locus can result in phenotypic
 variation (for instance disease status), under the influence of an 
 appropriate environment.
 
+Gradually, it happened that the focus moved from candidate genes to 
+whole genomes. As a consequence of the large amount of genetic variation 
+among individuals, larger sample sizes were needed to study variation at 
+a population level, thus many laboratories decided to join their forces 
+to create consortia.
+
 One of the driving ideas of the Human Genome 
 Project\cite{Lander2001,Venter2001} was that the knowledge of the human 
 genome sequence and its annotation would have helped to explain and cure 
@@ -42,12 +48,6 @@ which find association between genetic variants and phenotypic traits,
 in the sense that people harbouring a particular allele might be more 
 liable to develop a particular phenotype, and such liability can be 
 quantified by an odds ratio (or effect size).
-
-Gradually, it happened that the focus moved from candidate genes to 
-whole genomes. As a consequence of the large amount of genetic variation 
-among individuals, larger sample sizes were needed to study variation at 
-a population level, thus many laboratories decided to join their forces 
-to create consortia.
 
 Another method to investigate complex traits is the mapping of loci that 
 influence gene expression (see \refsec{eqtl}). Indeed, gene expression 
@@ -99,56 +99,105 @@ size. For some examples of success stories, see
 
 \begin{figure}
 	\includegraphics{introduction/gwas_success}
-	\caption{Some success stories. For example, one of the genes 
-		harbouring schizophrenia-associated variants is \textit{DRD2}, a 
-		dopamine receptor; once the gene was known, drugs could be 
-		developed.}
+	\caption{Some success stories. One of the genes harbouring 
+		schizophrenia-associated variants is \textit{DRD2}, a dopamine 
+		receptor; once the gene was known, drugs could be developed.}
 	\label{introduction/gwas_success}
 \end{figure}
 
-eQTL have resulted... many GWAS are eQTL
+The genomes of closely related species do not exhibit extreme 
+differences, even though the species are far apart at the phenotypic 
+level; the majority of differences are found in non coding 
+regions\sidenote{For instance, 80\% of human genes are shared with the 
+	mouse, and 40\% of nucleotides are identical. Source: Emes \etal 
+	2003, \textit{Comparison of the genomes of human and mouse lays the 
+		foundation of genome zoology}.}, suggesting that much of the 
+phenotypic differences are due to differences in how genes are 
+regulated. It seems to be even more so for variations between 
+individuals of the same species. The mapping of eQTL has revealed that 
+gene expression, as a phenotype, is predominantly regulated in \cis, is 
+quite heritable and differs in different populations\cite{Gilad2008}.
 
-\section{Limits of GWAS and eQTL mapping}
+It has been shown that disease-associated variants often are linked to 
+eQTL\cite{Nicolae2010}. However, in general genetic variants can 
+influence a phenotype in at least three ways (\reffig{eqtl_effects}): 
+chromatin modification, splicing sites alteration, and change of 
+expression levels through direct mechanisms\cite{Li2016}. Although most 
+times splicing does not alter gene expression, the other mechanisms 
+do,\todo{recapitulate in conclusions: twas does not detect splicing. 
+	however, see gusev2018.} suggesting that gene expression is the most 
+important intermediate link in the chain of events leading from genome 
+to phenotype.
 
-Missing heritability.
+\begin{figure}
+	\includegraphics{introduction/eqtl_effects}
+	\caption{The main effects of regulatory eQTL.}
+	\label{eqtl_effects}
+\end{figure}
 
-%https://www.nature.com/articles/ng0508-489
+\section{Limitations of GWAS and eQTL mapping}
 
-%Combination of alleles may have specific effects both if they occur at 
-%the same locus (dominance) or at different loci (epistasis). 
+The GWAS has been an important method in finding genetic variants 
+associated to disease. Its integration with eQTL and functional 
+annotation (mostly suggested by chromatin activity) of DNA, can provide 
+and has provided valuable knowledge both for science and for clinical 
+applications. Nevertheless, most variants are characterised by a small 
+effect size and are not able to explain fully the 
+heritability\cite{Manolio2009}. For example, height has an heritability 
+of 80\%, but the about 40 loci associated with this trait in 2009, after 
+a series of GWA studies involving tens of thousands of people, only 
+explained about 5\% of phenotypic variance.
 
-%\enquote{The main conclusion emerging from the current studies is that 
-%GWAS are able to robustly identify common variants that are associated 
-%with height but that the effect sizes of individual variants are small, 
-%so that very large sample sizes are needed to detect associations 
-%reliably. Single laboratories are unlikely to have sufficient sample 
-%sizes to do powerful studies on their own, and the trend in human 
-%complex trait mapping has been to create consortia of research groups 
-%and even consortia of consortia.}
+Some of the causes proposed to explain this \enquote{missing 
+	heritability} are the following.
+\begin{itemize}
+	\item Natural selection tends reduce the number of alleles 
+		conferring a strong disease risk, and the remaining alleles of 
+		small effect size are difficult to detect without very large 
+		sample sizes.
+	\item Rare variants of large effect may be present, but genotyping 
+		arrays are not fully able to detect rare variants, and 
+		sequencing the genomes of tens of thousand of people is 
+		infeasible.
+	\item Phenotypic variation might be explained by types of variation 
+		different from single nucleotide polimorfisms, like CNV, but 
+		genotyping arrays focus on SNPs.
+	\item The effects may be due to combinations of alleles which behave 
+		in a non-additive fashion; this can happen if they occur at the 
+		same locus (dominance) or ad different loci (epistasis).
+\end{itemize}
 
-%At the same time, among the full sequences now available there are so 
-%many variants that trying to associate them with anything is very 
-%difficult. Statistics is not enough in this case.
+\marginnote{Moreover, a sort of dilemma arises: to detect rare variants, 
+	whole genome sequencing of a huge number of people is necessary. At 
+	the same time, the differences among individuals revealed by WGS are 
+	so many that trying to associate them with anything can become 
+	statistically very dificult due to allelic heterogeneity. At each 
+	generation, some 40 \denovo mutations per genome are introduced in 
+	the population, since the mutation rate for humans is about $1.2 
+	\cdot 10^{-8}$ nucleotides per genome per generation. Source of the 
+	mutation rate datum: Kong \etal (2012), \textit{Rate of 
+		\textnormal{de novo} mutations and the importance of father’s 
+		age to disease risk}.}
 
-%----
+Another limitation of GWAS and eQTL is that, although most hits fall in 
+regulatory regions and are known to have an effect on gene expression, 
+these studies do not explain how the variant makes one individual more 
+liable to a disease.
 
-%other limit of gwas: they study single variants, but sometimes the 
-%disease manifest only when there is a certain \textit{combination} of 
-%variants.
+By exploiting the fact that most trait-associated variants influence 
+gene expression, transcriptome-wide association studies aim to find 
+correlations between expression and traits. Gene expression lies at an 
+higher level than DNA, therefore variation in expression levels are the 
+result of the combination of many genetic variants; TWAS naturally take 
+account of this and aggregate the effects of many SNPs into an 
+intermediate phenotype, which then is correlated to a yet higher level 
+phenotype, such as a disease.
 
-%gamazon2015: Gwas on their own are not enough (cite 
-%https://www.nature.com/articles/nature08494). in particular, there is a 
-%missing link between the variant and the disease: how (not why, 
-%\textit{how}) does the variant make one individual more susceptible to 
-%a disease? It is not true that the nearest gene is always involved.
-
-%gamazon2015: Many SNPs are found in regulatory regions, as evinced by 
-%the fact that they overlap with DNaseI sites (is this true? read Gusev, 
-%A. et al. Regulatory variants explain much more heritability than 
-%coding variants across 11 common diseases. bioRxiv 004309 (21 April 
-%2014).), and that they often are found in eQTL (see Nicolae, D.L. et 
-%     al. 
-%Trait-associated SNPs are more likely to be eQTLs: annotation to 
-%enhance discovery from GWAS. PLoS Genet. 6, e1000888 (2010).)
+Thus, while GWAS and eQTL mapping find associations between genetic 
+variants and phenotype or gene expression, respectively, TWAS find 
+associations between gene expression and phenotypes. On the one hand, 
+this reduces the statistical tests to perform; on the other hand, it 
+increases the interpretability of results. Indeed, it is easier to 
+understand the function of a gene rather than of a nucleotide.
 
 \end{document}

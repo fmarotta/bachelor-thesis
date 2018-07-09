@@ -1,11 +1,12 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-\chapter{A gene-based association method for mapping traits using 
-reference transcriptome data}
+\chapter[A gene-based association method for mapping traits]{A 
+	gene-based association method for mapping traits using reference 
+	transcriptome data}
 \labch{gamazon2015}
 
-\subsection{Gamazon, Eric R. \etal, Nature Genetics 2015}
+\subsection{Eric R. Gamazon \etal (2015), Nature Genetics}
 
 \begin{external_abstract}{title=\textit{Abstract}}
 Genome-wide association studies (GWAS) have identified thousands of 
@@ -87,7 +88,7 @@ transcriptome experiments, they already exclude that component from what
 they predict.
 
 \begin{figure}
-	\includegraphics{gamazon2015/1-expression_decomposition}
+	\includegraphics[width=0.8\textwidth]{gamazon2015/1-expression_decomposition}
 	\caption{Gene expression can be decomposed into three components}
 	\labfig{gamazon2015/1}
 \end{figure}
@@ -110,7 +111,7 @@ find for each SNP the coefficient of which gene expression is altered by
 a copy of that SNP. Once the coefficients have been estimated, the 
 genetically regulated component of gene expression can be predicted 
 starting only from the genotype of an individual; the predicted GReX is 
-denoted as $\hat{GReX}$.
+denoted as $\widehat{GReX}$.
 
 \begin{marginfigure}
 	\includegraphics{gamazon2015/ext-additive_genetic_model}
@@ -169,10 +170,10 @@ From DGN, they obtained whole-blood RNA-seq and genome-wide genotype
 data for 922 European individuals, normalised and filtered to retain 
 only SNPs with MAF > 0.05, in Hardy-Weinberg equilibrium and univoquely 
 mapped onto a strand. The SNPs that were not genotyped were imputed; 
-genome imputation\cite{Marchini2010} is a routinely-used method to 
-estimate the genotype of an individual at loci that were not analysed, 
-basing on known linkage disequilibrium information in a reference 
-population. This data set was used to train the predictive models.
+genome imputation is a routinely-used method to estimate the genotype of 
+an individual at loci that were not analysed, basing on known linkage 
+disequilibrium information in a reference population. This data set was 
+used to train the predictive models.
 
 From GEUVADIS, normalised RNA-seq data from lymphoblastoid cell lines 
 established from 421 individuals was downloaded; genotype data was also 
@@ -257,12 +258,12 @@ $S$, and the response to selection, $R$ (\reffig{breeders}). In other
 words, $R = h^2 S$, wihch is the famous breeder's equation. The larger 
 the heritability, the greater the response to selection.
 
-\begin{marginfigure}
-	\includegraphics{gamazon2015/ext-breeders}
+\begin{figure}
+	\includegraphics[width=0.8\textwidth]{gamazon2015/ext-breeders}
 	\caption{The breeder's work. Source: 
 \url{https://wiki.groenkennisnet.nl/}}
 	\labfig{breeders}
-\end{marginfigure}
+\end{figure}
 
 Another way to interpret heritability in the narrow sense is the 
 plotting of the averaged trait in the two parents versus the trait in 
@@ -278,13 +279,13 @@ $h^2$ is the slope of the regression line. This, however, is valid only
 if the environment is not shared between relatives more than it is 
 shared between unrelated people.
 
-\begin{marginfigure}
+\begin{figure}
 	\includegraphics{gamazon2015/ext-parents_offspring}
 	\caption{Parents-offspring regression. Source: Visscher \etal 2008, 
 \enquote{Heritability in the genomics era — concepts and 
 misconceptions}}
 	\labfig{parents_offspring}
-\end{marginfigure}
+\end{figure}
 
 Returning to the paper by Gamazon \etal, they rightly claim that 
 heritability is an upper bound to how well the trait can be associated 
@@ -308,10 +309,10 @@ heritability (black) of gene expression.}
 
 \section{Correlation between expression and phenotype}
 
-In the second phase, the predicted $\hat{GReX}$ is correlated with the 
-phenotypic status employing linear regression, logistic regression, Cox 
-regression, or Spearman correlation (the latter is non-parametric). They 
-chose to use logistic regression for the results discussed in this 
+In the second phase, the predicted $\widehat{GReX}$ is correlated with 
+the phenotypic status employing linear regression, logistic regression, 
+Cox regression, or Spearman correlation (the latter is non-parametric). 
+They chose to use logistic regression for the results discussed in this 
 article. Another possibility could have been that to model not the 
 disease status, which is a binary variable, but rather the liability to 
 the disease, following what Vissher\cite{Visscher2008} reported, showing 
@@ -322,31 +323,33 @@ variance.
 
 At last, their method was applied to seven autoimmune diseases which had 
 previously been the object of as many GWAS by the Wellcome Trust Case 
-Control Consortium\cite{WTCC2007}. They used DGN whole-blod elastic net 
-prediction models to predict the expression in each WTCCC cohort, then 
-correlated the predicted GReX with the disease status. After applying 
-Bonferroni correction, 41 significant associations (P < 0.05) with 5 
-diseases were reported. Most of the significant associations were for 
-autoimmune disease and were located in the extended MHC 
-region\sidenote{This region, located on chromosome 6, harbours 421 loci, 
-including 252 expressed genes, 139 pseudogenes and 30 transcripts. Many 
-of these loci are associated to diseases.} Moreover, some genes were 
-associated to multiple diseases\sidenote{In these cases, what determines 
-which disease shows up if the expression of that gene is altered in an 
-individual? Perhaps the environment, or gene expression level. This is 
-an example of the complexity of the situation: the relationship between 
-genotype and phenotype is not biunivocal at all.} The majority of these 
+Control Consortium. They used DGN whole-blod elastic net prediction 
+models to predict the expression in each WTCCC cohort, then correlated 
+the predicted GReX with the disease status. After applying Bonferroni 
+correction, 41 significant associations (P < 0.05) with 5 diseases were 
+reported. Most of the significant associations were for autoimmune 
+disease and were located in the extended MHC 
+region\sidenote[][-0.5cm]{This region, located on chromosome 6, harbours 
+	421 loci, including 252 expressed genes, 139 pseudogenes and 30 
+	transcripts. Many of these loci are associated to diseases.} 
+Moreover, some genes were associated to multiple diseases\sidenote{In 
+	these cases, what determines which disease shows up if the 
+	expression of that gene is altered in an individual? Perhaps the 
+	environment, or gene expression level. This is an example of the 
+	complexity of the situation: the relationship between genotype and 
+	phenotype is not biunivocal at all.} The majority of these 
 associations were supported by previous evidence, and often they were 
 enriched in known GWAS; but two completely novel disease-associated 
-genes were also found: low expression of KCNN4 was associated with 
-hypertension, and high expression of PTPRE with bipolar disorder.
+genes were also found: low expression of \textit{KCNN4} was associated 
+with hypertension, and high expression of \textit{PTPRE} with bipolar 
+disorder.
 
 One of the most interesting features of this new approach is that not 
 only can it provide association results, but also a directionality. As 
-an example, PTPN22 expression was positively associated with rheumatoid 
-arthritis and type 1 diabetes, and negatively associated with Crohn's 
-disease. The results of the associations with type 1 diabetes are 
-reported in \reffig{gamazon2015/7}.
+an example, \textit{PTPN22} expression was positively associated with 
+rheumatoid arthritis and type 1 diabetes, and negatively associated with 
+Crohn's disease. The results of the associations with type 1 diabetes 
+are reported in \reffig{gamazon2015/7}.
 
 \begin{figure}
 	\includegraphics{gamazon2015/7-t1d_associations}

@@ -194,7 +194,7 @@ pair between the number of alleles that individuals have at the marker
 and expression of the gene.
 
 \begin{figure}
-	\includegraphics[height=9cm]{methods/eqtl}
+	\includegraphics[height=9cm]{methods/eQTL}
 	\caption{Typical eQTL results.}
 	\labfig{eqtl}
 \end{figure}
@@ -202,8 +202,8 @@ and expression of the gene.
 \section{GWAS}
 \labsec{gwas}
 
-To perform a genome-wide association study\autocite{Clarke2011}, two types 
-of data about the individuals are needed: genetic markers and 
+To perform a genome-wide association study\autocite{Clarke2011}, two 
+types of data about the individuals are needed: genetic markers and 
 phenotypes. For each individual, its two alleles at each of the locus 
 under study are reported; such loci are called markers, because they 
 mark a specific position on a chromosome. Phenotypic data is needed to 
@@ -211,7 +211,9 @@ split the population in cases and controls, and possibly to detect and
 correct false associations: indeed, differences in the allele 
 frequencies of cases and controls could be due to differences in sex, 
 population stratification or other conditions that differ from cases to 
-controls\autocite{Price2006}.
+controls\autocite{Price2006}. Since only a few loci are typed in a 
+normal GWAS, it is often performed an imputation step, where SNPs at 
+other loci are estimated on the basis of their LD structure.
 
 After making quality controls and corrections for causes of variance not 
 due to the phenotype of interest (\ie, covariates, which are a possible 

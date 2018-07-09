@@ -7,40 +7,97 @@
 Transcriptome-wide association studies were born to address some of the 
 limits of classical association studies by combining many SNPs in a 
 biologically meaningful way, \ie through their effect on the expression 
-of a gene. However, one first problem is the paucity of large-cohort 
-studies where genomic, transcriptomic and phenotypic data are present 
-simultaneously (on the other hand, GWAS, where only genotype and 
-phenotype are characterised, are very common). This problem was solved 
-by imputing gene expression with a regression model able to predict the 
-levels of expression starting from the genotypic information. But 
-another problem arises: in published GWA studies the full genotype of 
-each individual is not available; in order to solve this problem, the 
-imputation of gene expression is performed at the level of the whole 
-GWAS cohort.
+of a gene. However, one first problem was the paucity of large-cohort 
+studies where genomic, transcriptomic and phenotypic data are collected 
+simultaneously; on the other hand, GWAS, where only genotype and 
+phenotype are characterised, are very common. This problem was solved by 
+imputing gene expression with a regression model able to predict the 
+levels of expression starting from genotypic information. But another 
+problem arised: in published GWA studies the full genotype of each 
+individual is not available; in order to solve this problem, the 
+association between gene expression and trait was performed at the level 
+of the whole GWAS cohort, still relying on reference transcriptome data 
+sets to grasp the relationship between SNPs and expression.
 
-A variant can have two main roles: a regulatory one and/or a structural 
-one. If a variant affects a TF, it can indirectly be associated with 
-many genes, and potentially many diseases. Different variants can affect 
-the same genes, so the same disease can be due to many variants, thus 
-increasing the difficulty in finding associations: think about how many 
-variants can in principle affect the expression of a gene! Regulatory 
-role: it alters a binding site. Structural role: ??
+The aggregation of SNPs in functional units ensure that TWAS perform 
+better than GWAS when there are multiple causal SNPs. Moreover, the 
+interpretability of results increases and directionality information is 
+provided. From a human point of view, knowing that having a \enquote{G} 
+rather than a \enquote{T} at a locus makes one more liable to a disease 
+does not make much sense. On the contrary, knowing that one is at risk 
+if a gene is more (or less) expressed than normal, is somewhat 
+reassuring.
 
-limits: assumption of linearity.
+The other side of the coin is that TWAS miserably fail when genetic 
+variants influence the phenotype independently of gene expression. Even 
+worse, if a variant pleiotropically affects both gene expression and 
+disease independently, TWAS are confounded, in the sense that they 
+report an association between expression and disease, where in fact 
+there is none.
 
-Who regulates who? Network approach: prioritisation of interactions, 
-prioritisation of combinatoric effects.
+A genetic variant can affect phenotypes in many ways, which fall in two 
+main broad categories: a regulatory or a structural one. In the paper by 
+Gusev \etal on schizophrenia, the possibility of structural alterations 
+was explored by associating the expression of particular spliced 
+isoforms to the disease, to perform a \enquote{splicing-wide association 
+study}. In the same paper, gene expression was associated to chromatin 
+activity. These examples highlight the fact that association studies can 
+go beyond genetic variants alone. In principle, every intermediate 
+phenotype in the path from genome to disease could be associated with 
+the disease status. A possible future perspective is to integrate 
+associations from more than one phenotypic levels (see 
+\refsec{phenolevels}). Indeed, genetic variants can have different 
+effects in different contexts.
 
-gusev says: twas do better when there are multiple causal snps, worse 
-when the mechanism does not involve gene expression.
+An advantage of performing associations using gene expression is that 
+this intermediate phenotype is fairly heritable, and above all its 
+prediction from genetic variants explains a good proportion of such 
+heritability. On the contrary, higher-level phenotypes are difficult to 
+predict from the genotype. This could mean that there is a more direct 
+link between gene sequence and gene expression than between gene 
+sequence and height. The \enquote{missing heritability}, not explained 
+by GWAS, could be lost in processes that do not depend directly on gene 
+sequence: each time a phenotypic level is crossed, the possible 
+combinations expand.
 
 Is there a way to understand the mechanisms behind association and to 
-find causal variants? (open question?)
+find causal variants? This should remain an open question for now. 
+Although transcriptome-wide associations can lead to putative causal 
+genes, they are cannot replace experimental validation. Fine mapping of 
+causal genes is still necessary.
 
-One could find genes near markers associated to a phenotype and look for 
-overrepresented pathways. Nobody did it here.
+The fact that we do not know the mechanism does not prevent us from 
+exploiting existing associations. For instance, if the expression of a 
+gene is positively correlated with the risk of a disease, we could 
+develop drugs that down-regulate that gene. Not only are genes more 
+interpretable: they are also more druggable than SNPs.
 
-gene expression is heritable and their models explain a large proportion 
-of heritability, contrary to what happpens for other phenotypes.
+In principle, any population whose genotypic and phenotypic data are 
+available can be used to perform a TWAS. For instance, one could start 
+from a population of tumours, such as those collected by TCGA, and 
+leverage this data to find driver genes. Another possibility is to start 
+from a population of single cells and ask which are the genes that make 
+each of them unique.
+
+A possible limitation of TWAS is as follows. If a disease-causing 
+variant alters the activity of a transcription factor, and this altered 
+transcription factor affects the expression of hundreds of genes, then 
+every one of these genes would be associated to the disease, albeit the 
+\enquote{true} causal gene was that encoding for the transcription 
+factor. Moreover, multiple variants in different individuals can lead to 
+the same disease, because they alter either the same gene or different 
+genes partaking in the same functional pathway or coregulated. All this 
+heterogeneity decreases the statistical power to find associations. 
+Perhaps one of the possible solutions is to aggregate genes in even 
+higher level biological units, like functional pathways. Such 
+\enquote{network approach} seems very promising, for it naturally 
+accounts for the fact that the behavious of living systems emerge from 
+the interactions of its elements.
+
+On the whole, transcriptome-wide association studies are one of the 
+methods through which the relationship between genome, transcriptome and 
+disease can be investigated. They are already applied quite widely and 
+hopefully in the future will enable us to understand and cure many 
+diseases.
 
 \end{document}

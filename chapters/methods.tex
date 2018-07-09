@@ -194,7 +194,7 @@ pair between the number of alleles that individuals have at the marker
 and expression of the gene.
 
 \begin{figure}
-	\includegraphics[height=9cm]{methods/eqtl}
+	\includegraphics[height=9cm]{methods/eQTL}
 	\caption{Typical eQTL results.}
 	\labfig{eqtl}
 \end{figure}
@@ -211,7 +211,9 @@ split the population in cases and controls, and possibly to detect and
 correct false associations: indeed, differences in the allele 
 frequencies of cases and controls could be due to differences in sex, 
 population stratification or other conditions that differ from cases to 
-controls\cite{Price2006}.
+controls\cite{Price2006}. Since only a few loci are typed in a normal 
+GWAS, it is often performed an imputation step, where SNPs at other loci 
+are estimated on the basis of their LD structure.
 
 After making quality controls and corrections for causes of variance not 
 due to the phenotype of interest (\ie, covariates, which are a possible 

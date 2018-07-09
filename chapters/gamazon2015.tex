@@ -30,6 +30,9 @@ associations.
 
 \section{Introduction}
 
+% GWAS needs large sample size because the effects are small. sequencing 
+% of large sample size is unfeasible.
+
 Albeit it is accepted that in the majority of cases the biological role 
 of variants associated to diseases is regulatory, as confirmed by the 
 fact that many such variants fall in regions that are epigenetically 
@@ -104,14 +107,13 @@ additive model is much simpler to implement. Moreover, the use of
 multiple linear regression, though a simplistic approach, is a first 
 attempt to quantitatively model the interactions among genetic variants: 
 indeed, it may well be that a given phenotype is influenced by a 
-\textit{combination} of SNPs rather than a single SNP\todo{safety check. 
-also: in a linear model the regressors are independent! how are the 
-interaction considered?}. The purpose of this regression model is to 
-find for each SNP the coefficient of which gene expression is altered by 
-a copy of that SNP. Once the coefficients have been estimated, the 
-genetically regulated component of gene expression can be predicted 
-starting only from the genotype of an individual; the predicted GReX is 
-denoted as $\widehat{GReX}$.
+\textit{combination} of SNPs rather than a single SNP\todo{safety 
+check.}. The purpose of this regression model is to find for each SNP 
+the coefficient of which gene expression is altered by a copy of that 
+SNP. Once the coefficients have been estimated, the genetically 
+regulated component of gene expression can be predicted starting only 
+from the genotype of an individual; the predicted GReX is denoted as 
+$\widehat{GReX}$.
 
 \begin{marginfigure}
 	\includegraphics{gamazon2015/ext-additive_genetic_model}

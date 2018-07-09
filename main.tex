@@ -80,10 +80,22 @@
 % Bibliography
 % See https://github.com/Tufte-LaTeX/tufte-latex/issues/60 for the 
 % problems concerning biblatex
-\usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,sorting=none,backend=biber]{biblatex}
+\usepackage[
+	citestyle=authortitle-icomp,
+	bibstyle=apa,
+	sorting=none,
+	backend=biber,
+	autocite=footnote,
+	hyperref=false,
+]{biblatex}
 \addbibresource{main.bib}
-\AtEveryBibitem{\clearfield{url}} % Do not show URL
-\renewcommand{\cite}[2][0pt]{\sidenote[][#1]{\fullcite{#2}} }
+\AtEveryBibitem{
+	\clearfield{url} % Do not show URL
+	\clearfield{issn}
+	\clearfield{archivePrefix}
+	\clearfield{arxivid}
+}
+%\renewcommand{\cite}[2][0pt]{\sidenote[][#1]{\fullcite{#2}} }
 
 % Index
 %\usepackage{makeidx} % Used to generate the index

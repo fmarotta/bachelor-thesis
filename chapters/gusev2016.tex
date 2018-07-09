@@ -39,12 +39,9 @@ decreasing for over a decade (\reffig{sequencingcost}), it can become
 quite an expensive technology if applied to cohorts of tens of thousand 
 samples, such as those of a typical modern GWAS; secondly, every tissue 
 shows a different pattern of expressed genes, and to choose the right 
-tissue to analyse for each phenotype is not always a trivial 
-matter.\todo{is the tissue from which the expression data for the 
-training comes relevant? Gamazon seems to say no, but another work 
-(https://www.ncbi.nlm.nih.gov/pubmed/29632380) says another thing}
+tissue to analyse for each phenotype is not always a trivial matter.
 
-\begin{marginfigure}[-13cm]
+\begin{marginfigure}[-5cm]
 	\includegraphics{gusev2016/ext-sequencingcost}
 	\caption[Sequencing cost over time]{The decrease in the cost of 
 	genome sequencing; the same technology is used to sequence RNA. 
@@ -89,11 +86,12 @@ There are some relevant points in this new method: its being based on
 summary association statistics greatly increases the effective sample 
 size, for the method can in principle be applied to any GWA study; 
 moreover, the authors emphasise the specificity of their approach, for 
-its focus is on the genetic component of expression only, therefore it 
-is guaranteed that the association between expression and trait is 
-ultimately due to genetic factors\todo{Non proprio, per es. ci può 
-	essere pleiotropia}. However, the method cannot reliably identify 
-causal genetic variants: indeed, there are several ways in which genomic 
+its focus is on the genetic component of expression only, computed from 
+a reference transcriptome data set of healthy individuals; therefore, it 
+is guaranteed that, save for pleiotropic effects, if an association 
+between expression and trait is detected, it is ultimately due to 
+genetic factors. However, the method cannot reliably identify causal 
+genetic variants: indeed, there are several ways in which genomic 
 variation can be related to gene expression and phenotypic variation 
 (\reffig{gusev2016/2}). The TWAS approach is not able to detect 
 associations between gene and disease if the mechanism does not involve 
@@ -137,7 +135,7 @@ the Gusev methods.
 	\labtab{comparison}
 \end{table}
 
-\section{Finding the \cis regulatory role of SNPs}
+\section{Estimating SNP-expression weights}
 
 The accuracy of the prediction of a gene's expression cannot be greater 
 than the heritability of the expression of that gene itself (see the 
@@ -180,14 +178,14 @@ adipose tissue data in follow-ups of the young finns study.
 
 From the data obtained from the about 3,000 individuals, the 
 heritability of the expression of each gene was computed 
-(\reffig{gusev2016/S1}) using the tool GCTA\cite{Yang2011}. For each 
+(\reffig{gusev2016/S1}) using the tool GCTA\autocite{Yang2011}. For each 
 gene, two heritability measures were estimated, \cis- and \trans- 
 heritability, labelled $h_{g,cis}^2$ and $h_{g,trans}^2$; 
 \cis-heritability refers to the proportion of variance in gene 
 expression that is imputable to variance in loci up to 1Mb from the 
 gene, whereas \trans-heritability is the proportion of variance in gene 
 expression explained by the rest of the loci. Since on average any two 
-non-related individuals differ at 0.1\% of loci \cite{Auton2015}, in 
+non-related individuals differ at 0.1\% of loci \autocite{Auton2015}, in 
 order to estimate \trans variance a very large sample size is needed, 
 far larger than the 3,000 individuals used in this study, and this is 
 the reason why estimates of \trans-heritability are close to 0. All 
@@ -244,7 +242,7 @@ The method they used to find associations between gene expression and
 phenotype from the summary statistics of the GWAS is a generalisation of 
 a method previously proposed by the same authors to impute SNP-phenotype 
 associations in a GWAS, knowing only the association score of genotyped 
-SNPs\cite{Pasaniuc2014} and optionally the summary LD statistics. In 
+SNPs\autocite{Pasaniuc2014} and optionally the summary LD statistics. In 
 essence, the original method is based on the assumption that the 
 z-scores\sidenote{The z-score is the standardised association score and 
 	measures of how many standard deviations the score differs from the 
@@ -267,12 +265,9 @@ applicability. Indeed, its potential was unleashed on three GWAS which
 account for over 900,000 phenotype measurements of obesity-related 
 traits\sidenote[][0cm]{Lipid measures (high-density lipoproteins [HDL] 
 cholesterol, low-density lipoprotein [LDL] cholesterol, total 
-cholesterol [TC], and triglycerides [TG]); height; and BMI}. They first 
-imputed gene expression for the 6,924 genes whose expression is 
-heritable, then associated such imputed expression to the trait, 
-correcting for the multiple testing, and finding 665 significant 
-gene-trait associations, 69 of which genes did not overlap any SNP which 
-was reported by the original GWA studies.
+cholesterol [TC], and triglycerides [TG]); height; and BMI}. 665 
+significant gene-trait associations were found, 69 of which genes did 
+not overlap any SNP which was reported by the original GWA studies.
 
 Those 69 novel associations are the most interesting ones, therefore 
 they were the focus of a functional analysis: on the one hand, their 
@@ -288,20 +283,18 @@ systems, which is consistent with recent discoveries on obesity.
 
 For comparison purposes, the authors built an array of simulated data 
 sets, each modelling a possible scenario (1 causal variant, 5\% causal 
-or 10\% causal), and performed a TWAS, a GWAS and an eGWAS on them. 
-\todo{Define eGWAS.}. On the whole, TWAS performance was comparable to 
-the others' when the number of causal variants was small, but it was the 
-best at associating multiple causal variants to the trait 
-(\reffig{gusev2016/5}).
+or 10\% causal), and performed a TWAS, a GWAS and an eGWAS on them. On 
+the whole, TWAS performance was comparable to the others' when the 
+number of causal variants was small, but it was the best at associating 
+multiple causal variants to the trait (\reffig{gusev2016/5}).
+
+\todo{Write more about this.}
 
 \begin{figure}
 	\includegraphics{gusev2016/5-association_power}
 	\caption{The TWAS approach compared to GWAS and eGWAS.}
 	\labfig{gusev2016/5}
 \end{figure}
-
-\todo{re-read that part of the paper and write some more sentence. 
-	Optionally add supplementary fig 17.}
 
 \section{Discussion}
 
@@ -330,7 +323,6 @@ cannot be better than the quality of the training data, so this is an
 additional limitation; however, with the ever-increasing amount of data 
 being produced daily, this will likely be less of a problem in the 
 future. Finally, the summary-based approach is less likely to identify 
-rare variants. And, as always, only linear effects are 
-accounted.\todo{improve}
+rare variants. And, as always, only linear effects are accounted.
 
 \end{document}

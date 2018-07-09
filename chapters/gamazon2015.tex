@@ -30,6 +30,9 @@ associations.
 
 \section{Introduction}
 
+% GWAS needs large sample size because the effects are small. sequencing 
+% of large sample size is unfeasible.
+
 Albeit it is accepted that in the majority of cases the biological role 
 of variants associated to diseases is regulatory, as confirmed by the 
 fact that many such variants fall in regions that are epigenetically 
@@ -104,14 +107,12 @@ additive model is much simpler to implement. Moreover, the use of
 multiple linear regression, though a simplistic approach, is a first 
 attempt to quantitatively model the interactions among genetic variants: 
 indeed, it may well be that a given phenotype is influenced by a 
-\textit{combination} of SNPs rather than a single SNP\todo{safety check. 
-also: in a linear model the regressors are independent! how are the 
-interaction considered?}. The purpose of this regression model is to 
-find for each SNP the coefficient of which gene expression is altered by 
-a copy of that SNP. Once the coefficients have been estimated, the 
-genetically regulated component of gene expression can be predicted 
-starting only from the genotype of an individual; the predicted GReX is 
-denoted as $\widehat{GReX}$.
+\textit{combination} of SNPs rather than a single SNP. The purpose of 
+this regression model is to find for each SNP the coefficient of which 
+gene expression is altered by a copy of that SNP. Once the coefficients 
+have been estimated, the genetically regulated component of gene 
+expression can be predicted starting only from the genotype of an 
+individual; the predicted GReX is denoted as $\widehat{GReX}$.
 
 \begin{marginfigure}
 	\includegraphics{gamazon2015/ext-additive_genetic_model}
@@ -187,7 +188,7 @@ null hypothesis were true (\ie, if there were no correlation between
 predicted and observed expression values), while on the $y$-axis there 
 is the observed $R^2$. A 45\textdegree line is displayed in gray: the 
 farther the points are from that line, the more different the two 
-distributions of $R^2$ are.\todo{safety check}
+distributions of $R^2$ are.
 
 RNA-seq data from GTeX, normalised and adjusted for the most common 
 covariates such as sex, was used to test the predictive performance of 
@@ -216,11 +217,10 @@ liability) can be considered a phenotypic trait. The heritability of a
 trait is the proportion of trait variance which can be explained by the 
 genetic variance among the individuals of the population. In order not 
 to underestimate heritability, only genetic variance at loci associated 
-to the phenotype must be taken into account\todo{safety check}. 
-Heritability does not deal with the influence of genes in the 
-development of the trait, but rather is concerned with the role of 
-genetic \textit{variation} in determining phenotypic variation. There 
-are two definitions of heritability:
+to the phenotype must be taken into account. Heritability does not deal 
+with the influence of genes in the development of the trait, but rather 
+is concerned with the role of genetic \textit{variation} in determining 
+phenotypic variation. There are two definitions of heritability:
 
 \begin{description}
 	\item[Narrow sense heritability,] or $h^2$, is the heritability due 
@@ -249,7 +249,7 @@ Usually, the first definition is used, but it is a reasonable
 approximation, for in the majority of case, alternate alleles are 
 homozygous only in a minority of individuals due to their low frequency, 
 hence the effects of dominance or epistasis manifest only 
-rarely\cite{Visscher2008}\todo{safety check}.
+rarely\autocite{Visscher2008}.
 
 There are many ways to estimate narrow-sense heritability. One is in 
 selective breeding, where the heritability is the proportionality 
@@ -281,9 +281,9 @@ shared between unrelated people.
 
 \begin{figure}
 	\includegraphics{gamazon2015/ext-parents_offspring}
-	\caption{Parents-offspring regression. Source: Visscher \etal 2008, 
-\enquote{Heritability in the genomics era — concepts and 
-misconceptions}}
+	\caption{Parents-offspring regression. Source: Visscher et al., 
+		\enquote{Heritability in the genomics era — concepts and 
+			misconceptions}.}
 	\labfig{parents_offspring}
 \end{figure}
 
@@ -315,7 +315,7 @@ Cox regression, or Spearman correlation (the latter is non-parametric).
 They chose to use logistic regression for the results discussed in this 
 article. Another possibility could have been that to model not the 
 disease status, which is a binary variable, but rather the liability to 
-the disease, following what Vissher\cite{Visscher2008} reported, showing 
+the disease, following what Vissher\autocite{Visscher2008} reported, showing 
 that this approach is able to explain a larger proportion of genetic 
 variance.
 
@@ -400,7 +400,6 @@ Even with this method, then, causal SNP or mechanisms cannot be
 inferred. Indeed, disease-associated SNPs may contribute both to gene 
 expression and to other factors that impact the disease independently 
 from gene expression. PrediXcan  only says that variation between 
-individuals at that locus results in variation in gene 
-expression.\todo{safety check}
+individuals at that locus results in variation in gene expression.
 
 \end{document}

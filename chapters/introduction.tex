@@ -11,9 +11,9 @@ an organism, from development to senility, and in particular in the
 manifestation of complex diseases. Every phenotype arises as a 
 consequence of the interactions of genes both with each other and with 
 the environment. Other things being equal, genetic variation among 
-individuals\cite{1000GenomesProjectConsortium2015} results in phenotypic 
-variation; on the other hand, environment can influence a trait as much 
-as any gene, especially if the trait is \textit{complex}.
+individuals\autocite{Auton2015} results in phenotypic variation; on the 
+other hand, environment can influence a trait as much as any gene, 
+especially if the trait is \textit{complex}.
 
 A complex trait, as opposed to a mendelian trait, is a phenotype whose 
 variation in the population cannot be explained by the variation in a 
@@ -25,10 +25,10 @@ variation in a population can be explained by genetic variation, for the
 environment has an effect as well. The proportion of phenotipic variance 
 that can be explained by genetic variance is called heritability (see 
 \refsec{heritability}), which for height is about 
-80\%\cite{Visscher2008a}. It cannot be said that an allele determines a 
-phenotype, but rather variation at that locus can result in phenotypic 
-variation (for instance disease status), under the influence of an 
-appropriate environment.
+80\%\autocite{Visscher2008a}. It cannot be said that an allele 
+determines a phenotype, but rather variation at that locus can result in 
+phenotypic variation (for instance disease status), under the influence 
+of an appropriate environment.
 
 Gradually, it happened that the focus moved from candidate genes to 
 whole genomes. As a consequence of the large amount of genetic variation 
@@ -37,17 +37,17 @@ a population level, thus many laboratories decided to join their forces
 to create consortia.
 
 One of the driving ideas of the Human Genome 
-Project\cite{Lander2001,Venter2001} was that the knowledge of the human 
-genome sequence and its annotation would have helped to explain and cure 
-diseases. Indeed, epigenetic markers aside, DNA is the only heritable 
-molecule, therefore heritable traits must be related to it. In 2005, a 
-powerful method was developed in order to harness the huge amount of 
-data collected from the sequencing of genomes: genome-wide association 
-studies (see \refsec{gwas} for a technical description of the method), 
-which find association between genetic variants and phenotypic traits, 
-in the sense that people harbouring a particular allele might be more 
-liable to develop a particular phenotype, and such liability can be 
-quantified by an odds ratio (or effect size).
+Project\autocite{Lander2001,Venter2001} was that the knowledge of the 
+human genome sequence and its annotation would have helped to explain 
+and cure diseases. Indeed, epigenetic markers aside, DNA is the only 
+heritable molecule, therefore heritable traits must be related to it. In 
+2005, a powerful method was developed in order to harness the huge 
+amount of data collected from the sequencing of genomes: genome-wide 
+association studies (see \refsec{gwas} for a technical description of 
+the method), which find association between genetic variants and 
+phenotypic traits, in the sense that people harbouring a particular 
+allele might be more liable to develop a particular phenotype, and such 
+liability can be quantified by an odds ratio (or effect size).
 
 Another method to investigate complex traits is the mapping of loci that 
 influence gene expression (see \refsec{eqtl}). Indeed, gene expression 
@@ -78,18 +78,18 @@ controls are said to be associated with the disease. Unless the full
 genome of the samples is sequenced, however, not every single variant in 
 the population will be known, and in fact those that result associated 
 to the disease are almost never the causal ones, but are only in linkage 
-disequilibrium with the unknown causal SNP\cite{Visscher2012}. Moreover, 
-even if the causal variant were known, we still would not know much 
-about the mechanism or the underlying biology of the disease, although 
-it is possible to leverage a functional annotation of the genome to draw 
-conclusions\sidenote{For instance, most disease-associated SNPs fall in 
-	enhancers, as reported in a paper by Ernst published in 2011, using 
-	data from the ENCODE project.}.
+disequilibrium with the unknown causal SNP\autocite{Visscher2012}. 
+Moreover, even if the causal variant were known, we still would not know 
+much about the mechanism or the underlying biology of the disease, 
+although it is possible to leverage a functional annotation of the 
+genome to draw conclusions\sidenote{For instance, most 
+	disease-associated SNPs fall in enhancers, as reported in a paper by 
+	Ernst published in 2011, using data from the ENCODE project.}.
 
 Despite these limitations, GWAS have revealed some interesting facts. 
 First and foremost, complex traits are highly 
-polygenic\cite{Visscher2017}: there are many loci which, together, can 
-carry a number of combination of alleles, each of which increases or 
+polygenic\autocite{Visscher2017}: there are many loci which, together, 
+can carry a number of combination of alleles, each of which increases or 
 decreases the probability of disease by a small amount. One of the 
 hypothesis was that of \enquote{common disease, common variant}, but 
 actually there can be few rare variants that contribute substantially to 
@@ -109,25 +109,24 @@ The genomes of closely related species do not exhibit extreme
 differences, even though the species are far apart at the phenotypic 
 level; the majority of differences are found in non coding 
 regions\sidenote{For instance, 80\% of human genes are shared with the 
-	mouse, and 40\% of nucleotides are identical. Source: Emes \etal 
-	2003, \textit{Comparison of the genomes of human and mouse lays the 
+	mouse, and 40\% of nucleotides are identical. Source: Emes et al., 
+	\enquote{Comparison of the genomes of human and mouse lays the 
 		foundation of genome zoology}.}, suggesting that much of the 
 phenotypic differences are due to differences in how genes are 
 regulated. It seems to be even more so for variations between 
 individuals of the same species. The mapping of eQTL has revealed that 
 gene expression, as a phenotype, is predominantly regulated in \cis, is 
-quite heritable and differs in different populations\cite{Gilad2008}.
+quite heritable and differs in different 
+populations\autocite{Gilad2008}.
 
 It has been shown that disease-associated variants often are linked to 
-eQTL\cite{Nicolae2010}. However, in general genetic variants can 
+eQTL\autocite{Nicolae2010}. However, in general genetic variants can 
 influence a phenotype in at least three ways (\reffig{eqtl_effects}): 
 chromatin modification, splicing sites alteration, and change of 
-expression levels through direct mechanisms\cite{Li2016}. Although most 
-times splicing does not alter gene expression, the other mechanisms 
-do,\todo{recapitulate in conclusions: twas does not detect splicing. 
-	however, see gusev2018.} suggesting that gene expression is the most 
-important intermediate link in the chain of events leading from genome 
-to phenotype.
+expression levels through direct mechanisms\autocite{Li2016}. Although 
+most times splicing does not alter gene expression, the other mechanisms 
+do, suggesting that gene expression is the most important intermediate 
+link in the chain of events leading from genome to phenotype.
 
 \begin{figure}
 	\includegraphics{introduction/eqtl_effects}
@@ -143,10 +142,10 @@ annotation (mostly suggested by chromatin activity) of DNA, can provide
 and has provided valuable knowledge both for science and for clinical 
 applications. Nevertheless, most variants are characterised by a small 
 effect size and are not able to explain fully the 
-heritability\cite{Manolio2009}. For example, height has an heritability 
-of 80\%, but the about 40 loci associated with this trait in 2009, after 
-a series of GWA studies involving tens of thousands of people, only 
-explained about 5\% of phenotypic variance.
+heritability\autocite{Manolio2009}. For example, height has an 
+heritability of 80\%, but the about 40 loci associated with this trait 
+in 2009, after a series of GWA studies involving tens of thousands of 
+people, only explained about 5\% of phenotypic variance.
 
 Some of the causes proposed to explain this \enquote{missing 
 	heritability} are the following.
@@ -175,9 +174,8 @@ Some of the causes proposed to explain this \enquote{missing
 	generation, some 40 \denovo mutations per genome are introduced in 
 	the population, since the mutation rate for humans is about $1.2 
 	\cdot 10^{-8}$ nucleotides per genome per generation. Source of the 
-	mutation rate datum: Kong \etal (2012), \textit{Rate of 
-		\textnormal{de novo} mutations and the importance of father’s 
-		age to disease risk}.}
+	mutation rate datum: Kong et al., \enquote{Rate of de novo mutations 
+		and the importance of father’s age to disease risk}.}
 
 Another limitation of GWAS and eQTL is that, although most hits fall in 
 regulatory regions and are known to have an effect on gene expression, 

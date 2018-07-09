@@ -24,7 +24,7 @@ data set are fed to the model, which returns an estimation of the
 outcome.
 \end{enumerate}
 
-\newthought{Linear regression\cite{James2013}} is used to model a linear 
+\newthought{Linear regression\autocite{James2013}} is used to model a linear 
 relationship between a continuous variable, $Y$, and one or more other 
 variables, the $X$'s, which may be continuous or categorical. In other 
 words, $Y$ can be expressed as
@@ -76,7 +76,7 @@ and the system yields
 Once we have the coefficients, given the $x$'s, we could estimate an 
 $\hat{y}$.
 
-\newthought{Ridge regression\cite{James2013}} is a regularisation method 
+\newthought{Ridge regression\autocite{James2013}} is a regularisation method 
 which allows to reduce the dependance of the fitting on the training set 
 of values by shrinking the coefficients towards zero. This is achieved 
 with a slight modification of the least squares, that is, the function 
@@ -91,7 +91,7 @@ This function is the sum of the RSS and a penalty term, the minimisation
 of which can improve the fitting of the model, provided that the tuning 
 parameter $\lambda$ is properly chosen.
 
-\newthought{The lasso\cite{Tibshirani1996}} is another regularisation 
+\newthought{The lasso\autocite{Tibshirani1996}} is another regularisation 
 method which allows to effectively select a subset of relevant 
 predictors by setting the coefficients of the others to zero. In this 
 case, the minimisation function is
@@ -101,7 +101,7 @@ case, the minimisation function is
 		\lambda\sum_{j=1}^{p}\left|\beta_j\right|\,.
 \end{equation}
 
-\newthought{Elastic net\cite{Zou2005}} combines the best features of 
+\newthought{Elastic net\autocite{Zou2005}} combines the best features of 
 ridge regression and lasso by introducing two penalty terms:
 
 \begin{equation}
@@ -117,7 +117,7 @@ select only one representative variable for each group.
 Elastic net is used in the paper by Gamazon \etal (\refch{gamazon2015}) 
 to predict the genetically regulated component of gene expression.
 
-\newthought{Logistic regression\cite{James2013}}, which applies when the 
+\newthought{Logistic regression\autocite{James2013}}, which applies when the 
 predicted outcome is a binary variable indicating whether the response 
 falls into one of two categories, models the probability that the 
 variable belongs to a particular category.
@@ -171,7 +171,7 @@ coefficients; the $uZ$'s are the random effects, because the $u$'s are
 assumed to be normally distributed; and $\epsilon$ is the residual 
 random error.
 
-\newthought{A bayesian sparse linear mixed model\cite{Zhou2013}} is a 
+\newthought{A bayesian sparse linear mixed model\autocite{Zhou2013}} is a 
 linear mixed model because the outcome depends on both fixed and random 
 effects, is sparse because it selects only a subset of all the 
 predictors (like lasso or elastic net), and is Bayesian because the 
@@ -184,7 +184,7 @@ of genes in a reference transcriptome data set.
 \section{eQTL mapping}
 \labsec{eqtl}
 
-There are many ways to perfom an eQTL analysis\cite{Gilad2008}, but the 
+There are many ways to perfom an eQTL analysis\autocite{Gilad2008}, but the 
 underlying idea is that of considering gene expression as a quantitative 
 trait and finding associations between a genetic variant and this 
 phenotype. The association, which can exist both for \cis and for \trans 
@@ -202,7 +202,7 @@ and expression of the gene.
 \section{GWAS}
 \labsec{gwas}
 
-To perform a genome-wide association study\cite{Clarke2011}, two types 
+To perform a genome-wide association study\autocite{Clarke2011}, two types 
 of data about the individuals are needed: genetic markers and 
 phenotypes. For each individual, its two alleles at each of the locus 
 under study are reported; such loci are called markers, because they 
@@ -211,7 +211,7 @@ split the population in cases and controls, and possibly to detect and
 correct false associations: indeed, differences in the allele 
 frequencies of cases and controls could be due to differences in sex, 
 population stratification or other conditions that differ from cases to 
-controls\cite{Price2006}.
+controls\autocite{Price2006}.
 
 After making quality controls and corrections for causes of variance not 
 due to the phenotype of interest (\ie, covariates, which are a possible 

@@ -20,13 +20,15 @@ of the whole GWAS cohort, still relying on reference transcriptome data
 sets to grasp the relationship between SNPs and expression.
 
 The aggregation of SNPs in functional units ensure that TWAS perform 
-better than GWAS when there are multiple causal SNPs. Moreover, the 
-interpretability of results increases and directionality information is 
-provided. From a human point of view, knowing that having a \enquote{G} 
-rather than a \enquote{T} at a locus makes one more liable to a disease 
-does not make much sense. On the contrary, knowing that one is at risk 
-if a gene is more (or less) expressed than normal, is somewhat 
-reassuring.
+better than GWAS when there are multiple causal SNPs (see 
+\refsec{allelic_heterogeneity}). Statistically, TWAS are more powerful 
+than single-variant-based approaches, for the multiple testing buden is 
+reduced. Moreover, the interpretability of results increases and 
+directionality information is provided. From a human point of view, 
+knowing that having a \enquote{G} rather than a \enquote{T} at a locus 
+makes one more liable to a disease does not make much sense. On the 
+contrary, knowing that one is at risk if a gene is more (or less) 
+expressed than normal, is somewhat reassuring.
 
 The other side of the coin is that TWAS miserably fail when genetic 
 variants influence the phenotype independently of gene expression. Even 
@@ -66,7 +68,7 @@ Although transcriptome-wide associations can lead to putative causal
 genes, they are cannot replace experimental validation. Fine mapping of 
 causal genes is still necessary.
 
-The fact that we do not know the mechanism does not prevent us from 
+But the fact that we do not know the mechanism does not prevent us from 
 exploiting existing associations. For instance, if the expression of a 
 gene is positively correlated with the risk of a disease, we could 
 develop drugs that down-regulate that gene. Not only are genes more 

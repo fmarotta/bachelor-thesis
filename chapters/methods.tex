@@ -6,7 +6,7 @@
 
 In this section I shall describe some general methods which are widely 
 used in quantitative genetics and bioinformatics, and were also employed 
-in the papers described in the thesis.
+in the articles described in the thesis.
 
 \section{Regression}
 \labsec{regression}
@@ -24,7 +24,7 @@ data set are fed to the model, which returns an estimation of the
 outcome.
 \end{enumerate}
 
-\newthought{Linear regression\autocite{James2013}} is used to model a linear 
+\newthought{Linear regression\autocite{James2013}} models a linear 
 relationship between a continuous variable, $Y$, and one or more other 
 variables, the $X$'s, which may be continuous or categorical. In other 
 words, $Y$ can be expressed as
@@ -35,13 +35,13 @@ words, $Y$ can be expressed as
 
 where the $\beta$'s are called the model coefficients; the approximation 
 sign is due to random errors, which causes the $Y$ to differ from the 
-right-hand side by a term $\epsilon$ ---a random error. The purpose of 
-simple linear regression is first to fit the model, \ie to find the 
-values of the coefficients that better describe the relationship between 
-$X$ and $Y$ in a training dataset, and then to apply the model to make 
-predictions of $Y$ on a testing dataset with known $X's$. The fitted 
-model, where the parameters are estimated, is usually represented as 
-follows:
+right-hand side by a term $\epsilon$ ---a random residual error. In 
+simple linear regression, at first the model is fitted, \ie the values 
+of the coefficients that better describe the relationship between $X$ 
+and $Y$ are found relying on a training dataset, and the model is 
+applied to a testing dataset with known $X$'s to make predictions of 
+$Y$. The fitted model, where the parameters are estimated, is usually 
+represented as follows, with the parameters denoted by an hat:
 
 \begin{equation}
 	\hat{y} = \hat{\beta}_0 + \sum_{j=1}^{p}\hat{\beta}_j x_j\,.
@@ -55,7 +55,8 @@ $\sum_{i=1}^{n}(y_i~-~(\hat{\beta}_0~+~\sum_{j=1}^{p}\hat{\beta}_jx_j))^2$.
 The coefficients are obtained by using some calculus to find the partial 
 derivatives of the RSS function with respect to all the $\hat{\beta}$, 
 and then some algebra to solve a $p$th-order linear system where we 
-impose such derivatives equal to $0$.
+impose such derivatives equal to 0.
+
 \marginnote{When $p=2$, the partial derivatives are
 \begin{flalign*}
 &\frac{\partial RSS}{\partial \hat{\beta}_0} =
@@ -76,11 +77,11 @@ and the system yields
 Once we have the coefficients, given the $x$'s, we could estimate an 
 $\hat{y}$.
 
-\newthought{Ridge regression\autocite{James2013}} is a regularisation method 
-which allows to reduce the dependance of the fitting on the training set 
-of values by shrinking the coefficients towards zero. This is achieved 
-with a slight modification of the least squares, that is, the function 
-to minimise is
+\newthought{Ridge regression\autocite{James2013}}, which is similar to 
+linear regression, is a regularisation method which allows to reduce the 
+dependance of the fitting on the training set of values by shrinking the 
+coefficients towards zero. This is achieved with a slight modification 
+of the least squares, that is, the function to minimise is
 
 \begin{equation}
 	\sum_{i=1}^{n}\left(y_i-\beta_0-\sum_{j=1}^{p}\beta_jx_{ij}\right)^2+
@@ -125,17 +126,16 @@ variable belongs to a particular category.
 While for linear regression we assumed an equation of the form of a 
 straight line (or a multi-dimensional equivalent), for logistic 
 regression we need a function that returns values between 0 and 1, thus 
-we rely on the logistic function
+we rely on the logistic function (\reffig{logistic}):
 
 \begin{equation}
 	Y = P(Z = 1 | X) =
 		\frac{\exp(\beta_0+\beta_1X)}{1+\exp(\beta_0+\beta_1X)}\,.
 \end{equation}
 
-\begin{marginfigure}[0cm]
+\begin{marginfigure}
 	\includegraphics{methods/logistic}
-	\caption{An example of logistic model. Adapted from James \etal 
-		2013, "An introduction to statistical learning".}
+	\caption{An example of logistic model. Adapted from \textcite{James2013}}
 	\labfig{logistic}
 \end{marginfigure}
 
@@ -148,14 +148,14 @@ denoted by an hat, and manipulate the logistic function until we have
 \end{equation}
 
 where the left-hand member is the logarithm of the odds, or logit. At 
-this point the coefficients can be found with the maximum likelihood, 
-and the predictions be made. As with linear regression, this model can 
-be easily extended to include more than one predictor.
+this point the coefficients can be found with the maximum likelihood 
+method, and the predictions be made. As with linear regression, this 
+model can be easily extended to include more than one predictor.
 
 Logistic regression is used in Gamazon \etal to find the probability of 
 disease given the expression level of a gene.
 
-\newthought{Linear mixed models} are useful when the data has an 
+\newthought{Linear mixed models} are useful when data have an 
 hierarchical structure, \ie there can be identified many groups and 
 there is variability both inside and among groups. Such models cobine 
 fixed and random effects as predictors of the outcome. The relationship 
@@ -167,14 +167,14 @@ between the predictors and the outcome is as follows.
 \end{equation}
 
 The $X$'s are the predictor variables, with the $\beta$'s as their 
-coefficients; the $uZ$'s are the random effects, because the $u$'s are 
-assumed to be normally distributed; and $\epsilon$ is the residual 
-random error.
+coefficients; the $uZ$'s are the random effects, random because the 
+$u$'s are assumed to be normally distributed; and $\epsilon$ is the 
+residual random error.
 
 \newthought{A bayesian sparse linear mixed model\autocite{Zhou2013}} is a 
 linear mixed model because the outcome depends on both fixed and random 
 effects, is sparse because it selects only a subset of all the 
-predictors (like lasso or elastic net), and is Bayesian because the 
+predictors (like the lasso or elastic net), and is Bayesian because the 
 predictors are selected using a Bayesian approach.
 
 One of these models is used in both papers by Gusev \etal 
@@ -191,10 +191,11 @@ phenotype. The association, which can exist both for \cis and for \trans
 variants, can be found either through correlating genotype and 
 expression, or by using a linear regression model for each gene-marker 
 pair between the number of alleles that individuals have at the marker 
-and expression of the gene.
+locus and the expression of the gene.
 
 \begin{figure}
-	\includegraphics[height=9cm]{methods/eQTL}
+	\centering
+	\includegraphics[width=0.8\textwidth]{methods/eQTL}
 	\caption{Typical eQTL results.}
 	\labfig{eqtl}
 \end{figure}
@@ -204,7 +205,7 @@ and expression of the gene.
 
 To perform a genome-wide association study\autocite{Clarke2011}, two 
 types of data about the individuals are needed: genetic markers and 
-phenotypes. For each individual, its two alleles at each of the locus 
+phenotypes. For each individual, its two alleles at each of the loci 
 under study are reported; such loci are called markers, because they 
 mark a specific position on a chromosome. Phenotypic data is needed to 
 split the population in cases and controls, and possibly to detect and 
@@ -220,10 +221,13 @@ due to the phenotype of interest (\ie, covariates, which are a possible
 source of confounding), the frequency of each allele at each marker in 
 cases and controls is computed. At this point, there are a few choices 
 about how to perform the test of association. The simplest model is 
-based on allele counts. First of all, a contingency table like that in 
-\reftab{gwas_contingency} is built.
+based on allele counts.
+
+First of all, a contingency table like that in \reftab{gwas_contingency} 
+is built.
 
 \begin{table}
+	\centering
 	\begin{tabular}{ l c c l}
 		\toprule
 		Allele & a & A & Total \\
@@ -248,9 +252,9 @@ And the association test is actually a $\chi^2$ test of independence of
 rows and columns, the significance threshold of which should be 
 corrected for the multiple testing performed at each marker.
 
-%\begin{equation}
-	%\chi^2 = \sum_{i=1}^{2} \sum_{j=1}^{2}
-		%\frac{(m_{ij} - E[m_{ij}])^2}{E[m_{ij}]}
-%\end{equation}
+\begin{equation}
+	\chi^2 = \sum_{i=1}^{2} \sum_{j=1}^{2}
+		\frac{(m_{ij} - E[m_{ij}])^2}{E[m_{ij}]}
+\end{equation}
 
 \end{document}

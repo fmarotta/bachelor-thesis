@@ -7,7 +7,13 @@ chromatin activity]{Transcriptome-wide association study of
 	insights}
 \labch{gusev2018}
 
-\subsection{Alexander Gusev \etal (2018), Nature Genetics}
+\extauth{Alexander Gusev, Nicholas Mancuso, Hyejung Won, Maria Kousi, 
+Hilary K. Finucane, Yakir Reshef, Lingyun Song, Alexias Safi, 
+Schizophrenia Working Group of the Psychiatric Genomics Consortium, 
+Steven McCarroll, Benjamin M. Neale, Roel A. Ophoff, Michael C. 
+O’Donovan, Gregory E. Crawford, Daniel H. Geschwind, Nicholas Katsanis, 
+Patrick F. Sullivan, Bogdan Pasaniuc \& Alkes L. Price; Nature Genetics 
+2018}
 
 \begin{external_abstract}{title=Abstract}
 Genome-wide association studies (GWAS) have identified over 100 risk 
@@ -40,7 +46,10 @@ knowledge of the biology at the locus where the variant lies.
 Integrating GWAS signals with a functional annotation of the genome can 
 give insight into the mechanisms through which the variant affects the 
 phenotype; in particular, it has been shown that schizophrenia GWAS hits 
-were enriched in regulatory elements.
+were enriched in regulatory elements. In this paper, this concept was 
+extended to transcriptome-wide association studies to identify putative 
+regulatory mechanisms, through which the associations could make 
+biological sense.
 
 The regulatory role of a genetic region is mainly determined by its 
 chromatinic state, \ie by how histones are modified, by which proteins 
@@ -54,8 +63,8 @@ control as much as any other phenotypic trait, therefore we have two
 effects that can spring from a genetic variant: the association with the 
 disease or the association with the chromatinic state of a region. Such 
 effects may or may not be independent. In this study the focus is on 
-those genetic variants which affects the chromatin structure of a locus, 
-which in turn alters gene expression, leading to a disease. The purpose, 
+those genetic variants which both affect the chromatin structure of a 
+locus, and alter gene expression, leading to a disease. The purpose, 
 then, is to find a causal mechanism of action for variants associated 
 with a disease.
 
@@ -69,7 +78,8 @@ genes associated with schizophrenia. Their approach is summarised in
 \reffig{gusev2018/1}.
 
 \begin{figure}
-	\includegraphics[height=10cm]{gusev2018/1-TWAS_schematic}
+	\centering
+	\includegraphics[width=0.55\textwidth]{gusev2018/1-TWAS_schematic}
 	\labfig{gusev2018/1}
 	\caption{The schematic of the TWAS approach used in the 
 schizophrenia work.}
@@ -111,7 +121,7 @@ phenotypes\autocite{Griffiths2000}. For example, a mutation in the gene
 with white eyes instead of red; however, that gene just encodes for an 
 ABC transporter\autocite{Mackenzie1999}, thus it cannot be responsible for 
 the eye colour unless we insert it in the context of an already 
-developed eye, which consists of many cells that assumed the structure 
+developed eye, which consists of many cells which assumed the structure 
 of the eye during development. If we traced back the history of an eye 
 cell, we would see that it changed dramatically, thanks to the 
 collaboration of many genes; the \textit{white} gene is only the last 
@@ -141,7 +151,7 @@ instance, a bird's nest is a phenotype, for a better nest increases the
 fitness of the bird, according to the view of the extended 
 phenotype\autocite{Dawkins1999}). Any phenotype can, in principle, 
 affect any other phenotype, as well as DNA itself (\eg some phenotypes 
-increase mutation rate of DNA). Therefore, there is not a linear 
+increase mutation rate of DNA). Therefore, there is no linear 
 relationship between genotype and phenotype, but rather a tight 
 integration of all the levels. Evolution can act at different levels, 
 too.
@@ -149,12 +159,12 @@ too.
 Genetic variation, however, can be argued to be the ultimate source of 
 variation. Epigenetic modifications, for instance, need two pieces of 
 DNA: a gene encoding for a DNA binding protein (or a 
-methyl-transferase), and a sequence to recognise and bind to. According 
-to what regions of DNA, be they coding or non-coding, are expressed, 
-different enzymes and specific membrane transporters can be produced, 
-thereby determining which reactions can happen and what molecules can 
-enter the cell\autocite{Alberts2014}. Moreover, genetic variation is very 
-easy to measure, so most efforts have concerned it.
+methyl-transferase), and a sequence recognised and bound by the protein. 
+According to what regions of DNA, be they coding or non-coding, are 
+expressed, different enzymes and specific membrane transporters can be 
+produced, thereby determining which reactions can happen and what 
+molecules can enter the cell\autocite{Alberts2014}. Moreover, genetic 
+variation is very easy to measure, so most efforts have concerned it.
 
 \section{Traning of the expression models}
 
@@ -164,30 +174,30 @@ or genome-wide SNP-array expression measurements, for a total of nearly
 models\sidenote{RNA-seq from the dorsolateral prefrontal cortex of 621 
 individuals (including 
 283 schizophrenia cases, 47 bipolar cases, and 291 controls) collected 
-	by the CommonMind Consortium (CMC), expression array data measured 
+	by the CommonMind Consortium (CMC); expression array data measured 
 in peripheral blood from 1,245 unrelated control individuals from the 
-Netherlands Twin Registry (NTR), expression array data measured in blood 
-from 1,264 control individuals from the Young Finns Study (YFS), and 
+Netherlands Twin Registry (NTR); expression array data measured in blood 
+from 1,264 control individuals from the Young Finns Study (YFS); and 
 RNA-seq data measured in adipose tissue from 563 control individuals 
-from the Metabolic Syndrome in Men study (METSIM).} In particular, some 
+from the Metabolic Syndrome in Men study (METSIM).}. In particular, some 
 of the data came from the YFS and METSIM studies, and the weights for 
-the SNPs in those cases were pre-computed by Gamazon \etal 2015). The 
-other dataset, the CMC, was added in order to train expression models in 
-the brain, which is in all probability a relevant tissue in 
-schizophrenia. The fact that both healthy individuals and patients were 
-present in this last cohort did not impair the prediction of gene 
-expression.
+the SNPs in those cases were pre-computed by Gusev \etal for the 2016 
+paper. The other dataset, the CMC, was added in order to train 
+expression models in the brain, which is in all probability a relevant 
+tissue in schizophrenia. The fact that both healthy individuals and 
+patients were present in this last cohort did not impair the prediction 
+of gene expression.
 
 For each reference panel, \cis- and \trans- heritability of gene 
 expression were computed and found significant for 18,084 genes (10,819 
 unique). In addition, 9,009 splicing events in the brain were 
 characterised, since an alteration of this kind of regulation is implied 
 in disease. From such datasets, a sparse midex linear model (the BSLMM 
-used in the previous paper) was used to find the weight of each \cis-SNP 
-for each gene. Furthermore, since a population LD structure is necessary 
-to estimate the correlation between the genetic component of expression 
-and a phenotypic trait using summary GWAS information, LD informaton was 
-also extracted from these data sets.
+also used in the previous paper) was trained to find the weight of each 
+\cis-SNP for each gene. Furthermore, since a population LD structure is 
+necessary to estimate the correlation between the genetic component of 
+expression and a phenotypic trait using summary GWAS information, LD 
+informaton was also extracted from these data sets.
 
 \section{Schizophrenia TWAS}
 
@@ -197,31 +207,33 @@ large study of about 80,000 samples. 157 unique genes, of which 35
 completely novel (\ie being farther than 500kb from any previously 
 associated SNP), were found significantly associated to the disease, as 
 shown in \reffig{gusev2018/2}. Interestingly, 33 loci were found to 
-harbour hotspots of multiple TWAS hits (\ie genes less than 500kb 
-apart), but, after a statistical test, in 27 of these cases the genes 
-were correlated, suggesting a single underlying effect. For instance, 
-this could be due to the alteration of the structure of an entire 
-topologically associating domain (TAD).
+harbour hotspots of multiple TWAS hits (\ie many genes less than 500kb 
+apart), but, with a statistical test, it was found that in 27 of these 
+cases the genes were correlated, suggesting a single underlying effect. 
+For instance, this could be due to the alteration of the structure of an 
+entire topologically associating domain (TAD).
 
-\marginnote{For these analysis, the MHC region was not considered due to 
-its complexity.}
+\marginnote[-4cm]{For these analysis, the MHC region was not considered 
+due to its complexity.}
 
 \begin{figure}
+	\centering
 	\includegraphics{gusev2018/2-schizophrenia_TWAS}
-	\caption{Results of the schizophrenia TWAS.}
+	\caption{Results of the schizophrenia TWAS. Red dots in the 
+manhattan plot represent significant genes.}
 	\labfig{gusev2018/2}
 \end{figure}
 
-Some evidence emerged again that TWAS are more powerful than GWAS at 
+Again, some evidence emerged that TWAS are more powerful than GWAS at 
 detecting multiple variants whose combined effects explain the 
-phenotype, rather than events where a single variant is involved: 
-indeed, 27\% of the novel genes were associated to the disease more 
-strongly than the top GWAS hit at the locus of the gene, whereas only 
-3\% of the genes overlapping a reported GWAS hit were more strongly 
-associated than the GWAS hit (\reffig{gusev2018/S6}). This indicates 
-that when there is a single causal variant, the GWAS is best at 
-identifying it, but when there are multiple variants affecting the 
-trait, the TWAS performs better.
+phenotype, rather than events where a single variant is involved (see 
+\refsec{allelic_heterogeneity}): indeed, 27\% of the novel genes were 
+associated to the disease more strongly than the top GWAS hit at the 
+locus of the gene, whereas only 3\% of the genes overlapping a reported 
+GWAS hit were more strongly associated than the GWAS hit 
+(\reffig{gusev2018/S6}). This indicates that when there is a single 
+causal variant, the GWAS is best at identifying it, but when there are 
+multiple variants affecting the trait, the TWAS performs better.
 
 \begin{marginfigure}
 	\includegraphics{gusev2018/S6-gwas_chi2}
@@ -230,7 +242,7 @@ variants.}
 	\labfig{gusev2018/S6}
 \end{marginfigure}
 
-After finding these genes whose expression is associated to 
+After finding those genes whose expression is associated to 
 schizophrenia, the authors evaluated on the one hand whether there was 
 an association between splicing events and disease, and on the other 
 hand whether the significant genes had chromatin interactions with one 
@@ -250,21 +262,29 @@ variants associated to a trait. First, all the SNPs in linkage
 disequilibrium with a GWAS hit are selected, then the probability of 
 each variant to be causal is estimated with a difficult statistical 
 method.}. From these data it was possible to trace back all the genes 
-that physically interact with one of the causal SNPs. Among such 
-\enquote{risk genes} there were 
-105 of the 157 TWAS-associated genes, pointing at a mechanistic reason 
-for the associations and relating gene expression and regulation.
+which physically interact with one of the causal SNPs. Among such 
+\enquote{risk genes} there were 105 of the 157 TWAS-associated genes, 
+pointing at a mechanistic reason for the associations and relating gene 
+expression and regulation\sidenote{Actually, this mechanism is only 
+valid if it is assumed to manifest during development, for the chromatin 
+interaction experiment was performed in a zebrafish embryo.}.
 
 \section{Chromatin TWAS}
 
 Chromatin data for nine markers was obtained from 
 ChIP-seq\sidenote{Chromatin immunoprecipitation-DNA sequencing consists 
 in the sequencing of DNA fragments bound to specific proteins, captured 
-by an antibody. In this case, the data came from lynphoblastoid cell 
-lines from Yoruban individuals.
-%\begin{description}
-	%\item[LCL of YRI]
-%\end{description}
+by an antibody. In this case, the data came from lymphoblastoid cell 
+lines from Yoruban and European populations:
+\begin{description}
+	\item[LCL of YRI:] acetylated histone H3 Lys27 (H3K27ac; marking 
+active enhancers), methylated H3 Lys4 (H3K4me1; enhancers), 
+trimethylated H3 Lys4 (H3K4me3; promoters), and DNase I–hypersensitive 
+sites (DHS; open chromatin).
+	\item[LCL of CEU:] H3K27ac, H3K4me1, H3K4me3, the regulatory 
+transcription factor PU1, and RNA polymerase II (RPB2, associated with 
+active transcription).
+\end{description}
 }, and the intensity of each peak was treated as a quantitative trait. 
 Inside the cohorts with chromatin information, a TWAS was performed 
 through the usual two steps: first, gene expression was imputed for the 
@@ -274,8 +294,12 @@ Overall, 806 genes and 224 splicing events associated to at least one
 chromatin state were found (\reffig{gusev2018/3}).
 
 \begin{figure}
+	\centering
 	\includegraphics{gusev2018/3-chromatin_TWAS}
-	\caption{Chromatin TWAS.}
+	\caption{Chromatin TWAS. eSNP-cQTL are those variants that influence 
+both expression and chromatin, find by traditional analysis. The TWAS 
+was able to find more associations, especially if the chromatin peak was 
+far from the gene.}
 	\labfig{gusev2018/3}
 \end{figure}
 
@@ -322,11 +346,12 @@ the predicted expression.
 	\includegraphics{gusev2018/ext-kinesin}
 	\caption{A kinase phosphorilates the kinesin triggering a 
 conformation change in the protein which results in its movement along 
-the microtubule filament.}
+the microtubule filament. \url{https://www.cytoskeleton.com}}
 	\labfig{gusev2018/kinesin}
 \end{marginfigure}
 
 \begin{figure}
+	\centering
 	\includegraphics{gusev2018/5-KLC1}
 	\caption{the \textit{KLC1} locus.}
 	\labfig{gusev2018/5}
@@ -361,6 +386,7 @@ embryos were small and the cells therein were less proliferative, but
 after the suppression of \textit{MAPK3}, the embryos developed normally.
 
 \begin{figure}
+	\centering
 	\includegraphics{gusev2018/6-zebrafish}
 	\caption{A zebrafish model validates the discovery of a gene 
 associated to schizophrenia.}
@@ -369,21 +395,36 @@ associated to schizophrenia.}
 
 It could be argued that this is not a real validation, for fish do not 
 have schizophrenia. However, modeling human psychiatric disorders is not 
-easy either. At least, this experiment validates that there are 
-enhancers which regulate the \textit{MAPK3} gene.
+easy either. At least, this experiment validates that the gene and the 
+phenotype are indeed associated, even in the real world.
 
 \section{Discussion}
 
-The integration of a disease TWAS with a chromatin activity TWAS allowed 
-to make hypothesis on the mechanism through which the expression is 
-regulated. A direct association between chromatin activity and disease, 
-however, was never proven\sidenote{Indeed, the sample size was too small 
-to perform a chromatin-wide association study}, therefore these result 
-provide possible mechanistic explainations for how genetic variants 
-regulate gene expression through the modification of chromatin, and not 
-for how the altered expression of a gene lead to the disease.
+The motivation behind this work was double: first, an association does 
+not imply a causal mechanism; secondly, gene expression is not the only 
+way through which genetic variants can alter a phenotype. For instance, 
+a gene can be differentially spliced without its expression level 
+changing.
 
-%They did not perform a chromatin-wide association study only because 
-%the sample size was not large enough.
+This was also an attempt to go beyond genetic variants alone and relate 
+chromatin structure to gene expression. The integration of a disease 
+TWAS with a chromatin activity TWAS allowed to make hypothesis on the 
+mechanism through which the expression is regulated. A direct 
+association between chromatin activity and disease, however, was never 
+proven\sidenote{Indeed, the sample size was too small to perform a 
+chromatin-wide association study}, therefore these result provide 
+possible mechanistic explainations for how genetic variants regulate 
+gene expression through the modification of chromatin (or \textit{vice 
+versa}), and not for how the altered expression of a gene lead to the 
+disease.
+
+The method and most of the data set where the expression models were 
+trained, were the same as those used in the previous article. A new 
+entry here was the integration of experimental biology to suggest or 
+validate hypothesis. First, the chromatin interactions were used to 
+confirm that, at least once in the life of a living organism, 
+disease-associated genes interacted with disease-associated SNPs. Then a 
+zebrafish model validated an hypothesis on a particular gene, 
+\textit{MAPK3}.
 
 \end{document}

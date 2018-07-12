@@ -50,10 +50,10 @@
 
 % Images
 \usepackage{graphicx}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \graphicspath{ {../images/} }
+\setlength\abovecaptionskip{+5pt}
 \setkeys{Gin}{keepaspectratio} % Improves figure scaling
-\setlength\abovecaptionskip{-5pt}
 \setbeamerfont{caption}{size=\tiny} % Font size for captions
 
 % Themes, colours and fonts
@@ -109,7 +109,8 @@
 %\setbeameroption{show notes} % Print note after corresponding frame
 %\setbeameroption{show only notes} % Print only notes
 %\setbeameroption{show notes on second screen} % (Self explainatory)
-%\setbeamertemplate{note page}[plain] % Use minimal notes
+\setbeamertemplate{note page}[plain] % Use minimal notes
+\AtBeginNote{\scriptsize}
 
 % ### Top matter
 
@@ -118,29 +119,34 @@
 	and disease}
 \author[Federico Marotta]
 {
-	\scriptsize
 	Supervisor: \href{mailto:paolo.provero@unito.it}{Prof. Paolo 
 		Provero}
 	\\
 	Candidate: \href{mailto:federico.marotta@edu.unito.it}{Federico 
 		Marotta}
+	\vfill
+	\scriptsize
+	Università degli Studi di Torino
+	\\
+	Dipartimento di Biotecnologie Molecolari e Scienze per la Salute
+	\vfill
 }
 \institute[UniTo, DBMSS]
 {
-	\scriptsize
-	\bigskip
+	%\scriptsize
+	%\bigskip
 
-	Università degli Studi di Torino\\
-	Dipartimento di Biotecnologie Molecolari e Scienze per la Salute
+	%Università degli Studi di Torino\\
+	%Dipartimento di Biotecnologie Molecolari e Scienze per la Salute
 
-	\bigskip
-	\vfill
+	%\bigskip
+	%\vfill
 
-	{\tiny {\ccbysa\/}
-	\href{https://creativecommons.org/licenses/by-sa/4.0/}
-	{CC BY-SA}}
+	%{\tiny {\ccbysa\/}
+	%\href{https://creativecommons.org/licenses/by-sa/4.0/}
+	%{CC BY-SA}}
 }
-\date{\tiny Tesi di Laurea, 18 Luglio 2018}
+\date{\tiny Tesi di Laurea, 18\textsuperscript{th} July 2018}
 
 % ### Document
 

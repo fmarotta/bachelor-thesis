@@ -7,6 +7,13 @@
 \usepackage[utf8]{inputenc} % Use utf8 encoding in the input (.tex) file
 \usepackage[english]{babel} % Load characters and hyphenation
 \usepackage[T1]{fontenc} % Use utf8 encoding in the output (.pdf) file
+\usepackage[english=british]{csquotes} % Quote like a boss
+
+% Decorations
+\usepackage{microtype} % Improves character and word spacing
+\usepackage{booktabs} % Better horizontal rules in tables
+\usepackage{multicol} % Customisation for tables
+\usepackage{amsmath} % Improved mathematics
 
 % Size
 % With an aspect ratio of 16:9, I prefer having wide margins
@@ -18,16 +25,32 @@
 
 % Special content
 \usepackage{textgreek} % Greek characters
-\usepackage{csquotes} % Quote like a boss
+\usepackage{units} % Used for printing standard units
 \usepackage[scale=2]{ccicons} % Creative Commons icons
+
+% Bibliography
 \usepackage[sortcites,style=authoryear-icomp]{biblatex} % Bibliography
-\addbibresource{main.bib}
+\addbibresource{../main.bib}
+\AtEveryBibitem{
+	\clearfield{url}
+	\clearfield{issn}
+	\clearfield{isbn}
+	\clearfield{archivePrefix}
+	\clearfield{arxivId}
+	\clearfield{pmid}
+	\clearfield{eprint}
+	\clearfield{doi}
+	\clearfield{number}
+	\clearfield{pages}
+	\clearfield{volume}
+}
 
 % Images
 \usepackage{graphicx}
-\usepackage{subcaption}
+%\usepackage{subcaption}
 \graphicspath{ {../images/} }
 \setlength\abovecaptionskip{+5pt}
+\setkeys{Gin}{keepaspectratio} % Improves figure scaling
 \setbeamerfont{caption}{size=\tiny} % Font size for captions
 
 % Themes, colours and fonts
@@ -35,7 +58,12 @@
 % become too attached to a particular theme. For long presentations, a 
 % sidebar which highlights the current topic can be helpful.
 % Themes
-\usetheme{metropolis} % A modern theme
+\usetheme[
+	progressbar=frametitle,
+	%progressbar=foot,
+	numbering=fraction,
+	block=fill,
+]{metropolis} % A modern theme
 %\usetheme{Madrid} % A classic
 %\usetheme{Hannover} % Side bar
 % Colour themes
@@ -44,6 +72,14 @@
 % Fonts
 \usepackage{FiraSans} % Font needed by metropolis
 \usepackage{FiraMono} % Font needed by metropolis
+\usepackage{amsfonts} % Math fonts
+\usepackage{xspace} % Print a space better than a ~
+
+\newcommand{\etal}{\textit{et al.}\xspace}
+
+%\definecolor{mLightBrown}{HTML}{EB811B}
+%\newcommand{\alert}[1]{\textcolor{mLightBrown}{#1}} % Print text in 
+%orange
 
 % Table of contents
 \setbeamertemplate{section in toc}[sections numbered] % ToC style
@@ -77,7 +113,7 @@
 \title{Transcriptome-Wide Association Studies}
 \subtitle{\footnotesize Bridging the gap between genome, transcriptome 
 	and disease}
-\author[FM]
+\author[Federico Marotta]
 {
 	Supervisor: \href{mailto:paolo.provero@unito.it}{Prof. Paolo 
 		Provero}
@@ -89,6 +125,7 @@
 	Università degli Studi di Torino
 	\\
 	Dipartimento di Biotecnologie Molecolari e Scienze per la Salute
+	\vfill
 }
 \institute[UniTo, DBMSS]
 {
@@ -105,7 +142,7 @@
 	%\href{https://creativecommons.org/licenses/by-sa/4.0/}
 	%{CC BY-SA}}
 }
-\date{\tiny Tesi di Laurea, 18 Luglio 2018}
+\date{\tiny Tesi di Laurea, 18\textsuperscript{th} July 2018}
 
 % ### Document
 
@@ -116,60 +153,125 @@
 % Table of contents
 % It can seem silly in a ten-minute presentation.
 % NOTE: This frame is mutually exclusive with a recurring ToC.
-\begin{frame}
-	\frametitle{Outline}
-	\tableofcontents
+%\begin{frame}
+	%\frametitle{Outline}
+	%\tableofcontents
+%\end{frame}
+
+\begin{frame}{Nature or Nurture: that is the question}
+
+	\bigskip
+
+	\begin{block}{Complex diseases:}
+		As opposed to Mendelian diseases, complex ones cannot be 
+explained by a mutation in a single gene
+	\end{block}
+
+	\bigskip
+
+	Do they have a genetic basis at all?
+
+	\pause
+
+	\begin{itemize}
+		\item Initially, there were \alert{linkage studies} and 
+\alert{candidate-gene association studies}
+		\item Gradually, the focus moved towards \alert{populations and 
+whole genomes}
+		\item \alert{GWAS}, especially if combined with eQTL mapping and 
+functional annotations, have been useful
+	 \end{itemize}
+
+	\note[item]{Interaction of many genes with each other and with the 
+environment}
+	\note[item]{We have seen with Alessandro Lussana that non coding 
+variants are important}
+	\note[item]{To answer the question, many methods were developed}
+	\note[item]{A linkage study is... a candidate-gene association study 
+is... a GWAS is... eQTL mapping is...}
+	\note[item]{Many SNP-disease association have been found}
+
 \end{frame}
 
-\section{Section}
+\begin{frame}{\ldots But GWAS do not explain everything}
 
-\begin{frame}
-    \frametitle{Frametitle}
-	gran parte della ricerca si concentra sulle malattie complesse, che 
-	derivano dall'interazione tra tanti geni e l'ambiente.
+	heritability
 
-	\note[item]{note1}
-    \note[item]{note2}
-\end{frame}
+	mechanism
 
-\begin{frame}
-	\frametitle{GWAS have been useful...}
-	Identification of SNPs associated to diabetes, IBD...
-\end{frame}
-
-\begin{frame}
-	\frametitle{...But they are a mess}
-	scheme of the pyramid
+	interpretation and druggability
 
 	GWAS: avere una A al posto di una C ti fa ammalare (non ha 
 	significato).
 	TWAS: se questo gene è più espresso, ci si ammala (molto più 
 	interpretabile per un umano).
+
+	\note[item]{Not only are they more difficult to interpret, but also 
+to translate into clinical applications}
+
 \end{frame}
 
 \begin{frame}
-	\frametitle{Recipe for a TWAS}
-	Gli ingredienti sono: un GWAS, la regressione lineare...
+
+	scheme of the pyramid
+
 \end{frame}
 
-\begin{frame}
-	\frametitle{Nature or Nurture, that is the question...}
-	In definitiva, si tratta del solito dilemma su chi sia responsabile: 
-	il genoma o l'ambiente.
+\section{A gene-based association method \newline
+\scriptsize Gamazon \etal (2015), \textit{Nature Genetics}}
+
+\begin{frame}{Imputation of gene expression}
+
+	\begin{columns}
+		\begin{column}{0.4\textwidth}
+			Since gene expression is not measured in a GWAS, it must be 
+imputed
+		\end{column}
+
+		\begin{column}{0.6\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{gamazon2015/1-expression_decomposition}
+				\caption{Expression can be decomposed in three 
+components}
+			\end{figure}
+		\end{column}
+	\end{columns}
+
+\end{frame}
+
+\begin{frame}{Imputation of gene expression (II)}
+
+	
+
+\end{frame}
+
+\section{Integrative approaches \newline
+\scriptsize Gusev \etal (2016), \textit{Nature Genetics}}
+
+\begin{frame}{Integrative approaches}
+\end{frame}
+
+\section{Moving beyond genetic variants alone \newline
+\scriptsize Gusev \etal (2018), \textit{Nature Genetics}}
+
+\begin{frame}{Moving beyond genetic variants alone}
+\end{frame}
+
+\begin{frame}{Conclusions}
 \end{frame}
 
 \begin{frame}[allowframebreaks] % Allow citations to occupy many frames
 	\frametitle{}
 	\nocite{*}
-	\printbibliography[title=Further Reading]
+	\tiny
+	\printbibliography[title=References,keyword=TWAS]
 \end{frame}
 
-\appendix
+%\appendix
 
-\begin{frame}
-	\frametitle{Appendix}
-	Numbering and progress are stopped here.
-\end{frame}
+%\begin{frame}{Appendix}
+	%Numbering and progress are stopped here.
+%\end{frame}
 
 \end{document}
 

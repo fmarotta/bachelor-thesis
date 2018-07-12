@@ -15,6 +15,9 @@
 \usepackage{multicol} % Customisation for tables
 \usepackage{amsmath} % Improved mathematics
 
+% Debug: grids
+%\setbeamertemplate{background}[grid][step=1mm]
+
 % Size
 % With an aspect ratio of 16:9, I prefer having wide margins
 \setbeamersize{text margin left=1.5cm}
@@ -62,6 +65,7 @@
 	progressbar=frametitle,
 	%progressbar=foot,
 	numbering=fraction,
+	%sectionpage=simple,
 	block=fill,
 ]{metropolis} % A modern theme
 %\usetheme{Madrid} % A classic
@@ -214,8 +218,30 @@ to translate into clinical applications}
 \section{A gene-based association method \newline
 \scriptsize Gamazon \etal (2015), \textit{Nature Genetics}}
 
-\begin{frame}{Imputation of gene expression}
+% NOTE: excluding decomposition of gene expression, validation of 
+% prediction (otherwise I should discuss heritability).
 
+%\begin{frame}{Imputation of gene expression (?)}
+
+	%\begin{columns}
+		%\begin{column}{0.4\textwidth}
+			%Since gene expression is not measured in a GWAS, it must be 
+			%imputed
+		%\end{column}
+
+		%\begin{column}{0.6\textwidth}
+			%\begin{figure}
+				%\includegraphics[width=\textwidth]{gamazon2015/1-expression_decomposition}
+				%\caption{Expression can be decomposed in three 
+				%components}
+			%\end{figure}
+		%\end{column}
+	%\end{columns}
+
+%\end{frame}
+
+\begin{frame}{Training on reference transcriptome data sets}
+	
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
 			Since gene expression is not measured in a GWAS, it must be 
@@ -224,35 +250,149 @@ imputed
 
 		\begin{column}{0.6\textwidth}
 			\begin{figure}
-				\includegraphics[width=\textwidth]{gamazon2015/1-expression_decomposition}
-				\caption{Expression can be decomposed in three 
-components}
+				\includegraphics[width=\textwidth]{gamazon2015/2-grex_estimation_part1}
 			\end{figure}
 		\end{column}
 	\end{columns}
 
+	\note[item]{Phenotype-determined expression goes away because these 
+are healthy individuals. The environment component goes away because it 
+averages out in the regression model.}
+
 \end{frame}
 
-\begin{frame}{Imputation of gene expression (II)}
+\begin{frame}{Association of the imputed expression to the phenotype}
 
+	The expression predicted in each individual is then associated to 
+its phenotype
 	
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{gamazon2015/2-grex_estimation_part2}
+	\end{figure}
+
+	\note[item]{Logistic model. They could have modeled the liability to 
+disease.}
+	\note[item]{This is the real TWAS. The previous part was only needed 
+because expression is not measured}
+
+\end{frame}
+
+\begin{frame}{Results}
+
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{gamazon2015/7-t1d_associations_manhattan}
+	\end{figure}
+
+	\note[item]{Why are nearby genes all associated? coregulation 
+because of tad altered (upstream event)? This could be a pitfall of 
+TWAS. See conclusions.}
 
 \end{frame}
 
 \section{Integrative approaches \newline
 \scriptsize Gusev \etal (2016), \textit{Nature Genetics}}
 
-\begin{frame}{Integrative approaches}
+\begin{frame}{From individual-level to summary-based TWAS}
+
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{gusev2016/1-TWAS_schematic}
+	\end{figure}
+
+	\note[item]{Individual-level data is not available}
+	\note[item]{If a SNP is associated to a trait with score z_SNP, but 
+it does not alter gene expression, its contribution to the association 
+score of the gene to the trait is 0.}
+
+\end{frame}
+
+\begin{frame}{Application}
+
+	The estimation of SNP weights was performed on \char`\~3000 
+individuals
+
+	\begin{itemize}
+		\item When applied to a small-cohort GWAS, this approach found 
+some genes that were reported in a later large-cohort GWAS
+		\item 900,000 phenotypes
+	\end{itemize}
+
+	\note[item]{First bullet: TWAS are more powerful. Indeed, less 
+multiple testing.}
+
 \end{frame}
 
 \section{Moving beyond genetic variants alone \newline
 \scriptsize Gusev \etal (2018), \textit{Nature Genetics}}
 
-\begin{frame}{Moving beyond genetic variants alone}
+% NOTE: here the results will be more important. Previously we have 
+% neglected them.
+
+\begin{frame}{Schematic}
+
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{gusev2018/1-TWAS_schematic_cropped}
+			\end{figure}
+		\end{column}
+
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item An association does not imply a causal mechanism
+				\item Genetic variants
+			\end{itemize}
+		\end{column}
+	\end{columns}
+
+	\note[item]{Gene expression is one of the many intermediate 
+phenotypes}
+
+\end{frame}
+
+\begin{frame}
+
+	schizophrenia twas
+
+	spliceome was
+
+	chromatin twas
+
+\end{frame}
+
+\begin{frame}
+
+	either mapk or klc1.
+
 \end{frame}
 
 \begin{frame}{Conclusions}
+
+	additive models do not account for epistasis, dominance, penetrance
+
+	more interpretability (anecdote of A->G vs. gene more or less 
+expressed) and druggability
+
+	not only expression: also structure
+
 \end{frame}
+
+\begin{frame}{Future perspectives}
+
+	Association study-related:
+
+	anything-WAS
+
+	any population
+
+	improvement of associations:
+
+	take account of biological ideas (epistasis, dominance, penetrance)
+
+	network to integrate and detect upstream events
+
+\end{frame}
+
+\appendix
 
 \begin{frame}[allowframebreaks] % Allow citations to occupy many frames
 	\frametitle{}
@@ -261,11 +401,21 @@ components}
 	\printbibliography[title=References,keyword=TWAS]
 \end{frame}
 
-%\appendix
+\begin{frame}{Different levels of phenotype}
 
-%\begin{frame}{Appendix}
-	%Numbering and progress are stopped here.
-%\end{frame}
+	pyramid
+
+\end{frame}
+
+\begin{frame}{Comparison of TWAS with classical approaches}
+
+	\begin{figure}
+		\includegraphics{gusev2016/5-association_power}
+	\end{figure}
+
+	\note[item]{Allelic heterogeneity}
+
+\end{frame}
 
 \end{document}
 

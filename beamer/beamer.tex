@@ -115,10 +115,11 @@
 % ### Top matter
 
 \title{Transcriptome-Wide Association Studies}
-\subtitle{\footnotesize Bridging the gap between genome, transcriptome 
-	and disease}
+\subtitle{\small Bridging the gap between genome, transcriptome and 
+disease}
 \author[Federico Marotta]
 {
+	\footnotesize
 	Supervisor: \href{mailto:paolo.provero@unito.it}{Prof. Paolo 
 		Provero}
 	\\
@@ -146,7 +147,8 @@
 	%\href{https://creativecommons.org/licenses/by-sa/4.0/}
 	%{CC BY-SA}}
 }
-\date{\tiny Tesi di Laurea, 18\textsuperscript{th} July 2018}
+%\date{\tiny Tesi di Laurea, 18\textsuperscript{th} July 2018}
+\date{\tiny Tesi di Laurea, 18 luglio 2018}
 
 % ### Document
 
@@ -197,23 +199,24 @@ is... a GWAS is... eQTL mapping is...}
 
 \end{frame}
 
-\begin{frame}{\ldots But GWAS do not explain everything}
+% NOTE: this is already in the conclusions
+%\begin{frame}{\ldots But GWAS do not explain everything}
 
-	heritability
+	%heritability
 
-	mechanism
+	%mechanism
 
-	interpretation and druggability
+	%interpretation and druggability
 
-	GWAS: avere una A al posto di una C ti fa ammalare (non ha 
-	significato).
-	TWAS: se questo gene è più espresso, ci si ammala (molto più 
-	interpretabile per un umano).
+	%GWAS: avere una A al posto di una C ti fa ammalare (non ha 
+	%significato).
+	%TWAS: se questo gene è più espresso, ci si ammala (molto più 
+	%interpretabile per un umano).
 
-	\note[item]{Not only are they more difficult to interpret, but also 
-to translate into clinical applications}
+	%\note[item]{Not only are they more difficult to interpret, but also 
+	%to translate into clinical applications}
 
-\end{frame}
+%\end{frame}
 
 \begin{frame}
 
@@ -269,8 +272,7 @@ averages out in the regression model.}
 
 \begin{frame}{Association of the imputed expression to the phenotype}
 
-	The expression predicted in each individual is then associated to 
-its phenotype
+	Predicted expression is then associated to phenotype
 	
 	\begin{figure}
 		\includegraphics[width=0.8\textwidth]{gamazon2015/2-grex_estimation_part2}
@@ -283,7 +285,7 @@ because expression is not measured}
 
 \end{frame}
 
-\begin{frame}{Results}
+\begin{frame}{Results in T1D}
 
 	\begin{figure}
 		\includegraphics[width=0.8\textwidth]{gamazon2015/7-t1d_associations_manhattan}
@@ -311,7 +313,7 @@ score of the gene to the trait is 0.}
 
 \end{frame}
 
-\begin{frame}{Application}
+\begin{frame}{Real-world application}
 
 	The estimation of SNP weights was performed on \char`\~3000 
 individuals
@@ -319,11 +321,13 @@ individuals
 	\begin{itemize}
 		\item When applied to a small-cohort GWAS, this approach found 
 some genes that were reported in a later large-cohort GWAS
-		\item 900,000 phenotypes
+		\item When applied to many GWAS, for a total of 900,000 
+phenotypes, 665 associations of which 69 completely novel
 	\end{itemize}
 
 	\note[item]{First bullet: TWAS are more powerful. Indeed, less 
 multiple testing.}
+	\note[item]{Second bullet: broad applicability}
 
 \end{frame}
 
@@ -333,19 +337,19 @@ multiple testing.}
 % NOTE: here the results will be more important. Previously we have 
 % neglected them.
 
-\begin{frame}{Schematic}
+\begin{frame}{Pipeline}
 
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.6\textwidth}
 			\begin{figure}
-				\includegraphics[width=\textwidth]{gusev2018/1-TWAS_schematic_cropped}
+				\includegraphics[width=0.63\textwidth]{gusev2018/1-TWAS_schematic_cropped}
 			\end{figure}
 		\end{column}
 
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.4\textwidth}
 			\begin{itemize}
-				\item An association does not imply a causal mechanism
-				\item Genetic variants
+				\item Association does not imply mechanism
+				\item Gene expression is not the only link
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -355,62 +359,74 @@ phenotypes}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Results}
 
-	schizophrenia twas
+	\begin{itemize}
+		\item Schizophrenia TWAS
+		\begin{itemize}
+			\item \includegraphics[width=0.7\textwidth]{gusev2018/2-schizophrenia_TWAS}
+		\end{itemize}
 
-	spliceome was
+		\item Schizophrenia Spliceome-WAS
+		\begin{itemize}
+			\item 46 splicing events in the brain associated to disease
+		\end{itemize}
 
-	chromatin twas
+		\item Chromatin TWAS
+		\begin{itemize}
+			\item Of the 157 SCZ-associated genes, 42 were also 
+associated a chromatin peak
+		\end{itemize}
+	\end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{A biological example}
 
-	either mapk or klc1.
+	\begin{figure}
+		\includegraphics[width=0.7\textwidth]{gusev2018/6-zebrafish}
+	\end{figure}
+
+	\note[item]{At last!}
 
 \end{frame}
 
 \begin{frame}{Conclusions}
 
-	additive models do not account for epistasis, dominance, penetrance
+	TWAS address some of the limitations of classical association 
+studies
 
-	more interpretability (anecdote of A->G vs. gene more or less 
-expressed) and druggability
+	\begin{itemize}
+		\item Broad applicability
+		\item Increased interpretability and druggability
+		\item Not only expression: also structure
+	\end{itemize}
 
-	not only expression: also structure
+	\begin{itemize}
+		\item Pleiotropy cannot be modeled
+	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{Future perspectives}
 
-	Association study-related:
-
-	anything-WAS
-
-	any population
-
-	improvement of associations:
-
-	take account of biological ideas (epistasis, dominance, penetrance)
-
-	network to integrate and detect upstream events
+	\begin{itemize}
+		\item<1-> An association could be performed with any phenotype
+		\item<2-> And in any population
+		\item<3-> Epistasis, dominance, and penetrance should be taken 
+into account
+		\item<4-> A \enquote{network approach} could overcome some 
+problems
+	\end{itemize}
 
 \end{frame}
 
 \appendix
 
-\begin{frame}[allowframebreaks] % Allow citations to occupy many frames
-	\frametitle{}
+\begin{frame}[plain] % Allow citations to occupy many frames
 	\nocite{*}
 	\tiny
 	\printbibliography[title=References,keyword=TWAS]
-\end{frame}
-
-\begin{frame}{Different levels of phenotype}
-
-	pyramid
-
 \end{frame}
 
 \begin{frame}{Comparison of TWAS with classical approaches}
@@ -420,6 +436,20 @@ expressed) and druggability
 	\end{figure}
 
 	\note[item]{Allelic heterogeneity}
+
+\end{frame}
+
+\begin{frame}{Causality models}
+
+	\begin{figure}
+		\includegraphics[width=0.5\textwidth]{gusev2016/2-causality_models}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}{Different levels of phenotype}
+
+	pyramid
 
 \end{frame}
 

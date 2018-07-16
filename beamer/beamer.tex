@@ -20,8 +20,8 @@
 
 % Size
 % With an aspect ratio of 16:9, I prefer having wide margins
-\setbeamersize{text margin left=1.5cm}
-\setbeamersize{text margin right=1.5cm}
+\setbeamersize{text margin left=1.4cm}
+\setbeamersize{text margin right=1.4cm}
 
 % Presentation structure
 \usepackage{appendixnumberbeamer} % Allows for an appendix
@@ -32,7 +32,7 @@
 \usepackage[scale=2]{ccicons} % Creative Commons icons
 
 % Bibliography
-\usepackage[sortcites,style=authoryear-icomp]{biblatex} % Bibliography
+\usepackage[sortcites,citestyle=verbose,backend=biber]{biblatex} 
 \addbibresource{../main.bib}
 \AtEveryBibitem{
 	\clearfield{url}
@@ -46,6 +46,14 @@
 	\clearfield{number}
 	\clearfield{pages}
 	\clearfield{volume}
+}
+% https://tex.stackexchange.com/questions/25891/fullcite-without-indent-in-biblatex
+\AtEveryCitekey{%
+	\clearfield{issn}%
+	\clearfield{url}%
+	\clearfield{archivePrefix}%
+	\clearfield{arxivId}%
+	\clearfield{eprint}%
 }
 
 % Images
@@ -102,8 +110,6 @@
 
 % Notes and printing layout settings
 
-%
-
 \usepackage{pgfpages} % Manage page layout 
 %\pgfpagesuselayout{4 on 1}[a4paper,border shrink=0mm,landscape]
 %\setbeameroption{show notes} % Print note after corresponding frame
@@ -111,6 +117,43 @@
 %\setbeameroption{show notes on second screen} % (Self explainatory)
 \setbeamertemplate{note page}[plain] % Use minimal notes
 \AtBeginNote{\scriptsize}
+
+% Insert a subtitle in the section page
+% Thanks to 
+% https://tex.stackexchange.com/questions/404224/beamer-metropolis-theme-add-image-to-section-page
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+  \centering
+  \begin{minipage}{25em}
+    \raggedright
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \insertsectionhead\\[-1ex]
+    \usebeamertemplate*{progress bar in section page}
+    \par
+    \ifx\insertsubsectionhead\@empty\else%
+      \usebeamercolor[fg]{subsection title}%
+      \usebeamerfont{subsection title}%
+      \insertsubsectionhead
+    \fi
+    \vskip0.5cm
+    \ifstrempty{#1}{}{%
+		\centering
+		\scriptsize #1%
+    }
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+\makeatother
+
+\newcommand{\sectionquote}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{sectionpage}[mytheme]
+	% Revert the changes to the section page
+	\metroset{sectionpage=progressbar}
+}
 
 % ### Top matter
 
@@ -181,20 +224,20 @@ explained by a mutation in a single gene
 
 	\begin{itemize}
 		\item Initially, there were \alert{linkage studies} and 
-\alert{candidate-gene association studies}
+			\alert{candidate-gene association studies}
 		\item Gradually, the focus moved towards \alert{populations and 
-whole genomes}
+				whole genomes}
 		\item \alert{GWAS}, especially if combined with eQTL mapping and 
-functional annotations, have been useful
+			functional annotations, have found many risk SNPs
 	 \end{itemize}
 
 	\note[item]{Interaction of many genes with each other and with the 
-environment}
+		environment}
 	\note[item]{We have seen with Alessandro Lussana that non coding 
-variants are important}
+		variants are important}
 	\note[item]{To answer the question, many methods were developed}
 	\note[item]{A linkage study is... a candidate-gene association study 
-is... a GWAS is... eQTL mapping is...}
+		is... a GWAS is... eQTL mapping is...}
 	\note[item]{Many SNP-disease association have been found}
 
 \end{frame}
@@ -224,8 +267,7 @@ is... a GWAS is... eQTL mapping is...}
 
 \end{frame}
 
-\section{A gene-based association method \newline
-\scriptsize Gamazon \etal (2015), \textit{Nature Genetics}}
+\sectionquote{A gene-based association method}{\cite{Gamazon2015}}
 
 % NOTE: excluding decomposition of gene expression, validation of 
 % prediction (otherwise I should discuss heritability).
@@ -297,8 +339,7 @@ TWAS. See conclusions.}
 
 \end{frame}
 
-\section{Integrative approaches \newline
-\scriptsize Gusev \etal (2016), \textit{Nature Genetics}}
+\sectionquote{Integrative approaches}{\cite{Gusev2016}}
 
 \begin{frame}{From individual-level to summary-based TWAS}
 
@@ -331,8 +372,7 @@ multiple testing.}
 
 \end{frame}
 
-\section{Moving beyond genetic variants alone \newline
-\scriptsize Gusev \etal (2018), \textit{Nature Genetics}}
+\sectionquote{Moving beyond genetic variants alone}{\cite{Gusev2018}}
 
 % NOTE: here the results will be more important. Previously we have 
 % neglected them.
@@ -422,6 +462,8 @@ problems
 \end{frame}
 
 \appendix
+
+\metroset{sectionpage=simple}
 
 \begin{frame}[plain] % Allow citations to occupy many frames
 	\nocite{*}

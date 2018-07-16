@@ -50,11 +50,11 @@
 
 % Images
 \usepackage{graphicx}
-%\usepackage{subcaption}
 \graphicspath{ {../images/} }
-\setlength\abovecaptionskip{+5pt}
 \setkeys{Gin}{keepaspectratio} % Improves figure scaling
-\setbeamerfont{caption}{size=\tiny} % Font size for captions
+\usepackage{caption}
+\setlength\abovecaptionskip{+5pt}
+\captionsetup{font=footnotesize}
 
 % Themes, colours and fonts
 % Choose the theme according to the purpose of the presentation; do not 
@@ -86,7 +86,7 @@
 %orange
 
 % Table of contents
-\setbeamertemplate{section in toc}[sections numbered] % ToC style
+%\setbeamertemplate{section in toc}[sections numbered] % ToC style
 %\AtBeginSection[] % Recurring ToC
 %{
 %	\begin{frame}
@@ -102,8 +102,6 @@
 
 % Notes and printing layout settings
 
-%
-
 \usepackage{pgfpages} % Manage page layout 
 %\pgfpagesuselayout{4 on 1}[a4paper,border shrink=0mm,landscape]
 %\setbeameroption{show notes} % Print note after corresponding frame
@@ -115,7 +113,7 @@
 % ### Top matter
 
 \title{Transcriptome-Wide Association Studies}
-\subtitle{\small Bridging the gap between genome, transcriptome and 
+\subtitle{\normalsize Bridging the gap between genome, transcriptome and 
 disease}
 \author[Federico Marotta]
 {
@@ -199,67 +197,33 @@ is... a GWAS is... eQTL mapping is...}
 
 \end{frame}
 
-% NOTE: this is already in the conclusions
-%\begin{frame}{\ldots But GWAS do not explain everything}
+\begin{frame}{GWAS have been useful, but have limitations}
 
-	%heritability
-
-	%mechanism
-
-	%interpretation and druggability
-
-	%GWAS: avere una A al posto di una C ti fa ammalare (non ha 
-	%significato).
-	%TWAS: se questo gene è più espresso, ci si ammala (molto più 
-	%interpretabile per un umano).
-
-	%\note[item]{Not only are they more difficult to interpret, but also 
-	%to translate into clinical applications}
-
-%\end{frame}
-
-\begin{frame}
-
-	scheme of the pyramid
+	\begin{figure}
+		\includegraphics[width=0.8\textwidth]{introduction/summary}
+	\end{figure}
 
 \end{frame}
 
 \section{A gene-based association method \newline
 \scriptsize Gamazon \etal (2015), \textit{Nature Genetics}}
 
-% NOTE: excluding decomposition of gene expression, validation of 
-% prediction (otherwise I should discuss heritability).
-
-%\begin{frame}{Imputation of gene expression (?)}
-
-	%\begin{columns}
-		%\begin{column}{0.4\textwidth}
-			%Since gene expression is not measured in a GWAS, it must be 
-			%imputed
-		%\end{column}
-
-		%\begin{column}{0.6\textwidth}
-			%\begin{figure}
-				%\includegraphics[width=\textwidth]{gamazon2015/1-expression_decomposition}
-				%\caption{Expression can be decomposed in three 
-				%components}
-			%\end{figure}
-		%\end{column}
-	%\end{columns}
-
-%\end{frame}
-
 \begin{frame}{Training on reference transcriptome data sets}
 	
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
-			Since gene expression is not measured in a GWAS, it must be 
-imputed
+			The genetically regulated component of gene expression must 
+be imputed
+
+			\begin{equation*}
+				T = w_1 X_1 + w_2 X_2 + \ldots
+			\end{equation*}
 		\end{column}
 
 		\begin{column}{0.6\textwidth}
 			\begin{figure}
 				\includegraphics[width=\textwidth]{gamazon2015/2-grex_estimation_part1}
+				\caption{Training of the SNP-expression model}
 			\end{figure}
 		\end{column}
 	\end{columns}
@@ -267,15 +231,16 @@ imputed
 	\note[item]{Phenotype-determined expression goes away because these 
 are healthy individuals. The environment component goes away because it 
 averages out in the regression model.}
+	\note[item]{Even if we had expression data, we still would impute 
+the GReX}
 
 \end{frame}
 
 \begin{frame}{Association of the imputed expression to the phenotype}
-
-	Predicted expression is then associated to phenotype
 	
 	\begin{figure}
 		\includegraphics[width=0.8\textwidth]{gamazon2015/2-grex_estimation_part2}
+		\caption{The actual TWAS}
 	\end{figure}
 
 	\note[item]{Logistic model. They could have modeled the liability to 
@@ -288,7 +253,9 @@ because expression is not measured}
 \begin{frame}{Results in T1D}
 
 	\begin{figure}
-		\includegraphics[width=0.8\textwidth]{gamazon2015/7-t1d_associations_manhattan}
+		\includegraphics[width=0.9\textwidth]{gamazon2015/7-t1d_associations_manhattan}
+		\caption{Manhattan plot of P-values for gene-disease 
+associations}
 	\end{figure}
 
 	\note[item]{Why are nearby genes all associated? coregulation 
@@ -322,7 +289,8 @@ individuals
 		\item When applied to a small-cohort GWAS, this approach found 
 some genes that were reported in a later large-cohort GWAS
 		\item When applied to many GWAS, for a total of 900,000 
-phenotypes, 665 associations of which 69 completely novel
+phenotype measurements, 665 associations, of which 69 completely novel, 
+were found
 	\end{itemize}
 
 	\note[item]{First bullet: TWAS are more powerful. Indeed, less 
@@ -332,12 +300,14 @@ multiple testing.}
 \end{frame}
 
 \section{Moving beyond genetic variants alone \newline
-\scriptsize Gusev \etal (2018), \textit{Nature Genetics}}
+	\scriptsize Gusev \etal (2018), \enquote{Transcriptome-wide 
+association study of schizophrenia and chromatin activity yields 
+mechanistic disease insights}, in: \textit{Nature Genetics}}
 
 % NOTE: here the results will be more important. Previously we have 
 % neglected them.
 
-\begin{frame}{Pipeline}
+\begin{frame}{Integrating many types of data}
 
 	\begin{columns}
 		\begin{column}{0.6\textwidth}
@@ -359,7 +329,7 @@ phenotypes}
 
 \end{frame}
 
-\begin{frame}{Results}
+\begin{frame}{A threefold pipe line}
 
 	\begin{itemize}
 		\item Schizophrenia TWAS
@@ -367,24 +337,32 @@ phenotypes}
 			\item \includegraphics[width=0.7\textwidth]{gusev2018/2-schizophrenia_TWAS}
 		\end{itemize}
 
-		\item Schizophrenia Spliceome-WAS
-		\begin{itemize}
-			\item 46 splicing events in the brain associated to disease
-		\end{itemize}
-
 		\item Chromatin TWAS
 		\begin{itemize}
 			\item Of the 157 SCZ-associated genes, 42 were also 
 associated a chromatin peak
 		\end{itemize}
+
+		\item Schizophrenia \enquote{Spliceome}-WAS
+		\begin{itemize}
+			\item 46 splicing events in the brain associated to disease
+		\end{itemize}
 	\end{itemize}
 
 \end{frame}
 
-\begin{frame}{A biological example}
+\begin{frame}{Biological example: \textit{MAPK3}}
+	
+	\begin{itemize}
+		\item \textit{MAPK3} and \textit{KCTD13} are coregulated
+		\item \textit{KCTD13} decreases proliferation, \textit{MAPK3} is 
+a functional trigger
+	\end{itemize}
 
 	\begin{figure}
-		\includegraphics[width=0.7\textwidth]{gusev2018/6-zebrafish}
+		\includegraphics[width=0.8\textwidth]{gusev2018/6-zebrafish}
+		\caption{Zebrafish over-expressing \textit{KCTD13}, with or 
+without inhibition of \textit{MAPK3}}
 	\end{figure}
 
 	\note[item]{At last!}
@@ -394,15 +372,18 @@ associated a chromatin peak
 \begin{frame}{Conclusions}
 
 	TWAS address some of the limitations of classical association 
-studies
+studies:
 
 	\begin{itemize}
 		\item Broad applicability
 		\item Increased interpretability and druggability
-		\item Not only expression: also structure
+		%\item Not only expression: also structure
 	\end{itemize}
 
+	But have limitations of their own:
+
 	\begin{itemize}
+		\item if the expression is not involved
 		\item Pleiotropy cannot be modeled
 	\end{itemize}
 
@@ -411,19 +392,22 @@ studies
 \begin{frame}{Future perspectives}
 
 	\begin{itemize}
-		\item<1-> An association could be performed with any phenotype
+		\item<1-> An association could be performed with any 
+intermediate molecular phenotype
 		\item<2-> And in any population
-		\item<3-> Epistasis, dominance, and penetrance should be taken 
-into account
-		\item<4-> A \enquote{network approach} could overcome some 
-problems
+		\item<3-> Epistasis and dominance should be taken into account
+		\item<4-> A \enquote{network approach} could help to further 
+explain the results
 	\end{itemize}
+
+	\note[item]{Network approach: indeed in the last paper the 
+association was with MAPK3, but the mechanism was explained by KCTD13}
 
 \end{frame}
 
 \appendix
 
-\begin{frame}[plain] % Allow citations to occupy many frames
+\begin{frame}[plain]
 	\nocite{*}
 	\tiny
 	\printbibliography[title=References,keyword=TWAS]
@@ -447,9 +431,16 @@ problems
 
 \end{frame}
 
+\begin{frame}{Heritability and prediction of gene expression}
+
+	\begin{figure}
+		\includegraphics[width=0.9\textwidth]{gamazon2015/3-prediction_r2}
+	\end{figure}
+
+\end{frame}
+
 \begin{frame}{Different levels of phenotype}
 
-	pyramid
 
 \end{frame}
 

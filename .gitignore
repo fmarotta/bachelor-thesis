@@ -10,5 +10,8 @@ beamer/*
 !**/*.tex
 !**/*.bib
 
+# include the .pdf
+!**/*.pdf
+
 # include .gitignore
 !.gitignore

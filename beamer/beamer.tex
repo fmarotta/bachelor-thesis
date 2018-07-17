@@ -242,10 +242,11 @@ explained by a mutation in a single gene
 
 \end{frame}
 
-\begin{frame}{GWAS, eQTL mapping and TWAS}
+\begin{frame}{Gene expression, the missing link}
 
 	\begin{figure}
 		\includegraphics[width=0.9\textwidth]{introduction/summary}
+		\caption{TWAS focus on the genetic component of expression}
 	\end{figure}
 
 \end{frame}
@@ -256,8 +257,8 @@ explained by a mutation in a single gene
 	
 	\begin{columns}
 		\begin{column}{0.4\textwidth}
-			The genetically regulated component of gene expression must 
-be imputed
+			The genetically regulated component of expression must be 
+imputed
 
 			\begin{equation*}
 				T = w_1 X_1 + w_2 X_2 + \ldots
@@ -323,14 +324,14 @@ score of the gene to the trait is 0.}
 
 \end{frame}
 
-\begin{frame}{Real-world application}
+\begin{frame}{Application to obesity GWAS}
 
 	The estimation of SNP weights was performed on \char`\~3000 
 individuals
 
 	\begin{itemize}
-		\item When applied to a small-cohort obesity GWAS, this approach 
-found some genes that were only reported in a later large-cohort GWAS
+		\item When applied to a small-cohort GWAS, this approach found 
+some genes that were only reported in a later large-cohort GWAS
 	\end{itemize}
 
 	\note[item]{First bullet: TWAS are more powerful. Indeed, less 
@@ -376,7 +377,7 @@ phenotypes}
 		\item Chromatin TWAS
 		\begin{itemize}
 			\item Of the 157 SCZ-associated genes, 42 were also 
-associated a chromatin peak
+associated to a chromatin peak
 		\end{itemize}
 
 		\item Schizophrenia \enquote{Spliceome}-WAS
@@ -411,15 +412,14 @@ without inhibition of \textit{MAPK3}}
 studies:
 
 	\begin{itemize}
-		\item Broad applicability
 		\item Increased interpretability and druggability
-		%\item Not only expression: also structure
+		\item No need to assemble large cohorts
 	\end{itemize}
 
 	But have limitations of their own:
 
 	\begin{itemize}
-		\item If the expression is not involved, TWAS are blind
+		\item If expression is not involved, TWAS do not work
 		\item Pleiotropy cannot be modeled
 	\end{itemize}
 
@@ -428,7 +428,7 @@ studies:
 \begin{frame}{Future perspectives}
 
 	\begin{itemize}
-		\item<1-> An association could be performed with any 
+		\item<1-> An association study may be performed with any 
 intermediate molecular phenotype
 		\item<2-> And in any population
 		\item<3-> Epistasis and dominance should be taken into account
